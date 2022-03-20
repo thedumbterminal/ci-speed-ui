@@ -16,5 +16,8 @@ module.exports = {
         { from: "public" }
       ],
     }),
-  ]
+  ],
+  output: {
+    path: path.resolve(__dirname, 'docs')
+  }
 }
