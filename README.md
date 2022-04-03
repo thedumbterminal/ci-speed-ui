@@ -10,6 +10,7 @@ Frontend for CI Speed
 ```
 nvm use
 npm install
+npx next telemetry disable
 ```
 
 ## Run
