@@ -7,7 +7,7 @@
     "start:production": "next start",
     "build": "next build",
     "lint": "next lint",
-    "dist": "BASE_PATH=/docs npm run build && next export -o docs"
+    "dist": "BASE_PATH=/ci-speed-ui npm run build && next export -o docs"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.4",
@@ -15,7 +15,6 @@
     "next": "12.1.4",
     "react": "18.0.0",
     "react-bootstrap": "^2.2.2",
-    "react-bootstrap-sidebar-menu": "^2.0.1",
     "react-dom": "18.0.0"
   },
   "devDependencies": {
