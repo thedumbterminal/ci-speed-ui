@@ -7,7 +7,7 @@
     "start:production": "next start",
     "build": "next build",
     "lint": "next lint",
-    "export": "next export -o docs"
+    "dist": "BASE_PATH=/docs npm run build && next export -o docs"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.4",

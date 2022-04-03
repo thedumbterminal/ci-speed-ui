@@ -21,7 +21,7 @@ npm start
 ## Deploy
 
 ```
-npm run build
+npm run dist
 ```
 
 Then commit.
