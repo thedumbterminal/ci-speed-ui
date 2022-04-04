@@ -29,5 +29,4 @@ Then commit.
 
 ## Todo
 
-* Sort out CSS on deployment
-* Sort out url base on deployment
+* Sort out CSS safari deployment

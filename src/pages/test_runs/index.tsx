@@ -1,7 +1,23 @@
 import { Table } from 'react-bootstrap'
 import axios from 'axios'
 
-const TestRuns = ({ testRuns }) => {
+interface TestRun {
+  created_at: string
+}
+
+interface TestRunProps {
+  testRuns: TestRun[]
+}
+
+const renderTestRun = (testRun: TestRun) => {
+  return (
+    <tr key={testRun.created_at}>
+      <td>{testRun.created_at}</td>
+    </tr>
+  )
+}
+
+const TestRuns = ({ testRuns }: TestRunProps) => {
   return (
     <main className="main-container container-fluid">
       <h1>Test Runs</h1>
@@ -12,17 +28,15 @@ const TestRuns = ({ testRuns }) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>some date</td>
-          </tr>
+          {testRuns.map((testRun: TestRun) => renderTestRun(testRun))}
         </tbody>
       </Table>
     </main>
   )
 }
 
-TestRuns.getInitialProps = async () => {
-  const { data } = await axios.get('https://ci-speed.herokuapp.com/test_runs')
+TestRuns.getInitialProps = async (): Promise<TestRunProps> => {
+  const { data } = await axios.get('https://ci-speed.herokuapp.com/test_runs/')
   return { testRuns: data }
 }
 
