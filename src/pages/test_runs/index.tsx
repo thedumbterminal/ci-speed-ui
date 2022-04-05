@@ -1,18 +1,30 @@
 import { Table } from 'react-bootstrap'
 import axios from 'axios'
+import { format } from 'date-fns'
+import Link from 'next/link'
 
 interface TestRun {
-  created_at: string
+  created_at: string,
+  id: number
 }
 
 interface TestRunProps {
   testRuns: TestRun[]
 }
 
+const formatDate = (isoString: string): string => {
+  const date = new Date(isoString)
+  return format(date, 'MM/dd/yyyy kk:mm:ss')
+}
+
 const renderTestRun = (testRun: TestRun) => {
+  const testRunLink = `/test_runs/${testRun.id}`
   return (
     <tr key={testRun.created_at}>
-      <td>{testRun.created_at}</td>
+      <td>{formatDate(testRun.created_at)}</td>
+      <td>
+        <Link href={testRunLink}>View</Link>
+      </td>
     </tr>
   )
 }
@@ -25,6 +37,7 @@ const TestRuns = ({ testRuns }: TestRunProps) => {
         <thead>
           <tr>
             <th>Created</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
