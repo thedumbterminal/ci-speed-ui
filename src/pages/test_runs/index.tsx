@@ -1,14 +1,11 @@
 import { Table } from 'react-bootstrap'
-import axios from 'axios'
 import { format } from 'date-fns'
 import Link from 'next/link'
+import TestRun from '../../shared/TestRun'
+import api from '../../api'
+import { NextPage } from 'next'
 
-interface TestRun {
-  created_at: string,
-  id: number
-}
-
-interface TestRunProps {
+interface TestRunsProps {
   testRuns: TestRun[]
 }
 
@@ -23,13 +20,13 @@ const renderTestRun = (testRun: TestRun) => {
     <tr key={testRun.created_at}>
       <td>{formatDate(testRun.created_at)}</td>
       <td>
-        <Link href={testRunLink}>View</Link>
+        <Link href={testRunLink}>View results</Link>
       </td>
     </tr>
   )
 }
 
-const TestRuns = ({ testRuns }: TestRunProps) => {
+const TestRuns: NextPage<TestRunsProps> = ({ testRuns }: TestRunsProps) => {
   return (
     <main className="main-container container-fluid">
       <h1>Test Runs</h1>
@@ -48,8 +45,8 @@ const TestRuns = ({ testRuns }: TestRunProps) => {
   )
 }
 
-TestRuns.getInitialProps = async (): Promise<TestRunProps> => {
-  const { data } = await axios.get('https://ci-speed.herokuapp.com/test_runs/')
+TestRuns.getInitialProps = async (): Promise<TestRunsProps> => {
+  const data = await api.get('/test_runs/')
   return { testRuns: data }
 }
 
