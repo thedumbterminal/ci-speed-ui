@@ -4,7 +4,7 @@ import { NextPage } from 'next'
 import { Table } from 'react-bootstrap'
 
 interface TestRunProps {
-  testRun: TestRun
+  testRun?: TestRun
   testSuites: TestSuite[]
 }
 
@@ -26,7 +26,7 @@ const renderTestSuite = (testSuite: TestSuite) => {
 const TestRun: NextPage<TestRunProps> = ({ testRun, testSuites }: TestRunProps) => {
   return (
     <main className="main-container container-fluid">
-      <h1>Test Run { testRun.id }</h1>
+      <h1>Test Run { testRun && testRun.id }</h1>
       <p>
         Results
       </p>
@@ -47,9 +47,10 @@ const TestRun: NextPage<TestRunProps> = ({ testRun, testSuites }: TestRunProps) 
 }
 
 TestRun.getInitialProps = async ({ query }): Promise<TestRunProps> => {
+  if (!query.id) return { testSuites: [] }
+
   const testRun = await api.get(`/test_runs/${query.id}`)
-  //const testSuites = await api.get(`/test_suites/`)
-  const testSuites: TestSuite[] = []
+  const testSuites = await api.get(`/test_suites/`)
   return { testRun, testSuites }
 }
 

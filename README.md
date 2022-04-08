@@ -30,3 +30,10 @@ Then commit.
 ## Todo
 
 * Sort out CSS safari deployment
+* Signup
+* Login
+* Viewing test runs
+* Viewing test results
+* Most failing tests
+* Longest tests
+* Flakey tests

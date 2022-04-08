@@ -7,7 +7,9 @@
     "start:production": "next start",
     "build": "next build",
     "lint": "next lint",
-    "dist": "BASE_PATH=/ci-speed-ui npm run build && next export -o docs"
+    "dist": "npm run build && next export -o docs",
+    "deploy": "BASE_PATH=/ci-speed-ui && npm run dist && git add docs",
+    "serve": "npm run dist && cd docs && python3 -m http.server"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.4",
