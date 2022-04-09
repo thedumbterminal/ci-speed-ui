@@ -20,7 +20,7 @@ const renderTestRun = (testRun: TestRun) => {
     <tr key={testRun.created_at}>
       <td>{formatDate(testRun.created_at)}</td>
       <td>
-        <Link href={testRunLink}>View results</Link>
+        <Link href={testRunLink}>View test suites</Link>
       </td>
     </tr>
   )
