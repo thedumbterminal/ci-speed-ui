@@ -25,7 +25,9 @@ npm start
 npm run dist
 ```
 
-Then commit.
+Then push.
+
+It will be deployed automatically to github pages.
 
 ## Todo
 
