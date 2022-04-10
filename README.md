@@ -25,7 +25,7 @@ npm start
 npm run dist
 ```
 
-Then push.
+This will automatically commit and push any changes in the `doc` directory.
 
 It will be deployed automatically to github pages.
 

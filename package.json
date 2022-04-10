@@ -8,7 +8,7 @@
     "build": "next build",
     "lint": "next lint",
     "dist": "npm run build && next export -o docs",
-    "deploy": "BASE_PATH=/ci-speed-ui npm run dist && git add docs",
+    "deploy": "BASE_PATH=/ci-speed-ui npm run dist && git add docs && git commit docs -m 'deploy' && git push origin",
     "serve": "npm run dist && cd docs && python3 -m http.server"
   },
   "dependencies": {
