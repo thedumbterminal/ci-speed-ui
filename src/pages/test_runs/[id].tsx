@@ -16,6 +16,7 @@ const renderTestSuite = (testSuite: TestSuite) => {
   return (
     <tr key={testSuite.id}>
       <td>{ testSuite.name }</td>
+      <td>{ testSuite.time }</td>
       <td>
         <Link href={testSuiteLink}>View test cases</Link>
       </td>
@@ -34,6 +35,7 @@ const TestRun: NextPage<TestRunProps> = ({ testRun, testSuites }: TestRunProps) 
         <thead>
           <tr>
             <th>Name</th>
+            <th>Duration</th>
             <th></th>
           </tr>
         </thead>

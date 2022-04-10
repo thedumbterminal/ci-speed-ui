@@ -11,6 +11,7 @@ interface TestSuiteProps {
 
 interface TestCase {
   name: string,
+  time: number,
   id: number
 }
 
@@ -18,8 +19,7 @@ const renderTestCase = (testCase: TestCase) => {
   return (
     <tr key={testCase.id}>
       <td>{ testCase.name }</td>
-      <td>
-      </td>
+      <td>{ testCase.time }</td>
     </tr>
   )
 }
@@ -35,7 +35,7 @@ const TestSuite: NextPage<TestSuiteProps> = ({ testSuite, testCases }: TestSuite
         <thead>
           <tr>
             <th>Name</th>
-            <th></th>
+            <th>Duration</th>
           </tr>
         </thead>
         <tbody>
@@ -52,7 +52,7 @@ TestSuite.getInitialProps = async ({ query }): Promise<TestSuiteProps> => {
   if (!testSuiteId) return { testCases: [] }
 
   const testSuite = await api.get(`/test_suites/${testSuiteId}`)
-  const testCases= await api.get(`/test_cases/`, { test_suite: testSuiteId })
+  const testCases = await api.get(`/test_cases/`, { test_suite: testSuiteId })
   return { testSuite, testCases }
 }
 
