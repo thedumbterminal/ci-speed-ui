@@ -1,24 +1,20 @@
 import api from '../../api'
 import TestRun from '../../shared/TestRun'
+import TestSuite from '../../shared/TestSuite'
 import { NextPage } from 'next'
 import { Table } from 'react-bootstrap'
-import { ParsedUrlQuery } from 'querystring'
 import Link from 'next/link'
+import getQueryValue from '../../lib/query'
 
 interface TestRunProps {
   testRun?: TestRun
   testSuites: TestSuite[]
 }
 
-interface TestSuite {
-  name: string,
-  id: number
-}
-
 const renderTestSuite = (testSuite: TestSuite) => {
   const testSuiteLink = `/test_suites/${testSuite.id}`
   return (
-    <tr>
+    <tr key={testSuite.id}>
       <td>{ testSuite.name }</td>
       <td>
         <Link href={testSuiteLink}>View test cases</Link>
@@ -48,12 +44,6 @@ const TestRun: NextPage<TestRunProps> = ({ testRun, testSuites }: TestRunProps) 
 
     </main>
   )
-}
-
-const getQueryValue = (query: ParsedUrlQuery, field: string): string|undefined => {
-  const value = query[field]
-  if(Array.isArray(value)) return value.shift()
-  return value
 }
 
 TestRun.getInitialProps = async ({ query }): Promise<TestRunProps> => {

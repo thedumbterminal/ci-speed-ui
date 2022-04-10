@@ -17,7 +17,7 @@ const formatDate = (isoString: string): string => {
 const renderTestRun = (testRun: TestRun) => {
   const testRunLink = `/test_runs/${testRun.id}`
   return (
-    <tr key={testRun.created_at}>
+    <tr key={testRun.id}>
       <td>{formatDate(testRun.created_at)}</td>
       <td>
         <Link href={testRunLink}>View test suites</Link>

@@ -1,36 +1,33 @@
 import api from '../../api'
-import TestRun from '../../shared/TestRun'
+import TestSuite from '../../shared/TestSuite'
 import { NextPage } from 'next'
 import { Table } from 'react-bootstrap'
-import { ParsedUrlQuery } from 'querystring'
-import Link from 'next/link'
+import getQueryValue from '../../lib/query'
 
-interface TestRunProps {
-  testRun?: TestRun
-  testSuites: TestSuite[]
+interface TestSuiteProps {
+  testSuite?: TestSuite
+  testCases: TestCase[]
 }
 
-interface TestSuite {
+interface TestCase {
   name: string,
   id: number
 }
 
-const renderTestSuite = (testSuite: TestSuite) => {
-  const testSuiteLink = `/test_suites/${testSuite.id}`
+const renderTestCase = (testCase: TestCase) => {
   return (
-    <tr>
-      <td>{ testSuite.name }</td>
+    <tr key={testCase.id}>
+      <td>{ testCase.name }</td>
       <td>
-        <Link href={testSuiteLink}>View test cases</Link>
       </td>
     </tr>
   )
 }
 
-const TestSuite: NextPage<TestRunProps> = ({ testRun, testSuites }: TestRunProps) => {
+const TestSuite: NextPage<TestSuiteProps> = ({ testSuite, testCases }: TestSuiteProps) => {
   return (
     <main className="main-container container-fluid">
-      <h1>Test suite { testRun && testRun.id }</h1>
+      <h1>Test suite { testSuite && testSuite.name }</h1>
       <p>
         Test cases
       </p>
@@ -42,7 +39,7 @@ const TestSuite: NextPage<TestRunProps> = ({ testRun, testSuites }: TestRunProps
           </tr>
         </thead>
         <tbody>
-          {testSuites.map((testSuite: TestSuite) => renderTestSuite(testSuite))}
+          {testCases.map((testCase: TestCase) => renderTestCase(testCase))}
         </tbody>
       </Table>
 
@@ -50,19 +47,13 @@ const TestSuite: NextPage<TestRunProps> = ({ testRun, testSuites }: TestRunProps
   )
 }
 
-const getQueryValue = (query: ParsedUrlQuery, field: string): string|undefined => {
-  const value = query[field]
-  if(Array.isArray(value)) return value.shift()
-  return value
-}
+TestSuite.getInitialProps = async ({ query }): Promise<TestSuiteProps> => {
+  const testSuiteId = getQueryValue(query, 'id')
+  if (!testSuiteId) return { testCases: [] }
 
-TestSuite.getInitialProps = async ({ query }): Promise<TestRunProps> => {
-  const testRunId = getQueryValue(query, 'id')
-  if (!testRunId) return { testSuites: [] }
-
-  const testRun = await api.get(`/test_runs/${testRunId}`)
-  const testSuites = await api.get(`/test_suites/`, { test_run: testRunId })
-  return { testRun, testSuites }
+  const testSuite = await api.get(`/test_suites/${testSuiteId}`)
+  const testCases= await api.get(`/test_cases/`, { test_suite: testSuiteId })
+  return { testSuite, testCases }
 }
 
 export default TestSuite
