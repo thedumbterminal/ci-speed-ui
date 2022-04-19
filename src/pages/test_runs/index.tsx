@@ -1,4 +1,10 @@
-import { Table } from 'react-bootstrap'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
 import { format } from 'date-fns'
 import Link from 'next/link'
 import TestRun from '../../shared/TestRun'
@@ -17,31 +23,36 @@ const formatDate = (isoString: string): string => {
 const renderTestRun = (testRun: TestRun) => {
   const testRunLink = `/test_runs/${testRun.id}`
   return (
-    <tr key={testRun.id}>
-      <td>{formatDate(testRun.created_at)}</td>
-      <td>
+    <TableRow
+      key={testRun.id}
+      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+    >
+      <TableCell>{formatDate(testRun.created_at)}</TableCell>
+      <TableCell>
         <Link href={testRunLink}>View test suites</Link>
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   )
 }
 
 const TestRuns: NextPage<TestRunsProps> = ({ testRuns }: TestRunsProps) => {
   return (
-    <main className="main-container container-fluid">
+    <>
       <h1>Test Runs</h1>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Created</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {testRuns.map((testRun: TestRun) => renderTestRun(testRun))}
-        </tbody>
-      </Table>
-    </main>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Created</TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {testRuns.map((testRun: TestRun) => renderTestRun(testRun))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   )
 }
 
