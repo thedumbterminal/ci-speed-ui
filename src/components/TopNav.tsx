@@ -1,22 +1,140 @@
-import { Navbar, Nav, Container } from 'react-bootstrap'
-import Link from 'next/link'
+import * as React from 'react'
+import { styled, useTheme } from '@mui/material/styles'
+import Drawer from '@mui/material/Drawer'
+import CssBaseline from '@mui/material/CssBaseline'
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import List from '@mui/material/List'
+import Typography from '@mui/material/Typography'
+import Divider from '@mui/material/Divider'
+import IconButton from '@mui/material/IconButton'
+import MenuIcon from '@mui/icons-material/Menu'
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
+import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import ListItem from '@mui/material/ListItem'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import Link from '../components/Link'
 
-export default function TopNav() {
+const drawerWidth = 240;
+
+interface DrawerProps {
+  open: boolean,
+  setOpen: Function
+}
+
+interface AppBarProps extends MuiAppBarProps {
+  open?: boolean;
+}
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})<AppBarProps>(({ theme, open }) => ({
+  transition: theme.transitions.create(['margin', 'width'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: `${drawerWidth}px`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}))
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
+}))
+
+
+const PersistentDrawerLeft = ({open, setOpen}: DrawerProps) => {
+  const theme = useTheme()
+
+  const handleDrawerOpen = () => {
+    setOpen(true)
+  }
+
+  const handleDrawerClose = () => {
+    setOpen(false)
+  }
+
   return (
-    <Navbar bg="light" expand="sm">
-      <Container>
-        <Link href="/" passHref>
-          <Navbar.Brand>CI-Speed</Navbar.Brand>
-        </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Link href="/test_runs" passHref>
-              <Nav.Link>Test Runs</Nav.Link>
-            </Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <>
+      <CssBaseline />
+      <AppBar position="fixed" open={open}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            CI-Speed
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+          },
+        }}
+        variant="persistent"
+        anchor="left"
+        open={open}
+      >
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        <List>
+          <Link href="/">
+            <ListItem button key="Home">
+              <ListItemIcon>
+                <MenuIcon />
+              </ListItemIcon>
+              <ListItemText primary="Home" />
+            </ListItem>
+          </Link>
+          <Link href="/test_runs">
+            <ListItem button key="Test runs">
+              <ListItemIcon>
+                <MenuIcon />
+              </ListItemIcon>
+              <ListItemText primary="Test runs" />
+            </ListItem>
+          </Link>
+        </List>
+        <Divider />
+        <List>
+          {['Account'].map((text) => (
+            <ListItem button key={text}>
+              <ListItemIcon>
+                <MenuIcon />
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+    </>
   )
 }
+
+export {DrawerHeader, PersistentDrawerLeft, drawerWidth}
