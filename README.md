@@ -29,13 +29,17 @@ This will automatically commit and push any changes in the `doc` directory.
 
 It will be deployed automatically to github pages.
 
+## Tech
+
+* Next.js
+* Material UI https://mui.com/material-ui/getting-started/installation/
+
 ## Todo
 
 * Sort out CSS safari deployment
 * Signup
 * Login
-* Viewing test runs
-* Viewing test results
 * Most failing tests
 * Longest tests
-* Flakey tests
+* Flaky tests
+* Amount of tests

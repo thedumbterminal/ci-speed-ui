@@ -1,7 +1,13 @@
-export default function Home() {
+import * as React from 'react'
+import type { NextPage } from 'next'
+import Typography from '@mui/material/Typography'
+
+const Home: NextPage = () => {
   return (
-    <main className="main-container container-fluid">
-      <h1>Home</h1>
-    </main>
-  )
-}
+    <Typography variant="h4" component="h1" gutterBottom>
+      Welcome
+    </Typography>
+  );
+};
+
+export default Home
