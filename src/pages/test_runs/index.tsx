@@ -63,7 +63,7 @@ const _getPageData = () => {
 
 const TestRuns: NextPage = () => {
   const {data, error, isLoading} = _getPageData()
-  if (error) throw error
+  if(error) throw error
   let testRuns: TestRunRow[] = []
   if(data){
     testRuns = transformRows(data)

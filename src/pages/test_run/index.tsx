@@ -68,7 +68,7 @@ const TestRun: NextPage = () => {
   const router = useRouter()
   const testRunId = getQueryValue(router.query, 'id')
   if(!testRunId) throw new Error('No test run ID given')
-  const {data, error, isLoading} = _getPageData(testRunId)
+  const {data, error, isLoading} = _getPageData(testRunId|| '')
   if (error) throw error
   let testSuites: TestSuiteRow[] = []
   if(data && data.testSuites){
