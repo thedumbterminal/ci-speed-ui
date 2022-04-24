@@ -1,18 +1,14 @@
-import { DataGrid, GridColDef, GridValueFormatterParams, GridRenderCellParams } from '@mui/x-data-grid'
+import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import api from '../../api'
-import TestSuite from '../../shared/TestSuite'
 import { NextPage } from 'next'
 import getQueryValue from '../../lib/query'
+import useSWR from 'swr'
+import { useRouter } from 'next/router'
 
 interface TestCaseRow {
   id: number,
   name: string,
   duration: number
-}
-
-interface TestSuiteProps {
-  testSuite?: TestSuite
-  testCases: TestCaseRow[]
 }
 
 interface TestCase {
@@ -44,10 +40,30 @@ const columns: GridColDef[] = [
   }
 ]
 
-const TestSuite: NextPage<TestSuiteProps> = ({ testSuite, testCases }: TestSuiteProps) => {
+const _getPageData = (id: string) => {
+  const { data: testSuite, error: suiteError } = useSWR('/test_suites/' + id, api.get)
+  const { data: testCases, error: caseError } = useSWR(() => ['/test_cases/', {test_suite: testSuite.id}], api.get)
+  return {
+    data: {testSuite, testCases},
+    error: suiteError || caseError,
+    isLoading: !caseError && !testCases,
+  }
+}
+
+const TestSuite: NextPage = () => {
+  const router = useRouter()
+  const testSuiteId = getQueryValue(router.query, 'id')
+  if(!testSuiteId) throw new Error('No test suite ID given')
+  const {data, error, isLoading} = _getPageData(testSuiteId)
+  if (error) throw error
+  let testCases: TestCaseRow[] = []
+  if(data && data.testCases){
+    testCases = transformRows(data.testCases)
+  }
+
   return (
     <>
-      <h1>Test suite { testSuite && testSuite.name }</h1>
+      <h1>Test suite { data.testSuite && data.testSuite.name }</h1>
       <p>
         Test cases
       </p>
@@ -59,6 +75,7 @@ const TestSuite: NextPage<TestSuiteProps> = ({ testSuite, testCases }: TestSuite
         autoHeight={true}
         disableColumnMenu={true}
         disableSelectionOnClick={true}
+        loading={isLoading}
         sx={{
           boxShadow: 2,
           border: 2,
@@ -69,16 +86,6 @@ const TestSuite: NextPage<TestSuiteProps> = ({ testSuite, testCases }: TestSuite
       />
     </>
   )
-}
-
-TestSuite.getInitialProps = async ({ query }): Promise<TestSuiteProps> => {
-  const testSuiteId = getQueryValue(query, 'id')
-  if (!testSuiteId) return { testCases: [] }
-
-  const testSuite = await api.get(`/test_suites/${testSuiteId}`)
-  const testCases = await api.get(`/test_cases/`, { test_suite: testSuiteId })
-  const rows = transformRows(testCases)
-  return { testSuite, testCases: rows }
 }
 
 export default TestSuite
