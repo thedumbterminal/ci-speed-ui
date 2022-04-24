@@ -1,20 +1,16 @@
 import api from '../../api'
-import TestRun from '../../shared/TestRun'
 import TestSuite from '../../shared/TestSuite'
 import { NextPage } from 'next'
 import { DataGrid, GridColDef, GridValueFormatterParams, GridRenderCellParams } from '@mui/x-data-grid'
 import Link from 'next/link'
 import getQueryValue from '../../lib/query'
+import useSWR from 'swr'
+import { useRouter } from 'next/router'
 
 interface TestSuiteRow {
   id: number,
   name: string,
   duration: number
-}
-
-interface TestRunProps {
-  testRun?: TestRun
-  testSuites: TestSuiteRow[]
 }
 
 const formatLink = (params: GridValueFormatterParams<string>): string => {
@@ -58,10 +54,30 @@ const columns: GridColDef[] = [
   }
 ]
 
-const TestRun: NextPage<TestRunProps> = ({ testRun, testSuites }: TestRunProps) => {
+const _getPageData = (id: string) => {
+  const { data: testRun, error: runError } = useSWR('/test_runs/' + id, api.get)
+  const { data: testSuites, error: suiteError } = useSWR(() => ['/test_suites/', {test_run: testRun.id}], api.get)
+  return {
+    data: {testRun, testSuites},
+    error: runError || suiteError,
+    isLoading: !suiteError && !testRun,
+  }
+}
+
+const TestRun: NextPage = () => {
+  const router = useRouter()
+  const testRunId = getQueryValue(router.query, 'id')
+  if(!testRunId) throw new Error('No test id given')
+  const {data, error, isLoading} = _getPageData(testRunId)
+  if (error) throw error
+  let testSuites: TestSuiteRow[] = []
+  if(data && data.testSuites){
+    testSuites = transformRows(data.testSuites)
+  }
+
   return (
     <>
-      <h1>Test Run { testRun && testRun.id }</h1>
+      <h1>Test Run { data.testRun && data.testRun.id }</h1>
       <p>
         Test suites
       </p>
@@ -73,6 +89,7 @@ const TestRun: NextPage<TestRunProps> = ({ testRun, testSuites }: TestRunProps) 
         autoHeight={true}
         disableColumnMenu={true}
         disableSelectionOnClick={true}
+        loading={isLoading}
         sx={{
           boxShadow: 2,
           border: 2,
@@ -83,16 +100,6 @@ const TestRun: NextPage<TestRunProps> = ({ testRun, testSuites }: TestRunProps) 
       />
     </>
   )
-}
-
-TestRun.getInitialProps = async ({ query }): Promise<TestRunProps> => {
-  const testRunId = getQueryValue(query, 'id')
-  if (!testRunId) return { testSuites: [] }
-
-  const testRun = await api.get(`/test_runs/${testRunId}`)
-  const testSuites = await api.get(`/test_suites/`, { test_run: testRunId })
-  const rows = transformRows(testSuites)
-  return { testRun, testSuites: rows }
 }
 
 export default TestRun

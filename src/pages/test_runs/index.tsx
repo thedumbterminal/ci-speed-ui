@@ -52,7 +52,7 @@ const columns: GridColDef[] = [
   }
 ]
 
-const _getTestRuns = () => {
+const _getPageData = () => {
   const { data, error } = useSWR('/test_runs/', api.get)
   return {
     data,
@@ -62,7 +62,7 @@ const _getTestRuns = () => {
 }
 
 const TestRuns: NextPage = () => {
-  const {data, error, isLoading} = _getTestRuns()
+  const {data, error, isLoading} = _getPageData()
   if (error) throw error
   let testRuns: TestRunRow[] = []
   if(data){
