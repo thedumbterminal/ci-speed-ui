@@ -18,7 +18,7 @@ interface TestRunProps {
 }
 
 const formatLink = (params: GridValueFormatterParams<string>): string => {
-  return `/test_suites/${params.value}`
+  return `/test_suite/?id=${params.value}`
 }
 
 const transformRows = (testSuites: TestSuite[]): TestSuiteRow[] => {

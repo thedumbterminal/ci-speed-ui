@@ -20,7 +20,7 @@ const formatDate = (params: GridValueFormatterParams<string>): string => {
 }
 
 const formatLink = (params: GridValueFormatterParams<string>): string => {
-  return `/test_runs/${params.value}`
+  return `/test_run?id=${params.value}`
 }
 
 const transformRows = (testRuns: TestRun[]): TestRunRow[] => {
