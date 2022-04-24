@@ -22,7 +22,7 @@ npm start
 ## Deploy
 
 ```
-npm run dist
+npm run deploy
 ```
 
 This will automatically commit and push any changes in the `doc` directory.
