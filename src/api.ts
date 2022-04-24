@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 const URL_BASE = 'https://ci-speed.herokuapp.com'
 

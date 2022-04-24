@@ -4,14 +4,11 @@ import Link from 'next/link'
 import TestRun from '../../shared/TestRun'
 import api from '../../api'
 import { NextPage } from 'next'
+import useSWR from 'swr'
 
 interface TestRunRow {
   id: number,
   created: string
-}
-
-interface TestRunsProps {
-  testRuns: TestRunRow[]
 }
 
 const formatDate = (params: GridValueFormatterParams<string>): string => {
@@ -20,7 +17,7 @@ const formatDate = (params: GridValueFormatterParams<string>): string => {
 }
 
 const formatLink = (params: GridValueFormatterParams<string>): string => {
-  return `/test_run?id=${params.value}`
+  return `/test_run/?id=${params.value}`
 }
 
 const transformRows = (testRuns: TestRun[]): TestRunRow[] => {
@@ -55,7 +52,23 @@ const columns: GridColDef[] = [
   }
 ]
 
-const TestRuns: NextPage<TestRunsProps> = ({ testRuns }: TestRunsProps) => {
+const _getTestRuns = () => {
+  const { data, error } = useSWR('/test_runs/', api.get)
+  return {
+    data,
+    error,
+    isLoading: !error && !data,
+  }
+}
+
+const TestRuns: NextPage = () => {
+  const {data, error, isLoading} = _getTestRuns()
+  if (error) throw error
+  let testRuns: TestRunRow[] = []
+  if(data){
+    testRuns = transformRows(data)
+  }
+
   return (
     <>
       <h1>Test Runs</h1>
@@ -67,6 +80,7 @@ const TestRuns: NextPage<TestRunsProps> = ({ testRuns }: TestRunsProps) => {
         autoHeight={true}
         disableColumnMenu={true}
         disableSelectionOnClick={true}
+        loading={isLoading}
         sx={{
           boxShadow: 2,
           border: 2,
@@ -77,12 +91,6 @@ const TestRuns: NextPage<TestRunsProps> = ({ testRuns }: TestRunsProps) => {
       />
     </>
   )
-}
-
-TestRuns.getInitialProps = async (): Promise<TestRunsProps> => {
-  const data = await api.get('/test_runs/')
-  const rows = transformRows(data)
-  return { testRuns: rows }
 }
 
 export default TestRuns
