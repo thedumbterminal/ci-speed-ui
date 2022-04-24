@@ -24,10 +24,10 @@ const formatLink = (params: GridValueFormatterParams<string>): string => {
 }
 
 const transformRows = (testRuns: TestRun[]): TestRunRow[] => {
-  return testRuns.map((testRun: TestRun) => {
+  return testRuns.map((item: TestRun) => {
     return {
-      id: testRun.id,
-      created: testRun.created_at
+      id: item.id,
+      created: item.created_at
     }
   })
 }
@@ -63,7 +63,7 @@ const TestRuns: NextPage<TestRunsProps> = ({ testRuns }: TestRunsProps) => {
         rows={testRuns}
         columns={columns}
         pageSize={10}
-        rowsPerPageOptions={[5]}
+        rowsPerPageOptions={[10,50,100]}
         autoHeight={true}
         disableColumnMenu={true}
         disableSelectionOnClick={true}

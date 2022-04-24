@@ -2,36 +2,61 @@ import api from '../../api'
 import TestRun from '../../shared/TestRun'
 import TestSuite from '../../shared/TestSuite'
 import { NextPage } from 'next'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
+import { DataGrid, GridColDef, GridValueFormatterParams, GridRenderCellParams } from '@mui/x-data-grid'
 import Link from 'next/link'
 import getQueryValue from '../../lib/query'
 
-interface TestRunProps {
-  testRun?: TestRun
-  testSuites: TestSuite[]
+interface TestSuiteRow {
+  id: number,
+  name: string,
+  duration: number
 }
 
-const renderTestSuite = (testSuite: TestSuite) => {
-  const testSuiteLink = `/test_suites/${testSuite.id}`
+interface TestRunProps {
+  testRun?: TestRun
+  testSuites: TestSuiteRow[]
+}
+
+const formatLink = (params: GridValueFormatterParams<string>): string => {
+  return `/test_suites/${params.value}`
+}
+
+const transformRows = (testSuites: TestSuite[]): TestSuiteRow[] => {
+  return testSuites.map((item: TestSuite) => {
+    return {
+      id: item.id,
+      name: item.name,
+      duration: item.time
+    }
+  })
+}
+
+const renderLinkCell = (params: GridRenderCellParams<string>) => {
+  const formatted = params.formattedValue as string
   return (
-    <TableRow
-      key={testSuite.id}
-      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-    >
-      <TableCell>{ testSuite.name }</TableCell>
-      <TableCell>{ testSuite.time }</TableCell>
-      <TableCell>
-        <Link href={testSuiteLink}>View test cases</Link>
-      </TableCell>
-    </TableRow>
+    <Link href={formatted}>Test cases</Link> 
   )
 }
+
+const columns: GridColDef[] = [
+  {
+    field: 'name',
+    headerName: 'Name',
+    width: 160
+  },
+  {
+    field: 'duration',
+    headerName: 'Duration',
+    width: 160
+  },
+  {
+    field: 'id',
+    headerName: 'View',
+    width: 160,
+    valueFormatter: formatLink,
+    renderCell: renderLinkCell
+  }
+]
 
 const TestRun: NextPage<TestRunProps> = ({ testRun, testSuites }: TestRunProps) => {
   return (
@@ -40,20 +65,22 @@ const TestRun: NextPage<TestRunProps> = ({ testRun, testSuites }: TestRunProps) 
       <p>
         Test suites
       </p>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Duration</TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {testSuites.map((testSuite: TestSuite) => renderTestSuite(testSuite))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <DataGrid
+        rows={testSuites}
+        columns={columns}
+        pageSize={10}
+        rowsPerPageOptions={[10,50,100]}
+        autoHeight={true}
+        disableColumnMenu={true}
+        disableSelectionOnClick={true}
+        sx={{
+          boxShadow: 2,
+          border: 2,
+          borderColor: 'primary.light',
+          '& .MuiDataGrid-cell--editable': {
+          }
+        }}
+      />
     </>
   )
 }
@@ -64,7 +91,8 @@ TestRun.getInitialProps = async ({ query }): Promise<TestRunProps> => {
 
   const testRun = await api.get(`/test_runs/${testRunId}`)
   const testSuites = await api.get(`/test_suites/`, { test_run: testRunId })
-  return { testRun, testSuites }
+  const rows = transformRows(testSuites)
+  return { testRun, testSuites: rows }
 }
 
 export default TestRun
