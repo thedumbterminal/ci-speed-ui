@@ -53,7 +53,7 @@ const _getPageData = (id: string) => {
 const TestSuite: NextPage = () => {
   const router = useRouter()
   const testSuiteId = getQueryValue(router.query, 'id')
-  if(!testSuiteId) throw new Error('No test suite ID given')
+  //if(!testSuiteId) throw new Error('No test suite ID given')
   const {data, error, isLoading} = _getPageData(testSuiteId || '')
   if(error) throw error
   let testCases: TestCaseRow[] = []
