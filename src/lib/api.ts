@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios'
 
-const URL_BASE = 'https://ci-speed.herokuapp.com'
+const DEFAULT_BASE = 'https://ci-speed.herokuapp.com'
+const URL_BASE = process.env.REACT_APP_API_BASE || DEFAULT_BASE
 
 interface URLParams {
   [key: string]: string | number

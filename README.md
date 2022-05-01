@@ -19,6 +19,10 @@ npx next telemetry disable
 npm start
 ```
 
+## Environment Variables
+
+* REACT_APP_API_BASE - The URL of the API to use.
+
 ## Deploy
 
 ```
