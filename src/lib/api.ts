@@ -9,8 +9,12 @@ interface URLParams {
 
 const api = {
   get: async (path: string, params: URLParams = {}) => {
-    const { data } = await axios.get(URL_BASE + path, { params })
-    return data
+    try {
+      const { data } = await axios.get(URL_BASE + path, { params })
+      return data
+    } catch (error) {
+      console.error('API error:', error)
+    }
   }
 }
 
