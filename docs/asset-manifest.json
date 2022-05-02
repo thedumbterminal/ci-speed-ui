@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/ci-speed-ui/static/js/main.74368219.js",
+    "main.js": "/ci-speed-ui/static/js/main.fdbfa30e.js",
     "index.html": "/ci-speed-ui/index.html",
-    "main.74368219.js.map": "/ci-speed-ui/static/js/main.74368219.js.map"
+    "main.fdbfa30e.js.map": "/ci-speed-ui/static/js/main.fdbfa30e.js.map"
   },
   "entrypoints": [
-    "static/js/main.74368219.js"
+    "static/js/main.fdbfa30e.js"
   ]
 }
