@@ -1,6 +1,6 @@
 import { DataGrid, GridColDef, GridValueFormatterParams, GridRenderCellParams } from '@mui/x-data-grid'
 import { format } from 'date-fns'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import TestRun from '../shared/TestRun'
 import api from '../lib/api'
 import useSWR from 'swr'
@@ -31,7 +31,7 @@ const transformRows = (testRuns: TestRun[]): TestRunRow[] => {
 const renderLinkCell = (params: GridRenderCellParams<string>) => {
   const formatted = params.formattedValue as string
   return (
-    <Link to={formatted}>Test suites</Link> 
+    <Link to={formatted}>Test run</Link> 
   )
 }
 
@@ -51,26 +51,33 @@ const columns: GridColDef[] = [
   }
 ]
 
-const _getPageData = () => {
-  const { data, error } = useSWR('/test_runs/', api.get)
+const _getPageData = (id: string) => {
+  const { data: project, error: projectError } = useSWR('/projects/' + id, api.get)
+  const { data: testRuns, error: runError } = useSWR(() => ['/test_runs/', {project_id: project.id}], api.get)
   return {
-    data,
-    error,
-    isLoading: !error && !data,
+    data: {project, testRuns},
+    error: projectError || runError,
+    isLoading: !runError && !testRuns,
   }
 }
 
-const TestRuns = () => {
-  const {data, error, isLoading} = _getPageData()
+const Project = () => {
+  let [searchParams] = useSearchParams()
+  let projectId = searchParams.get('id')
+
+  const {data, error, isLoading} = _getPageData(projectId|| '')
   if(error) throw error
   let testRuns: TestRunRow[] = []
-  if(data){
-    testRuns = transformRows(data)
+  if(data && data.testRuns){
+    testRuns = transformRows(data.testRuns)
   }
 
   return (
     <>
-      <h1>Test Runs</h1>
+      <h1>Project { data.project && data.project.name }</h1>
+      <p>
+        Test runs
+      </p>
       <DataGrid
         rows={testRuns}
         columns={columns}
@@ -92,4 +99,4 @@ const TestRuns = () => {
   )
 }
 
-export default TestRuns
+export default Project

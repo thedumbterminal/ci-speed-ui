@@ -40,7 +40,7 @@ const columns: GridColDef[] = [
 
 const _getPageData = (id: string) => {
   const { data: testSuite, error: suiteError } = useSWR('/test_suites/' + id, api.get)
-  const { data: testCases, error: caseError } = useSWR(() => ['/test_cases/', {test_suite: testSuite.id}], api.get)
+  const { data: testCases, error: caseError } = useSWR(() => ['/test_cases/', {test_suite_id: testSuite.id}], api.get)
   return {
     data: {testSuite, testCases},
     error: suiteError || caseError,
