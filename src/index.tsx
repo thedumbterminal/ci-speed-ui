@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import * as React from "react"
 import App from "./pages/App"
+import Account from "./pages/Account"
 import Projects from './pages/Projects'
 import Project from './pages/Project'
 import TestRun from './pages/TestRun'
@@ -19,6 +20,7 @@ root.render(
     <HashRouter>
       <Routes>
         <Route path="/" element={<App />}>
+          <Route path="/account" element={<Account />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/project" element={<Project />} />
           <Route path="/test_run" element={<TestRun />} />

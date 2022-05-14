@@ -122,14 +122,14 @@ const PersistentDrawerLeft = ({open, setOpen}: DrawerProps) => {
         </List>
         <Divider />
         <List>
-          {['Account'].map((text) => (
-            <ListItem button key={text}>
+          <Link to="/account">
+            <ListItem button key="Account">
               <ListItemIcon>
                 <MenuIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+              <ListItemText primary="Account" />
+          </ListItem>
+          </Link>
         </List>
       </Drawer>
     </>
