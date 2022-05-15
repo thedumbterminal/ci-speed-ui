@@ -1,7 +1,7 @@
 import { DataGrid, GridColDef, GridValueFormatterParams, GridRenderCellParams } from '@mui/x-data-grid'
 import { Link } from 'react-router-dom'
 import Project from '../shared/Project'
-import api from '../lib/api'
+import { api } from '../lib/api'
 import useSWR from 'swr'
 
 interface ProjectRow {

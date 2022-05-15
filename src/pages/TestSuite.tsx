@@ -1,5 +1,5 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
-import api from '../lib/api'
+import { api } from '../lib/api'
 import useSWR from 'swr'
 import { useSearchParams } from 'react-router-dom'
 
