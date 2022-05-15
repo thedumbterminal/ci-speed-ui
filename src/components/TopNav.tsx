@@ -14,7 +14,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 const drawerWidth = 240;
 
 interface DrawerProps {
@@ -103,33 +103,33 @@ const PersistentDrawerLeft = ({open, setOpen}: DrawerProps) => {
         </DrawerHeader>
         <Divider />
         <List>
-          <Link to="/">
+          <NavLink to="/">
             <ListItem button key="Home">
               <ListItemIcon>
                 <MenuIcon />
               </ListItemIcon>
               <ListItemText primary="Home" />
             </ListItem>
-          </Link>
-          <Link to="/projects">
+          </NavLink>
+          <NavLink to="/projects">
             <ListItem button key="Projects">
               <ListItemIcon>
                 <MenuIcon />
               </ListItemIcon>
               <ListItemText primary="Projects" />
             </ListItem>
-          </Link>
+          </NavLink>
         </List>
         <Divider />
         <List>
-          <Link to="/account">
+          <NavLink to="/account">
             <ListItem button key="Account">
               <ListItemIcon>
                 <MenuIcon />
               </ListItemIcon>
               <ListItemText primary="Account" />
           </ListItem>
-          </Link>
+          </NavLink>
         </List>
       </Drawer>
     </>

@@ -1,5 +1,5 @@
 import { Link, useSearchParams } from 'react-router-dom'
-import api from '../lib/api'
+import { api } from '../lib/api'
 import useSWR from 'swr'
 import Login from '../components/Login'
 

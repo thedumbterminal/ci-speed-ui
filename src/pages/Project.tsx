@@ -2,7 +2,7 @@ import { DataGrid, GridColDef, GridValueFormatterParams, GridRenderCellParams } 
 import { format } from 'date-fns'
 import { Link, useSearchParams } from 'react-router-dom'
 import TestRun from '../shared/TestRun'
-import api from '../lib/api'
+import { api } from '../lib/api'
 import useSWR from 'swr'
 
 interface TestRunRow {

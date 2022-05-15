@@ -1,4 +1,4 @@
-import api from '../lib/api'
+import { api } from '../lib/api'
 import TestSuite from '../shared/TestSuite'
 import { DataGrid, GridColDef, GridValueFormatterParams, GridRenderCellParams } from '@mui/x-data-grid'
 import { Link, useSearchParams } from 'react-router-dom'
