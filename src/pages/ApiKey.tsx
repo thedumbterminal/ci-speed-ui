@@ -40,23 +40,27 @@ const ApiKey = () => {
   //} else {
   //  stateComponent = <Info data={data}/>
   //}
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(false)
+  const [apiKey, setApiKey] = React.useState(null)
+
   const _generateClick = () => {
     console.log('_generateClick()')
     setLoading(true)
   }
+
+  const loadingButton = <LoadingButton
+    loading={loading}
+    variant="contained"
+    onClick={_generateClick}
+    loadingIndicator="Generating..."
+  >Generate API Key</LoadingButton>
+
   return (
     <>
       <h1>API Key</h1>
       <p>
         In order to access CI-Speed from CLI tools, please generate an API using the button below.
       </p>
-      <LoadingButton
-        loading={loading}
-        variant="contained"
-        onClick={_generateClick}
-        loadingIndicator="Generating..."
-      >Generate API Key</LoadingButton>
     </>
   )
 }
