@@ -20,6 +20,18 @@ const api = {
     } catch (error) {
       console.error('API error:', error)
     }
+  },
+
+  post: async (path: string, params: URLParams = {}) => {
+    try {
+      const { data } = await axios.post(absoluteURL(path), {
+        params,
+        withCredentials: true
+      })
+      return data
+    } catch (error) {
+      console.error('API error:', error)
+    }
   }
 }
 
