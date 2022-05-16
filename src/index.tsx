@@ -1,7 +1,8 @@
 import { createRoot } from 'react-dom/client';
 import * as React from "react"
 import App from "./pages/App"
-import Account from "./pages/Account"
+import Account from './pages/Account'
+import ApiKey from './pages/ApiKey'
 import Projects from './pages/Projects'
 import Project from './pages/Project'
 import TestRun from './pages/TestRun'
@@ -21,6 +22,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route path="/account" element={<Account />} />
+          <Route path="/api_key" element={<ApiKey />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/project" element={<Project />} />
           <Route path="/test_run" element={<TestRun />} />

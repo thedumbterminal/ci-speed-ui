@@ -7,7 +7,10 @@ const Login = () => {
   return (
     <>
     <p>
-      <Link href={loginURL}>Please login</Link>
+      Please login to gain access to CI-Speed features.
+    </p>
+    <p>
+      <Link href={loginURL}>Login via OAUTH with GitHub</Link>
     </p>
     </>
   )

@@ -1,7 +1,14 @@
-import { Link, useSearchParams } from 'react-router-dom'
 import { api } from '../lib/api'
 import useSWR from 'swr'
 import Login from '../components/Login'
+
+interface UserInfoProps {
+  data: UserInfo
+}
+
+interface UserInfo {
+  email: string
+}
 
 const _getUserInfo = () => {
   const { data, error } = useSWR('/user/', api.get)
@@ -12,15 +19,23 @@ const _getUserInfo = () => {
   }
 }
 
+const Info = ({ data }: UserInfoProps) => {
+  return (
+    <>
+      <p>
+        Logged in via GitHub as <b>{data.email}</b>.
+      </p>
+    </>
+  )
+}
+
 const Account = () => {
   const {data, error, isLoading} = _getUserInfo()
-  console.log('error:', error)
-  console.log('data:', data)
   let stateComponent
   if(!data){
     stateComponent = <Login />
   } else {
-    stateComponent = <div />
+    stateComponent = <Info data={data}/>
   }
   return (
     <>

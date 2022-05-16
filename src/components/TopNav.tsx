@@ -128,7 +128,15 @@ const PersistentDrawerLeft = ({open, setOpen}: DrawerProps) => {
                 <MenuIcon />
               </ListItemIcon>
               <ListItemText primary="Account" />
-          </ListItem>
+            </ListItem>
+          </NavLink>
+          <NavLink to="/api_key">
+            <ListItem button key="ApiKey">
+              <ListItemIcon>
+                <MenuIcon />
+              </ListItemIcon>
+              <ListItemText primary="API Key" />
+            </ListItem>
           </NavLink>
         </List>
       </Drawer>
