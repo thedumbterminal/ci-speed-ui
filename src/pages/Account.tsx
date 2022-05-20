@@ -1,6 +1,7 @@
 import { api } from '../lib/api'
 import useSWR from 'swr'
 import Login from '../components/Login'
+import Typography from '@mui/material/Typography'
 
 interface UserInfoProps {
   data: UserInfo
@@ -39,7 +40,7 @@ const Account = () => {
   }
   return (
     <>
-      <h1>Account</h1>
+      <Typography variant="h1" component="h1">Account</Typography>
       {stateComponent}
     </>
   )

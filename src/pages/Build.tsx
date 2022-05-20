@@ -4,6 +4,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import TestRun from '../shared/TestRun'
 import { api } from '../lib/api'
 import useSWR from 'swr'
+import Typography from '@mui/material/Typography'
 
 interface TestRunRow {
   id: number,
@@ -74,9 +75,9 @@ const Build = () => {
 
   return (
     <>
-      <h1>Project { data.build && data.build.ref }</h1>
+      <Typography variant="h1" component="h1">Build</Typography>
       <p>
-        Test runs
+        Test runs for <b>{ data.build && data.build.ref }</b>.
       </p>
       <DataGrid
         rows={testRuns}

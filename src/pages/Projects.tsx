@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Project from '../shared/Project'
 import { api } from '../lib/api'
 import useSWR from 'swr'
+import Typography from '@mui/material/Typography'
 
 interface ProjectRow {
   id: number,
@@ -63,7 +64,7 @@ const Projects = () => {
 
   return (
     <>
-      <h1>Projects</h1>
+      <Typography variant="h1" component="h1">Projects</Typography>
       <DataGrid
         rows={projects}
         columns={columns}

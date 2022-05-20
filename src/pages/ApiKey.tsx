@@ -2,7 +2,8 @@ import { api } from '../lib/api'
 import useSWR from 'swr'
 import LoadingButton from '@mui/lab/LoadingButton'
 import * as React from 'react'
-import TextareaAutosize from '@mui/material/TextareaAutosize';
+import TextareaAutosize from '@mui/material/TextareaAutosize'
+import Typography from '@mui/material/Typography'
 
 interface GenerateButtonProps {
   loading: boolean
@@ -61,7 +62,6 @@ const ApiKey = () => {
 
   let stateComponent
   if(loading) {
-    console.log('displaying token')
     stateComponent = <TokenDisplay />
   } else {
     stateComponent = <GenerateButton loading={loading} onClick={_generateClick} />
@@ -69,7 +69,7 @@ const ApiKey = () => {
 
   return (
     <>
-      <h1>API Key</h1>
+      <Typography variant="h1" component="h1">API Key</Typography>
        {stateComponent}
     </>
   )
