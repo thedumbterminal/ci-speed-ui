@@ -5,6 +5,7 @@ import Account from './pages/Account'
 import ApiKey from './pages/ApiKey'
 import Projects from './pages/Projects'
 import Project from './pages/Project'
+import Build from './pages/Build'
 import TestRun from './pages/TestRun'
 import TestSuite from './pages/TestSuite'
 import {
@@ -25,6 +26,7 @@ root.render(
           <Route path="/api_key" element={<ApiKey />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/project" element={<Project />} />
+          <Route path="/build" element={<Build />} />
           <Route path="/test_run" element={<TestRun />} />
           <Route path="/test_suite" element={<TestSuite />} />
         </Route>

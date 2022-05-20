@@ -16,7 +16,7 @@ const formatDate = (params: GridValueFormatterParams<string>): string => {
 }
 
 const formatLink = (params: GridValueFormatterParams<string>): string => {
-  return `/build/?id=${params.value}`
+  return `/test_run/?id=${params.value}`
 }
 
 const transformRows = (testRuns: TestRun[]): TestRunRow[] => {
@@ -31,7 +31,7 @@ const transformRows = (testRuns: TestRun[]): TestRunRow[] => {
 const renderLinkCell = (params: GridRenderCellParams<string>) => {
   const formatted = params.formattedValue as string
   return (
-    <Link to={formatted}>View build</Link>
+    <Link to={formatted}>View test run</Link>
   )
 }
 
@@ -52,34 +52,34 @@ const columns: GridColDef[] = [
 ]
 
 const _getPageData = (id: string) => {
-  const { data: project, error: projectError } = useSWR('/projects/' + id, api.get)
-  const { data: builds, error: runError } = useSWR(() => ['/builds/', {project_id: project.id}], api.get)
+  const { data: build, error: projectError } = useSWR('/builds/' + id, api.get)
+  const { data: testRuns, error: runError } = useSWR(() => ['/test_runs/', {build_id: build.id}], api.get)
   return {
-    data: {project, builds},
+    data: {build, testRuns},
     error: projectError || runError,
-    isLoading: !runError && !builds,
+    isLoading: !runError && !testRuns,
   }
 }
 
-const Project = () => {
+const Build = () => {
   let [searchParams] = useSearchParams()
-  let projectId = searchParams.get('id')
+  let buildId = searchParams.get('id')
 
-  const {data, error, isLoading} = _getPageData(projectId|| '')
+  const {data, error, isLoading} = _getPageData(buildId || '')
   if(error) throw error
-  let builds: TestRunRow[] = []
-  if(data && data.builds){
-    builds = transformRows(data.builds)
+  let testRuns: TestRunRow[] = []
+  if(data && data.testRuns){
+    testRuns = transformRows(data.testRuns)
   }
 
   return (
     <>
-      <h1>Project { data.project && data.project.name }</h1>
+      <h1>Project { data.build && data.build.ref }</h1>
       <p>
-        Builds
+        Test runs
       </p>
       <DataGrid
-        rows={builds}
+        rows={testRuns}
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10,50,100]}
@@ -99,4 +99,4 @@ const Project = () => {
   )
 }
 
-export default Project
+export default Build

@@ -25,7 +25,7 @@ const transformRows = (projects: Project[]): ProjectRow[] => {
 const renderLinkCell = (params: GridRenderCellParams<string>) => {
   const formatted = params.formattedValue as string
   return (
-    <Link to={formatted}>Test runs</Link> 
+    <Link to={formatted}>View project</Link>
   )
 }
 
