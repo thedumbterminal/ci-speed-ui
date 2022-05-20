@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import * as React from "react"
 import App from "./pages/App"
+import Home from './pages/Home'
 import Account from './pages/Account'
 import ApiKey from './pages/ApiKey'
 import Projects from './pages/Projects'
@@ -29,6 +30,7 @@ root.render(
           <Route path="/build" element={<Build />} />
           <Route path="/test_run" element={<TestRun />} />
           <Route path="/test_suite" element={<TestSuite />} />
+          <Route index element={<Home />} />
         </Route>
       </Routes>
     </HashRouter>
