@@ -40,7 +40,7 @@ const Account = () => {
   }
   return (
     <>
-      <Typography variant="h1" component="h1">Account</Typography>
+      <Typography variant="h2" component="h2">Account</Typography>
       {stateComponent}
     </>
   )

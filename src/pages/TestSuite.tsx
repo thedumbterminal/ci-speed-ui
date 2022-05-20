@@ -2,6 +2,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { api } from '../lib/api'
 import useSWR from 'swr'
 import { useSearchParams } from 'react-router-dom'
+import Typography from '@mui/material/Typography'
 
 interface TestCaseRow {
   id: number,
@@ -61,9 +62,9 @@ const TestSuite = () => {
 
   return (
     <>
-      <h1>Test suite { data.testSuite && data.testSuite.name }</h1>
+      <Typography variant="h2" component="h2">Test Suite</Typography>
       <p>
-        Test cases
+        Test cases for test suite <b>{ data.testSuite && data.testSuite.name }</b>.
       </p>
       <DataGrid
         rows={testCases}

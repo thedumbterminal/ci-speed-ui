@@ -64,7 +64,7 @@ const Projects = () => {
 
   return (
     <>
-      <Typography variant="h1" component="h1">Projects</Typography>
+      <Typography variant="h2" component="h2" gutterBottom>Projects</Typography>
       <DataGrid
         rows={projects}
         columns={columns}

@@ -75,7 +75,7 @@ const Build = () => {
 
   return (
     <>
-      <Typography variant="h1" component="h1">Build</Typography>
+      <Typography variant="h2" component="h2">Build</Typography>
       <p>
         Test runs for <b>{ data.build && data.build.ref }</b>.
       </p>

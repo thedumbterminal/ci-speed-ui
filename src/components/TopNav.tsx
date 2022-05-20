@@ -78,7 +78,7 @@ const PersistentDrawerLeft = ({open, setOpen}: DrawerProps) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component="h1">
             CI-Speed
           </Typography>
         </Toolbar>

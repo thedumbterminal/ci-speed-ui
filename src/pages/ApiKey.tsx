@@ -69,7 +69,7 @@ const ApiKey = () => {
 
   return (
     <>
-      <Typography variant="h1" component="h1">API Key</Typography>
+      <Typography variant="h2" component="h2">API Key</Typography>
        {stateComponent}
     </>
   )

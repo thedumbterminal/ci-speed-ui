@@ -3,6 +3,7 @@ import TestSuite from '../shared/TestSuite'
 import { DataGrid, GridColDef, GridValueFormatterParams, GridRenderCellParams } from '@mui/x-data-grid'
 import { Link, useSearchParams } from 'react-router-dom'
 import useSWR from 'swr'
+import Typography from '@mui/material/Typography'
 
 interface TestSuiteRow {
   id: number,
@@ -27,7 +28,7 @@ const transformRows = (testSuites: TestSuite[]): TestSuiteRow[] => {
 const renderLinkCell = (params: GridRenderCellParams<string>) => {
   const formatted = params.formattedValue as string
   return (
-    <Link to={formatted}>Test cases</Link> 
+    <Link to={formatted}>View test suite</Link> 
   )
 }
 
@@ -74,10 +75,9 @@ const TestRun = () => {
 
   return (
     <>
-      <h1>Test Run { data.testRun && data.testRun.id }</h1>
-      
+      <Typography variant="h2" component="h2">Test Run</Typography>
       <p>
-        Test suites
+        Test suites for test run <b>{ data.testRun && data.testRun.id }</b>.
       </p>
       <DataGrid
         rows={testSuites}

@@ -75,9 +75,9 @@ const Project = () => {
 
   return (
     <>
-      <Typography variant="h1" component="h1">Project</Typography>
+      <Typography variant="h2" component="h2">Project</Typography>
       <p>
-        Builds for <b>{ data.project && data.project.name }</b>.
+        Builds for project <b>{ data.project && data.project.name }</b>.
       </p>
       <DataGrid
         rows={builds}
