@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import Project from '../shared/Project'
 import { api } from '../lib/api'
 import useSWR from 'swr'
-import Typography from '@mui/material/Typography'
+import { Typography } from '@mui/material'
+import NewProject from '../components/NewProject'
 
 interface ProjectRow {
   id: number,
@@ -82,6 +83,7 @@ const Projects = () => {
           }
         }}
       />
+      <NewProject />
     </>
   )
 }

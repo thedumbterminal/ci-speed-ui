@@ -2,8 +2,7 @@ import { api } from '../lib/api'
 import useSWR from 'swr'
 import LoadingButton from '@mui/lab/LoadingButton'
 import * as React from 'react'
-import TextareaAutosize from '@mui/material/TextareaAutosize'
-import Typography from '@mui/material/Typography'
+import { TextareaAutosize, Typography } from '@mui/material'
 
 interface GenerateButtonProps {
   loading: boolean
