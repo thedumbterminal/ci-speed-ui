@@ -4,13 +4,14 @@ import LoadingButton from '@mui/lab/LoadingButton'
 import { useForm } from 'react-hook-form'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { api } from '../lib/api'
 
 interface IFormInput {
-  project_name: string
+  name: string
 }
 
 const schema = yup.object().shape({
-  project_name: yup.string().required().matches(/^[a-zA-Z0-9_-]+$/),
+  name: yup.string().required().matches(/^[a-zA-Z0-9_-]+$/),
 })
 
 export default () => {
@@ -24,10 +25,11 @@ export default () => {
 
   const [loading, setLoading] = React.useState(false)
 
-  let _onSubmit = (data: IFormInput) => {
+  let _onSubmit = async (formData: IFormInput) => {
     setLoading(true)
-    console.log('got form data' ,data)
-
+    await api.post('/projects/', {
+      name: formData.name
+    })
     setLoading(false)
   }
   return (
@@ -38,10 +40,10 @@ export default () => {
       <form onSubmit={handleSubmit(_onSubmit)} >
         <Stack direction="row" spacing={2} alignItems="center">
             <TextField
-                {...register("project_name")}
+                {...register("name")}
                 label="New Project Name"
-                helperText={errors.project_name?.message}
-                error={!!errors.project_name?.message}
+                helperText={errors.name?.message}
+                error={!!errors.name?.message}
                 variant="filled" />
             <div>
               <LoadingButton

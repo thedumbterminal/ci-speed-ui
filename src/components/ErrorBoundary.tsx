@@ -27,7 +27,7 @@ class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <>
-          <Typography variant="h1" component="h1">Sorry...</Typography>
+          <Typography variant="h2" component="h2">Sorry...</Typography>
           <p>
             there was an error.
           </p>
