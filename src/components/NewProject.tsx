@@ -1,15 +1,33 @@
 import * as React from 'react'
 import { Stack, TextField } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
+import { useForm } from 'react-hook-form'
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+interface IFormInput {
+  project_name: string
+}
+
+const schema = yup.object().shape({
+  project_name: yup.string().required().matches(/^[a-zA-Z0-9_-]+$/),
+})
 
 export default () => {
-  // TODO add some project name validation
-  const [newProjectError, setNewProjectError] = React.useState('')
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<IFormInput>({
+    resolver: yupResolver(schema),
+  })
+
   const [loading, setLoading] = React.useState(false)
 
-  let onClick = () => {
+  let _onSubmit = (data: IFormInput) => {
     setLoading(true)
-    setNewProjectError('Not implemented yet')
+    console.log('got form data' ,data)
+
     setLoading(false)
   }
   return (
@@ -17,22 +35,24 @@ export default () => {
       <p>
         Create a new project
       </p>
-      <Stack direction="row" spacing={2} alignItems="center">
-          <TextField
-              error={Boolean(newProjectError)}
-              id="project_name"
-              label="New Project Name"
-              helperText={newProjectError}
-              variant="filled" />
-          <div>
-            <LoadingButton
-              loading={loading}
-              variant="contained"
-              onClick={onClick}
-              loadingIndicator="Creating..."
-            >Create Project</LoadingButton>
-        </div>
-      </Stack>
+      <form onSubmit={handleSubmit(_onSubmit)} >
+        <Stack direction="row" spacing={2} alignItems="center">
+            <TextField
+                {...register("project_name")}
+                label="New Project Name"
+                helperText={errors.project_name?.message}
+                error={!!errors.project_name?.message}
+                variant="filled" />
+            <div>
+              <LoadingButton
+                type="submit"
+                loading={loading}
+                variant="contained"
+                loadingIndicator="Creating..."
+              >Create Project</LoadingButton>
+          </div>
+        </Stack>
+      </form>
     </>
   )
 }
