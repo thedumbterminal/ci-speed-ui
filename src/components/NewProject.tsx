@@ -11,7 +11,7 @@ interface IFormInput {
 }
 
 const schema = yup.object().shape({
-  name: yup.string().required().matches(/^[a-zA-Z0-9_-]+$/),
+  name: yup.string().required().matches(/^[a-zA-Z0-9_-\/]+$/),
 })
 
 export default () => {
