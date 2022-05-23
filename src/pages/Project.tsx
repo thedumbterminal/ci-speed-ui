@@ -75,7 +75,7 @@ const Project = () => {
 
   const {data, error, isLoading} = _getPageData(projectId|| '')
   if(error) throw error
-  let builds: TestRunRow[] = []
+  let builds: BuildRow[] = []
   if(data && data.builds){
     builds = transformRows(data.builds)
   }
