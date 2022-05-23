@@ -1,13 +1,14 @@
 import { DataGrid, GridColDef, GridValueFormatterParams, GridRenderCellParams } from '@mui/x-data-grid'
 import { format } from 'date-fns'
 import { Link, useSearchParams } from 'react-router-dom'
-import TestRun from '../shared/TestRun'
+import Build from '../shared/Build'
 import { api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
 
-interface TestRunRow {
+interface BuildRow {
   id: number,
+  ref: string,
   created: string
 }
 
@@ -20,10 +21,11 @@ const formatLink = (params: GridValueFormatterParams<string>): string => {
   return `/build/?id=${params.value}`
 }
 
-const transformRows = (testRuns: TestRun[]): TestRunRow[] => {
-  return testRuns.map((item: TestRun) => {
+const transformRows = (testRuns: Build[]): BuildRow[] => {
+  return testRuns.map((item: Build) => {
     return {
       id: item.id,
+      ref: item.ref,
       created: item.created_at
     }
   })
@@ -42,6 +44,11 @@ const columns: GridColDef[] = [
     headerName: 'Created',
     width: 160,
     valueFormatter: formatDate
+  },
+  {
+    field: 'ref',
+    headerName: 'Reference',
+    width: 160,
   },
   {
     field: 'id',
