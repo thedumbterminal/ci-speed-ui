@@ -5,6 +5,7 @@ import Build from '../shared/Build'
 import { api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
+import BarChart from '../components/BarChart'
 
 interface BuildRow {
   id: number,
@@ -103,6 +104,7 @@ const Project = () => {
           }
         }}
       />
+      <BarChart />
     </>
   )
 }
