@@ -37,18 +37,15 @@ It will be deployed automatically to github pages.
 
 * Create react app
 * Material UI https://mui.com/material-ui/getting-started/installation/
+* Visx https://airbnb.io/visx
 
 ## Todo
 
-* Sort out CSS safari deployment
 * Signup
-* Login
 * Most failing tests
 * Longest tests
 * Flaky tests
 * Amount of tests
-
-
 
 # Getting Started with Create React App
 
