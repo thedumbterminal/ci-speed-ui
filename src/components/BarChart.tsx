@@ -5,9 +5,11 @@ import {
   AnimatedBarSeries,
   XYChart,
   Tooltip,
-  BarGroup
+  BarGroup,
+  buildChartTheme
 } from '@visx/xychart'
 import { RenderTooltipParams } from '@visx/xychart/lib/components/Tooltip'
+import { useTheme } from '@mui/material/styles'
 
 type Datum = {
   x: string;
@@ -36,9 +38,26 @@ const renderTooltip = ({ tooltipData, colorScale }: RenderTooltipParams<Datum>) 
   )
 }
 
+const margin = {
+  top: 10,
+  right: 10,
+  left: 20,
+  bottom: 20
+}
+
 export default ({ height, data }: ChartProps) => {
+  const muiTheme = useTheme()
+  const customTheme = buildChartTheme({
+    backgroundColor: muiTheme.palette.background.paper,
+    colors: [
+      muiTheme.palette.secondary.main
+    ],
+    tickLength: 1,
+    gridColor: muiTheme.palette.grey[200],
+    gridColorDark: muiTheme.palette.grey[600]
+  })
   return (
-    <XYChart height={height} xScale={{ type: 'band' }} yScale={{ type: 'linear' }}>
+    <XYChart theme={customTheme} margin={margin} height={height} xScale={{ type: 'band' }} yScale={{ type: 'linear' }}>
       <AnimatedAxis orientation="bottom" />
       <AnimatedAxis orientation="left" />
       <AnimatedGrid columns={true} />

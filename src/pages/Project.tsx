@@ -110,6 +110,9 @@ const Project = () => {
           }
         }}
       />
+      <p>
+        Number of tests over time
+      </p>
       <BarChart
         height={200}
         data={chartData}
