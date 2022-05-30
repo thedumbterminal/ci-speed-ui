@@ -81,6 +81,12 @@ const Project = () => {
     builds = transformRows(data.builds)
   }
 
+  const chartData = [
+    { x: '2020-01-01', y: 50 },
+    { x: '2020-01-02', y: 10 },
+    { x: '2020-01-03', y: 20 },
+  ]
+
   return (
     <>
       <Typography variant="h2" component="h2">Project</Typography>
@@ -104,7 +110,10 @@ const Project = () => {
           }
         }}
       />
-      <BarChart />
+      <BarChart
+        height={200}
+        data={chartData}
+      />
     </>
   )
 }
