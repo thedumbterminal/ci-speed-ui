@@ -1,6 +1,6 @@
-import { createRoot } from 'react-dom/client';
-import * as React from "react"
-import App from "./pages/App"
+import { createRoot } from 'react-dom/client'
+import * as React from 'react'
+import App from './pages/App'
 import Home from './pages/Home'
 import Account from './pages/Account'
 import ApiKey from './pages/ApiKey'
@@ -9,18 +9,14 @@ import Project from './pages/Project'
 import Build from './pages/Build'
 import TestRun from './pages/TestRun'
 import TestSuite from './pages/TestSuite'
-import {
-  HashRouter,
-  Routes,
-  Route
-} from "react-router-dom";
+import { HashRouter, Routes, Route } from 'react-router-dom'
 
 import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 
-const container = document.getElementById("root");
+const container = document.getElementById('root')
 const root = createRoot(container!)
 root.render(
   <React.StrictMode>

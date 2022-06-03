@@ -1,16 +1,16 @@
-import {PersistentDrawerLeft, DrawerHeader, drawerWidth} from './TopNav'
-import * as React from "react"
+import { PersistentDrawerLeft, DrawerHeader, drawerWidth } from './TopNav'
+import * as React from 'react'
 import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 
-interface LayoutProps  { 
+interface LayoutProps {
   children: React.ReactNode
 }
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
-  open?: boolean;
+  open?: boolean
 }>(({ theme, open }) => ({
   flexGrow: 1,
   padding: theme.spacing(3),
@@ -29,16 +29,16 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
 }))
 
 const Layout = (props: LayoutProps) => {
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const theme = useTheme()
+  const [open, setOpen] = React.useState(false)
   const wideScreen = useMediaQuery(theme.breakpoints.up('md'))
   const [defaultedMenu, setDefaultedMenu] = React.useState(false)
-  if(wideScreen && !defaultedMenu) {
+  if (wideScreen && !defaultedMenu) {
     console.debug('Defaulting menu to open for wide screens')
     setOpen(true)
     setDefaultedMenu(true)
   }
-  
+
   return (
     <Box sx={{ display: 'flex' }}>
       <PersistentDrawerLeft open={open} setOpen={setOpen} />

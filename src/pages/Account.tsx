@@ -31,16 +31,18 @@ const Info = ({ data }: UserInfoProps) => {
 }
 
 const Account = () => {
-  const {data, error, isLoading} = _getUserInfo()
+  const { data, error, isLoading } = _getUserInfo()
   let stateComponent
-  if(!data){
+  if (!data) {
     stateComponent = <Login />
   } else {
-    stateComponent = <Info data={data}/>
+    stateComponent = <Info data={data} />
   }
   return (
     <>
-      <Typography variant="h2" component="h2">Account</Typography>
+      <Typography variant="h2" component="h2">
+        Account
+      </Typography>
       {stateComponent}
     </>
   )

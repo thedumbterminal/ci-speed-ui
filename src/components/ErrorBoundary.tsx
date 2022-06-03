@@ -11,7 +11,7 @@ interface State {
 
 class ErrorBoundary extends Component<Props, State> {
   public state: State = {
-    hasError: false
+    hasError: false,
   }
 
   public static getDerivedStateFromError(_: Error): State {
@@ -20,17 +20,17 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("Uncaught error:", error, errorInfo)
+    console.error('Uncaught error:', error, errorInfo)
   }
 
   public render() {
     if (this.state.hasError) {
       return (
         <>
-          <Typography variant="h2" component="h2">Sorry...</Typography>
-          <p>
-            there was an error.
-          </p>
+          <Typography variant="h2" component="h2">
+            Sorry...
+          </Typography>
+          <p>there was an error.</p>
         </>
       )
     }

@@ -1,4 +1,9 @@
-import { DataGrid, GridColDef, GridValueFormatterParams, GridRenderCellParams } from '@mui/x-data-grid'
+import {
+  DataGrid,
+  GridColDef,
+  GridValueFormatterParams,
+  GridRenderCellParams,
+} from '@mui/x-data-grid'
 import { format } from 'date-fns'
 import { Link, useSearchParams } from 'react-router-dom'
 import TestRun from '../shared/TestRun'
@@ -7,7 +12,7 @@ import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
 
 interface TestRunRow {
-  id: number,
+  id: number
   created: string
 }
 
@@ -24,16 +29,14 @@ const transformRows = (testRuns: TestRun[]): TestRunRow[] => {
   return testRuns.map((item: TestRun) => {
     return {
       id: item.id,
-      created: item.created_at
+      created: item.created_at,
     }
   })
 }
 
 const renderLinkCell = (params: GridRenderCellParams<string>) => {
   const formatted = params.formattedValue as string
-  return (
-    <Link to={formatted}>View test run</Link>
-  )
+  return <Link to={formatted}>View test run</Link>
 }
 
 const columns: GridColDef[] = [
@@ -41,22 +44,25 @@ const columns: GridColDef[] = [
     field: 'created',
     headerName: 'Created',
     width: 160,
-    valueFormatter: formatDate
+    valueFormatter: formatDate,
   },
   {
     field: 'id',
     headerName: 'View',
     width: 160,
     valueFormatter: formatLink,
-    renderCell: renderLinkCell
-  }
+    renderCell: renderLinkCell,
+  },
 ]
 
 const _getPageData = (id: string) => {
   const { data: build, error: projectError } = useSWR('/builds/' + id, api.get)
-  const { data: testRuns, error: runError } = useSWR(() => ['/test_runs/', {build_id: build.id}], api.get)
+  const { data: testRuns, error: runError } = useSWR(
+    () => ['/test_runs/', { build_id: build.id }],
+    api.get
+  )
   return {
-    data: {build, testRuns},
+    data: { build, testRuns },
     error: projectError || runError,
     isLoading: !runError && !testRuns,
   }
@@ -66,24 +72,26 @@ const Build = () => {
   let [searchParams] = useSearchParams()
   let buildId = searchParams.get('id')
 
-  const {data, error, isLoading} = _getPageData(buildId || '')
-  if(error) throw error
+  const { data, error, isLoading } = _getPageData(buildId || '')
+  if (error) throw error
   let testRuns: TestRunRow[] = []
-  if(data && data.testRuns){
+  if (data && data.testRuns) {
     testRuns = transformRows(data.testRuns)
   }
 
   return (
     <>
-      <Typography variant="h2" component="h2">Build</Typography>
+      <Typography variant="h2" component="h2">
+        Build
+      </Typography>
       <p>
-        Test runs for <b>{ data.build && data.build.ref }</b>.
+        Test runs for <b>{data.build && data.build.ref}</b>.
       </p>
       <DataGrid
         rows={testRuns}
         columns={columns}
         pageSize={10}
-        rowsPerPageOptions={[10,50,100]}
+        rowsPerPageOptions={[10, 50, 100]}
         autoHeight={true}
         disableColumnMenu={true}
         disableSelectionOnClick={true}
@@ -92,8 +100,7 @@ const Build = () => {
           boxShadow: 2,
           border: 2,
           borderColor: 'primary.light',
-          '& .MuiDataGrid-cell--editable': {
-          }
+          '& .MuiDataGrid-cell--editable': {},
         }}
       />
     </>

@@ -15,7 +15,7 @@ const api = {
     try {
       const { data } = await axios.get(absoluteURL(path), {
         params,
-        withCredentials: true
+        withCredentials: true,
       })
       return data
     } catch (error) {
@@ -29,14 +29,14 @@ const api = {
       const { data } = await axios.post(absoluteURL(path), formData, {
         withCredentials: true,
         headers: {
-          'content-type': 'application/x-www-form-urlencoded'
-        }
+          'content-type': 'application/x-www-form-urlencoded',
+        },
       })
       return data
     } catch (error) {
       console.error('API error:', error)
     }
-  }
+  },
 }
 
 export { api, absoluteURL }

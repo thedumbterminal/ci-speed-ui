@@ -15,15 +15,15 @@ import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { NavLink } from 'react-router-dom'
-const drawerWidth = 240;
+const drawerWidth = 240
 
 interface DrawerProps {
-  open: boolean,
+  open: boolean
   setOpen: Function
 }
 
 interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
+  open?: boolean
 }
 
 const AppBar = styled(MuiAppBar, {
@@ -52,8 +52,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }))
 
-
-const PersistentDrawerLeft = ({open, setOpen}: DrawerProps) => {
+const PersistentDrawerLeft = ({ open, setOpen }: DrawerProps) => {
   const theme = useTheme()
 
   const handleDrawerOpen = () => {
@@ -98,7 +97,11 @@ const PersistentDrawerLeft = ({open, setOpen}: DrawerProps) => {
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === 'ltr' ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -155,4 +158,4 @@ const PersistentDrawerLeft = ({open, setOpen}: DrawerProps) => {
   )
 }
 
-export {DrawerHeader, PersistentDrawerLeft, drawerWidth}
+export { DrawerHeader, PersistentDrawerLeft, drawerWidth }

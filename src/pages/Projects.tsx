@@ -1,4 +1,9 @@
-import { DataGrid, GridColDef, GridValueFormatterParams, GridRenderCellParams } from '@mui/x-data-grid'
+import {
+  DataGrid,
+  GridColDef,
+  GridValueFormatterParams,
+  GridRenderCellParams,
+} from '@mui/x-data-grid'
 import { Link } from 'react-router-dom'
 import Project from '../shared/Project'
 import { api } from '../lib/api'
@@ -7,7 +12,7 @@ import { Typography } from '@mui/material'
 import NewProject from '../components/NewProject'
 
 interface ProjectRow {
-  id: number,
+  id: number
   name: string
 }
 
@@ -19,31 +24,29 @@ const transformRows = (projects: Project[]): ProjectRow[] => {
   return projects.map((item: Project) => {
     return {
       id: item.id,
-      name: item.name
+      name: item.name,
     }
   })
 }
 
 const renderLinkCell = (params: GridRenderCellParams<string>) => {
   const formatted = params.formattedValue as string
-  return (
-    <Link to={formatted}>View project</Link>
-  )
+  return <Link to={formatted}>View project</Link>
 }
 
 const columns: GridColDef[] = [
   {
     field: 'name',
     headerName: 'Name',
-    width: 250
+    width: 250,
   },
   {
     field: 'id',
     headerName: 'View',
     width: 100,
     valueFormatter: formatLink,
-    renderCell: renderLinkCell
-  }
+    renderCell: renderLinkCell,
+  },
 ]
 
 const _getPageData = () => {
@@ -56,21 +59,23 @@ const _getPageData = () => {
 }
 
 const Projects = () => {
-  const {data, error, isLoading} = _getPageData()
-  if(error) throw error
+  const { data, error, isLoading } = _getPageData()
+  if (error) throw error
   let projects: ProjectRow[] = []
-  if(data){
+  if (data) {
     projects = transformRows(data)
   }
 
   return (
     <>
-      <Typography variant="h2" component="h2" gutterBottom>Projects</Typography>
+      <Typography variant="h2" component="h2" gutterBottom>
+        Projects
+      </Typography>
       <DataGrid
         rows={projects}
         columns={columns}
         pageSize={10}
-        rowsPerPageOptions={[10,50,100]}
+        rowsPerPageOptions={[10, 50, 100]}
         autoHeight={true}
         disableColumnMenu={true}
         disableSelectionOnClick={true}
@@ -79,8 +84,7 @@ const Projects = () => {
           boxShadow: 2,
           border: 2,
           borderColor: 'primary.light',
-          '& .MuiDataGrid-cell--editable': {
-          }
+          '& .MuiDataGrid-cell--editable': {},
         }}
       />
       <NewProject />
