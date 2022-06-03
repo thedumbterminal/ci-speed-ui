@@ -30,10 +30,11 @@ const renderTooltip = ({ tooltipData, colorScale }: RenderTooltipParams<Datum>) 
   const datum = tooltipData?.nearestDatum?.datum
   return (
     <>
-      <div style={{ color: colorScale && colorScale(tooltipData?.nearestDatum?.key || '') }}>{tooltipData?.nearestDatum?.key}</div>
+      <div style={{ color: colorScale && colorScale(tooltipData?.nearestDatum?.key || '') }}>
+        {tooltipData?.nearestDatum?.key}: {datum && accessors.yAccessor(datum)}
+      </div>
       <br />
-      {datum && accessors.xAccessor(datum)}:{" "}
-      {datum && accessors.yAccessor(datum).toFixed(2)}
+      {datum && accessors.xAccessor(datum)}
     </>
   )
 }
@@ -41,8 +42,8 @@ const renderTooltip = ({ tooltipData, colorScale }: RenderTooltipParams<Datum>) 
 const margin = {
   top: 10,
   right: 10,
-  left: 20,
-  bottom: 20
+  left: 40,
+  bottom: 40
 }
 
 export default ({ height, data }: ChartProps) => {
@@ -58,11 +59,11 @@ export default ({ height, data }: ChartProps) => {
   })
   return (
     <XYChart theme={customTheme} margin={margin} height={height} xScale={{ type: 'band' }} yScale={{ type: 'linear' }}>
-      <AnimatedAxis orientation="bottom" />
-      <AnimatedAxis orientation="left" />
+      <AnimatedAxis numTicks={4} animationTrajectory="min" label="Date" orientation="bottom" />
+      <AnimatedAxis animationTrajectory="min" label="Tests" orientation="left" />
       <AnimatedGrid columns={true} />
       <BarGroup>
-        <AnimatedBarSeries dataKey="Line" data={data} {...accessors} />
+        <AnimatedBarSeries dataKey="Tests" data={data} {...accessors} />
       </BarGroup>
       <Tooltip<Datum>
         renderTooltip={renderTooltip}

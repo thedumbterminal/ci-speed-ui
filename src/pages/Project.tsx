@@ -13,16 +13,23 @@ interface BuildRow {
   created: string
 }
 
-const formatDate = (params: GridValueFormatterParams<string>): string => {
-  const date = new Date(params.value)
+interface NumTest {
+  x: string,
+  y: number
+}
+
+const _isoStringFormat = (iso: string): string => {
+  const date = new Date(iso)
   return format(date, 'MM/dd/yyyy kk:mm:ss')
 }
 
-const formatLink = (params: GridValueFormatterParams<string>): string => {
+const _formatDate = (params: GridValueFormatterParams<string>): string => _isoStringFormat(params.value)
+
+const _formatLink = (params: GridValueFormatterParams<string>): string => {
   return `/build/?id=${params.value}`
 }
 
-const transformRows = (testRuns: Build[]): BuildRow[] => {
+const _transformRows = (testRuns: Build[]): BuildRow[] => {
   return testRuns.map((item: Build) => {
     return {
       id: item.id,
@@ -32,7 +39,17 @@ const transformRows = (testRuns: Build[]): BuildRow[] => {
   })
 }
 
-const renderLinkCell = (params: GridRenderCellParams<string>) => {
+const _transformNumTests = (numTests: NumTest[]): NumTest[] => {
+  return numTests.map((item: NumTest) => {
+    return {
+      x: _isoStringFormat(item.x),
+      y: item.y
+    }
+  })
+}
+
+
+const _renderLinkCell = (params: GridRenderCellParams<string>) => {
   const formatted = params.formattedValue as string
   return (
     <Link to={formatted}>View build</Link>
@@ -44,7 +61,7 @@ const columns: GridColDef[] = [
     field: 'created',
     headerName: 'Created',
     width: 160,
-    valueFormatter: formatDate
+    valueFormatter: _formatDate
   },
   {
     field: 'ref',
@@ -55,8 +72,8 @@ const columns: GridColDef[] = [
     field: 'id',
     headerName: 'View',
     width: 160,
-    valueFormatter: formatLink,
-    renderCell: renderLinkCell
+    valueFormatter: _formatLink,
+    renderCell: _renderLinkCell
   }
 ]
 
@@ -78,8 +95,12 @@ const Project = () => {
   const {data, error, isLoading} = _getPageData(projectId|| '')
   if(error) throw error
   let builds: BuildRow[] = []
-  if(data && data.builds){
-    builds = transformRows(data.builds)
+  if(data?.builds){
+    builds = _transformRows(data.builds)
+  }
+  let numTests: NumTest[] = []
+  if(data?.numTests){
+    numTests = _transformNumTests(data.numTests)
   }
 
   return (
@@ -110,7 +131,7 @@ const Project = () => {
       </p>
       <BarChart
         height={200}
-        data={data.numTests}
+        data={numTests}
       />
     </>
   )
