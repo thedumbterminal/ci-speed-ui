@@ -35,12 +35,12 @@ const columns: GridColDef[] = [
   {
     field: 'name',
     headerName: 'Name',
-    width: 160
+    width: 250
   },
   {
     field: 'id',
     headerName: 'View',
-    width: 160,
+    width: 100,
     valueFormatter: formatLink,
     renderCell: renderLinkCell
   }

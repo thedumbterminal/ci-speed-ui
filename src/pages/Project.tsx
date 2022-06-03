@@ -5,6 +5,7 @@ import Build from '../shared/Build'
 import { api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
+import BarChart from '../components/BarChart'
 
 interface BuildRow {
   id: number,
@@ -80,6 +81,12 @@ const Project = () => {
     builds = transformRows(data.builds)
   }
 
+  const chartData = [
+    { x: '2020-01-01', y: 50 },
+    { x: '2020-01-02', y: 10 },
+    { x: '2020-01-03', y: 20 },
+  ]
+
   return (
     <>
       <Typography variant="h2" component="h2">Project</Typography>
@@ -102,6 +109,13 @@ const Project = () => {
           '& .MuiDataGrid-cell--editable': {
           }
         }}
+      />
+      <p>
+        Number of tests over time
+      </p>
+      <BarChart
+        height={200}
+        data={chartData}
       />
     </>
   )
