@@ -63,10 +63,11 @@ const columns: GridColDef[] = [
 const _getPageData = (id: string) => {
   const { data: project, error: projectError } = useSWR('/projects/' + id, api.get)
   const { data: builds, error: runError } = useSWR(() => ['/builds/', {project_id: project.id}], api.get)
+  const { data: numTests, error: numTestsError } = useSWR(() => `/projects/${id}/num_tests`, api.get)
   return {
-    data: {project, builds},
-    error: projectError || runError,
-    isLoading: !runError && !builds,
+    data: {project, builds, numTests},
+    error: projectError || runError || numTestsError,
+    isLoading: !runError && !builds && !numTestsError && !numTests,
   }
 }
 
@@ -80,12 +81,6 @@ const Project = () => {
   if(data && data.builds){
     builds = transformRows(data.builds)
   }
-
-  const chartData = [
-    { x: '2020-01-01', y: 50 },
-    { x: '2020-01-02', y: 10 },
-    { x: '2020-01-03', y: 20 },
-  ]
 
   return (
     <>
@@ -115,7 +110,7 @@ const Project = () => {
       </p>
       <BarChart
         height={200}
-        data={chartData}
+        data={data.numTests}
       />
     </>
   )
