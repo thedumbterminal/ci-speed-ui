@@ -25,7 +25,7 @@ interface NumTest {
 
 const _isoStringFormat = (iso: string): string => {
   const date = new Date(iso)
-  return format(date, 'MM/dd/yyyy kk:mm:ss')
+  return format(date, 'dd/MM/yyyy kk:mm:ss')
 }
 
 const _formatDate = (params: GridValueFormatterParams<string>): string =>
