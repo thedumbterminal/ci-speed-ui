@@ -114,12 +114,20 @@ const PersistentDrawerLeft = ({ open, setOpen }: DrawerProps) => {
               <ListItemText primary="Home" />
             </ListItem>
           </NavLink>
-          <NavLink to="/projects">
-            <ListItem button key="Projects">
+          <NavLink to="/insights">
+            <ListItem button key="Analyse">
               <ListItemIcon>
                 <MenuIcon />
               </ListItemIcon>
-              <ListItemText primary="Projects" />
+              <ListItemText primary="Analyse" />
+            </ListItem>
+          </NavLink>
+          <NavLink to="/projects">
+            <ListItem button key="Detail">
+              <ListItemIcon>
+                <MenuIcon />
+              </ListItemIcon>
+              <ListItemText primary="Detail" />
             </ListItem>
           </NavLink>
         </List>
