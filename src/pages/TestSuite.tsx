@@ -58,11 +58,11 @@ const _getPageData = (id: string) => {
 const TestSuite = () => {
   let [searchParams] = useSearchParams()
   let testSuiteId = searchParams.get('id')
-  //if(!testSuiteId) throw new Error('No test suite ID given')
-  const { data, error, isLoading } = _getPageData(testSuiteId || '')
-  if (error) throw error
   let testCases: TestCaseRow[] = []
-  if (data && data.testCases) {
+  if(!testSuiteId) throw new Error('No test suite ID given')
+  const { data, error, isLoading } = _getPageData(testSuiteId)
+  if (error) throw error
+  if (data?.testCases) {
     testCases = transformRows(data.testCases)
   }
 
