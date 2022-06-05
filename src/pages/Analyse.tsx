@@ -1,14 +1,13 @@
 import { Typography } from '@mui/material'
 import BarChart from '../components/BarChart'
+import ProjectSelect from '../components/ProjectSelect'
 import { api } from '../lib/api'
 import useSWR from 'swr'
 import { useSearchParams } from 'react-router-dom'
 import { isoStringFormat } from '../lib/date'
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
 import * as React from 'react'
+import Project from '../shared/Project'
+import { SelectChangeEvent } from '@mui/material/Select'
 
 interface NumTest {
   x: string
@@ -25,60 +24,49 @@ const _transformNumTests = (numTests: NumTest[]): NumTest[] => {
 }
 
 const _getPageData = (id: string) => {
-  const { data: project, error: projectError } = useSWR(
-    '/projects/' + id,
-    api.get
-  )
-  const { data: numTests, error: numTestsError } = useSWR(
-    () => `/projects/${id}/num_tests`,
+  const { data, error } = useSWR(
+    `/projects/${id}/num_tests`,
     api.get
   )
   return {
-    data: { project, numTests },
-    error: projectError || numTestsError,
-    isLoading: !numTestsError && !numTests,
+    data,
+    error,
+    isLoading: !error && !data,
   }
 }
 
 const Analyse = () => {
   let numTests: NumTest[] = []
-  let [searchParams] = useSearchParams()
-  //let projectId = searchParams.get('id')
-  let projectId = "3"
+  let [searchParams, setSearchParams] = useSearchParams()
+  let projectFromSearch = searchParams.get('projectId')
 
-  if(!projectId) throw new Error('No project ID given')
-  const { data, error } = _getPageData(projectId)
-  if (error) throw error
-  if (data?.numTests) {
-    numTests = _transformNumTests(data.numTests)
+  const [projectId, setProjectId] = React.useState<string>(projectFromSearch || '')
+
+  if(projectId) {
+    console.log('got project id')
+    const { data, error } = _getPageData(projectId)
+    if (error) throw error
+    if (data?.numTests) {
+      numTests = _transformNumTests(data.numTests)
+    }
   }
 
-  const [age, setAge] = React.useState('');
-
   const handleChange = (event: SelectChangeEvent) => {
-    const value = event.target.value as string
-    setAge(value);
-  };
+    const value = event.target.value
+    console.log('change', value)
+    setProjectId(value)
+    const search = {
+      projectId: value
+    }
+    setSearchParams(search, { replace: true })
+  }
 
   return (
     <>
       <Typography variant="h2" component="h2" gutterBottom>
         Analyse
       </Typography>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Project</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Projct"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
+      <ProjectSelect projectId={projectId} onChange={handleChange}/>
       <p>Number of tests over time</p>
       <BarChart height={200} data={numTests} />
     </>
