@@ -5,4 +5,4 @@ const isoStringFormat = (iso: string): string => {
   return format(date, 'dd/MM/yyyy kk:mm:ss')
 }
 
-export {isoStringFormat }
+export { isoStringFormat }

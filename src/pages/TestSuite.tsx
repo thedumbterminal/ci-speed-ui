@@ -59,7 +59,7 @@ const TestSuite = () => {
   let [searchParams] = useSearchParams()
   let testSuiteId = searchParams.get('id')
   let testCases: TestCaseRow[] = []
-  if(!testSuiteId) throw new Error('No test suite ID given')
+  if (!testSuiteId) throw new Error('No test suite ID given')
   const { data, error, isLoading } = _getPageData(testSuiteId)
   if (error) throw error
   if (data?.testCases) {

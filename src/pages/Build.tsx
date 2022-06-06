@@ -72,7 +72,7 @@ const Build = () => {
   let [searchParams] = useSearchParams()
   let buildId = searchParams.get('id')
   let testRuns: TestRunRow[] = []
-  if(!buildId) throw new Error('No build ID given')
+  if (!buildId) throw new Error('No build ID given')
   const { data, error, isLoading } = _getPageData(buildId)
   if (error) throw error
   if (data?.testRuns) {

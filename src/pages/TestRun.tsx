@@ -72,7 +72,7 @@ const TestRun = () => {
   let [searchParams] = useSearchParams()
   let testRunId = searchParams.get('id')
   let testSuites: TestSuiteRow[] = []
-  if(!testRunId) throw new Error('No test run ID given')
+  if (!testRunId) throw new Error('No test run ID given')
   const { data, error, isLoading } = _getPageData(testRunId)
   if (error) throw error
   if (data?.testSuites) {

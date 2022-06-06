@@ -17,7 +17,6 @@ interface BuildRow {
   created: string
 }
 
-
 const _formatDate = (params: GridValueFormatterParams<string>): string =>
   isoStringFormat(params.value)
 
@@ -73,7 +72,7 @@ const _getPageData = (id: string) => {
   return {
     data: { project, builds },
     error: projectError || runError,
-    isLoading: !runError && !builds ,
+    isLoading: !runError && !builds,
   }
 }
 
@@ -81,7 +80,7 @@ const Project = () => {
   let builds: BuildRow[] = []
   let [searchParams] = useSearchParams()
   let projectId = searchParams.get('id')
-  if(!projectId) throw new Error('No project ID given')
+  if (!projectId) throw new Error('No project ID given')
   const { data, error, isLoading } = _getPageData(projectId)
   if (error) throw error
   if (data?.builds) {
