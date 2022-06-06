@@ -1,0 +1,36 @@
+import { Typography } from '@mui/material'
+import ProjectSelect from '../components/ProjectSelect'
+import NumTestsChart from '../components/NumTestsChart'
+import { useSearchParams } from 'react-router-dom'
+import * as React from 'react'
+import { SelectChangeEvent } from '@mui/material/Select'
+
+const Analyse = () => {
+  let [searchParams, setSearchParams] = useSearchParams()
+  let projectFromSearch = searchParams.get('projectId')
+
+  const [projectId, setProjectId] = React.useState<string>(
+    projectFromSearch || ''
+  )
+
+  const handleChange = (event: SelectChangeEvent) => {
+    const value = event.target.value
+    setProjectId(value)
+    const search = {
+      projectId: value,
+    }
+    setSearchParams(search, { replace: true })
+  }
+
+  return (
+    <>
+      <Typography variant="h2" component="h2" gutterBottom>
+        Analyse
+      </Typography>
+      <ProjectSelect projectId={projectId} onChange={handleChange} />
+      {projectId && <NumTestsChart projectId={projectId} />}
+    </>
+  )
+}
+
+export default Analyse

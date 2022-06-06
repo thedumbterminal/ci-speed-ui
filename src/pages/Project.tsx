@@ -4,13 +4,12 @@ import {
   GridValueFormatterParams,
   GridRenderCellParams,
 } from '@mui/x-data-grid'
-import { format } from 'date-fns'
 import { Link, useSearchParams } from 'react-router-dom'
 import Build from '../shared/Build'
 import { api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
-import BarChart from '../components/BarChart'
+import { isoStringFormat } from '../lib/date'
 
 interface BuildRow {
   id: number
@@ -18,18 +17,8 @@ interface BuildRow {
   created: string
 }
 
-interface NumTest {
-  x: string
-  y: number
-}
-
-const _isoStringFormat = (iso: string): string => {
-  const date = new Date(iso)
-  return format(date, 'dd/MM/yyyy kk:mm:ss')
-}
-
 const _formatDate = (params: GridValueFormatterParams<string>): string =>
-  _isoStringFormat(params.value)
+  isoStringFormat(params.value)
 
 const _formatLink = (params: GridValueFormatterParams<string>): string => {
   return `/build/?id=${params.value}`
@@ -41,15 +30,6 @@ const _transformRows = (testRuns: Build[]): BuildRow[] => {
       id: item.id,
       ref: item.ref,
       created: item.created_at,
-    }
-  })
-}
-
-const _transformNumTests = (numTests: NumTest[]): NumTest[] => {
-  return numTests.map((item: NumTest) => {
-    return {
-      x: _isoStringFormat(item.x),
-      y: item.y,
     }
   })
 }
@@ -89,30 +69,22 @@ const _getPageData = (id: string) => {
     () => ['/builds/', { project_id: project.id }],
     api.get
   )
-  const { data: numTests, error: numTestsError } = useSWR(
-    () => `/projects/${id}/num_tests`,
-    api.get
-  )
   return {
-    data: { project, builds, numTests },
-    error: projectError || runError || numTestsError,
-    isLoading: !runError && !builds && !numTestsError && !numTests,
+    data: { project, builds },
+    error: projectError || runError,
+    isLoading: !runError && !builds,
   }
 }
 
 const Project = () => {
+  let builds: BuildRow[] = []
   let [searchParams] = useSearchParams()
   let projectId = searchParams.get('id')
-
-  const { data, error, isLoading } = _getPageData(projectId || '')
+  if (!projectId) throw new Error('No project ID given')
+  const { data, error, isLoading } = _getPageData(projectId)
   if (error) throw error
-  let builds: BuildRow[] = []
   if (data?.builds) {
     builds = _transformRows(data.builds)
-  }
-  let numTests: NumTest[] = []
-  if (data?.numTests) {
-    numTests = _transformNumTests(data.numTests)
   }
 
   return (
@@ -139,8 +111,6 @@ const Project = () => {
           '& .MuiDataGrid-cell--editable': {},
         }}
       />
-      <p>Number of tests over time</p>
-      <BarChart height={200} data={numTests} />
     </>
   )
 }

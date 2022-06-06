@@ -71,11 +71,11 @@ const _getPageData = (id: string) => {
 const Build = () => {
   let [searchParams] = useSearchParams()
   let buildId = searchParams.get('id')
-
-  const { data, error, isLoading } = _getPageData(buildId || '')
-  if (error) throw error
   let testRuns: TestRunRow[] = []
-  if (data && data.testRuns) {
+  if (!buildId) throw new Error('No build ID given')
+  const { data, error, isLoading } = _getPageData(buildId)
+  if (error) throw error
+  if (data?.testRuns) {
     testRuns = transformRows(data.testRuns)
   }
 
