@@ -42,7 +42,7 @@
     "eject": "react-scripts eject",
     "deploy": "REACT_APP_API_BASE=https://ci-speed.herokuapp.com/api PUBLIC_URL=/ci-speed-ui npm run build && git add docs && git commit docs -m 'Deploy' && git push origin",
     "serve": "npm run build && cd docs && python3 -m http.server",
-    "ci": "npm run coverage"
+    "ci": "npm run coverage -- --reporters=default --reporters=jest-junit"
   },
   "eslintConfig": {
     "extends": [
@@ -67,6 +67,7 @@
     "singleQuote": true
   },
   "devDependencies": {
+    "jest-junit": "^13.2.0",
     "prettier": "^2.6.2"
   }
 }
