@@ -1,4 +1,7 @@
 # ci-speed-ui
+
+[![Node.js CI](https://github.com/thedumbterminal/ci-speed-ui/actions/workflows/node.js.yml/badge.svg)](https://github.com/thedumbterminal/ci-speed-ui/actions/workflows/node.js.yml)
+
 Frontend for CI Speed
 
 ## Requirements

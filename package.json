@@ -33,13 +33,17 @@
     "yup": "^0.32.11"
   },
   "scripts": {
+    "lint": "eslint .",
     "format": "prettier --write 'src/**/*.tsx' 'src/**/*.ts'",
     "start": "react-scripts start",
     "build": "BUILD_PATH=./docs react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
+    "coverage": "npm run test -- --coverage",
+    "test:watch": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "REACT_APP_API_BASE=https://ci-speed.herokuapp.com/api PUBLIC_URL=/ci-speed-ui npm run build && git add docs && git commit docs -m 'Deploy' && git push origin",
-    "serve": "npm run build && cd docs && python3 -m http.server"
+    "serve": "npm run build && cd docs && python3 -m http.server",
+    "ci": "npm run lint && npm run coverage -- --reporters=default --reporters=jest-junit"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +51,7 @@
       "react-app/jest"
     ]
   },
+  "eslintIgnore": ["coverage/*"],
   "browserslist": {
     "production": [
       ">0.2%",
@@ -64,6 +69,7 @@
     "singleQuote": true
   },
   "devDependencies": {
+    "jest-junit": "^13.2.0",
     "prettier": "^2.6.2"
   }
 }
