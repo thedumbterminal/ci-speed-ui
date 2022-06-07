@@ -48,7 +48,6 @@ It will be deployed automatically to github pages.
 * Most failing tests
 * Longest tests
 * Flaky tests
-* Amount of tests
 
 # Getting Started with Create React App
 
