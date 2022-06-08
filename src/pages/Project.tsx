@@ -96,6 +96,11 @@ const Project = () => {
         Builds for project <b>{data.project && data.project.name}</b>.
       </p>
       <DataGrid
+        initialState={{
+          sorting: {
+            sortModel: [{ field: 'created', sort: 'desc' }]
+          }
+        }}
         rows={builds}
         columns={columns}
         pageSize={10}
