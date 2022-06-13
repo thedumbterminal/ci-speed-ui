@@ -11,7 +11,7 @@ const inputGlobalStyles = (
     styles={{
       'pre.failure': {
         color: 'white',
-        'background-color': 'black',
+        backgroundColor: 'black',
         padding: '10px',
       },
     }}
