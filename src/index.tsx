@@ -10,6 +10,7 @@ import Project from './pages/Project'
 import Build from './pages/Build'
 import TestRun from './pages/TestRun'
 import TestSuite from './pages/TestSuite'
+import TestFailure from './pages/TestFailure'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 
 import '@fontsource/roboto/300.css'
@@ -32,6 +33,7 @@ root.render(
           <Route path="/build" element={<Build />} />
           <Route path="/test_run" element={<TestRun />} />
           <Route path="/test_suite" element={<TestSuite />} />
+          <Route path="/test_failure" element={<TestFailure />} />
           <Route index element={<Home />} />
         </Route>
       </Routes>

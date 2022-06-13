@@ -1,4 +1,4 @@
-import {isoStringFormat } from './date'
+import { isoStringFormat } from './date'
 
 describe('date lib', () => {
   describe('isoStringFormat()', () => {

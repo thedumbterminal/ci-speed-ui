@@ -98,8 +98,8 @@ const Project = () => {
       <DataGrid
         initialState={{
           sorting: {
-            sortModel: [{ field: 'created', sort: 'desc' }]
-          }
+            sortModel: [{ field: 'created', sort: 'desc' }],
+          },
         }}
         rows={builds}
         columns={columns}
