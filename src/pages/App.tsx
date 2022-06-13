@@ -6,15 +6,17 @@ import theme from '../theme'
 import Layout from '../components/Layout'
 import ErrorBoundary from '../components/ErrorBoundary'
 
+const styles = {
+  'pre.failure': {
+    color: 'white',
+    backgroundColor: 'black',
+    padding: '10px',
+  },
+}
+
 const inputGlobalStyles = (
   <GlobalStyles
-    styles={{
-      'pre.failure': {
-        color: 'white',
-        backgroundColor: 'black',
-        padding: '10px',
-      },
-    }}
+    styles={styles}
   />
 )
 
