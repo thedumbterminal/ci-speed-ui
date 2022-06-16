@@ -10,11 +10,8 @@ import {
 } from '@visx/xychart'
 import { RenderTooltipParams } from '@visx/xychart/lib/components/Tooltip'
 import { useTheme } from '@mui/material/styles'
-
-type Datum = {
-  x: string
-  y: number
-}
+import Datum from '../shared/Datum'
+import { isoStringFormat } from '../lib/date'
 
 type ChartProps = {
   height: number
@@ -24,6 +21,13 @@ type ChartProps = {
 const accessors = {
   xAccessor: (d: Datum) => d.x,
   yAccessor: (d: Datum) => d.y,
+}
+
+const margin = {
+  top: 10,
+  right: 10,
+  left: 40,
+  bottom: 40,
 }
 
 const renderTooltip = ({
@@ -46,14 +50,16 @@ const renderTooltip = ({
   )
 }
 
-const margin = {
-  top: 10,
-  right: 10,
-  left: 40,
-  bottom: 40,
+const _transformDateForTimeSeries = (data: Datum[]): Datum[] => {
+  return data.map((item: Datum) => {
+    return {
+      x: isoStringFormat(item.x),
+      y: item.y,
+    }
+  })
 }
 
-export default ({ height, data }: ChartProps) => {
+export default ({ height, data = [] }: ChartProps) => {
   const muiTheme = useTheme()
   const customTheme = buildChartTheme({
     backgroundColor: muiTheme.palette.background.paper,
@@ -62,6 +68,8 @@ export default ({ height, data }: ChartProps) => {
     gridColor: muiTheme.palette.grey[200],
     gridColorDark: muiTheme.palette.grey[600],
   })
+  data = _transformDateForTimeSeries(data)
+
   return (
     <XYChart
       theme={customTheme}

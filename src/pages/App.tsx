@@ -14,11 +14,7 @@ const styles = {
   },
 }
 
-const inputGlobalStyles = (
-  <GlobalStyles
-    styles={styles}
-  />
-)
+const inputGlobalStyles = <GlobalStyles styles={styles} />
 
 export default function App() {
   return (
