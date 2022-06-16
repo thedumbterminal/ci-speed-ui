@@ -16,6 +16,7 @@ import { isoStringFormat } from '../lib/date'
 type ChartProps = {
   height: number
   data: Datum[]
+  xAxiesLabel: string
 }
 
 const accessors = {
@@ -59,7 +60,7 @@ const _transformDateForTimeSeries = (data: Datum[]): Datum[] => {
   })
 }
 
-export default ({ height, data = [] }: ChartProps) => {
+export default ({ height, data = [], xAxiesLabel }: ChartProps) => {
   const muiTheme = useTheme()
   const customTheme = buildChartTheme({
     backgroundColor: muiTheme.palette.background.paper,
@@ -86,12 +87,12 @@ export default ({ height, data = [] }: ChartProps) => {
       />
       <AnimatedAxis
         animationTrajectory="min"
-        label="Tests"
+        label={xAxiesLabel}
         orientation="left"
       />
       <AnimatedGrid columns={true} />
       <BarGroup>
-        <AnimatedBarSeries dataKey="Tests" data={data} {...accessors} />
+        <AnimatedBarSeries dataKey={xAxiesLabel} data={data} {...accessors} />
       </BarGroup>
       <Tooltip<Datum> renderTooltip={renderTooltip} />
     </XYChart>
