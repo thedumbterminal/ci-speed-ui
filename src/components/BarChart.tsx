@@ -71,30 +71,38 @@ export default ({ height, data = [], xAxiesLabel }: ChartProps) => {
   })
   data = _transformDateForTimeSeries(data)
 
+  // Need to set the height on an outer container as xychart will set it to 100% if we dont give
+  // a width.
+  const containerCssProps = {
+    height,
+  }
+
   return (
-    <XYChart
-      theme={customTheme}
-      margin={margin}
-      height={height}
-      xScale={{ type: 'band' }}
-      yScale={{ type: 'linear' }}
-    >
-      <AnimatedAxis
-        numTicks={4}
-        animationTrajectory="min"
-        label="Date"
-        orientation="bottom"
-      />
-      <AnimatedAxis
-        animationTrajectory="min"
-        label={xAxiesLabel}
-        orientation="left"
-      />
-      <AnimatedGrid columns={true} />
-      <BarGroup>
-        <AnimatedBarSeries dataKey={xAxiesLabel} data={data} {...accessors} />
-      </BarGroup>
-      <Tooltip<Datum> renderTooltip={renderTooltip} />
-    </XYChart>
+    <div style={containerCssProps}>
+      <XYChart
+        theme={customTheme}
+        margin={margin}
+        height={200}
+        xScale={{ type: 'band' }}
+        yScale={{ type: 'linear' }}
+      >
+        <AnimatedAxis
+          numTicks={4}
+          animationTrajectory="min"
+          label="Date"
+          orientation="bottom"
+        />
+        <AnimatedAxis
+          animationTrajectory="min"
+          label={xAxiesLabel}
+          orientation="left"
+        />
+        <AnimatedGrid columns={true} />
+        <BarGroup>
+          <AnimatedBarSeries dataKey={xAxiesLabel} data={data} {...accessors} />
+        </BarGroup>
+        <Tooltip<Datum> renderTooltip={renderTooltip} />
+      </XYChart>
+    </div>
   )
 }
