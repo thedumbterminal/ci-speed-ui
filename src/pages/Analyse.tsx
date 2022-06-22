@@ -2,6 +2,7 @@ import { Typography } from '@mui/material'
 import ProjectSelect from '../components/ProjectSelect'
 import NumTestsChart from '../components/NumTestsChart'
 import TestDurationChart from '../components/TestDurationChart'
+import TestSuccessChart from '../components/TestSuccessChart'
 import { useSearchParams } from 'react-router-dom'
 import * as React from 'react'
 import { SelectChangeEvent } from '@mui/material/Select'
@@ -31,6 +32,7 @@ const Analyse = () => {
       <ProjectSelect projectId={projectId} onChange={handleChange} />
       {projectId && <NumTestsChart projectId={projectId} />}
       {projectId && <TestDurationChart projectId={projectId} />}
+      {projectId && <TestSuccessChart projectId={projectId} />}
     </>
   )
 }

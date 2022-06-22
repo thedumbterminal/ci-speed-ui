@@ -7,7 +7,7 @@ interface ProjectChartProps {
 }
 
 const _getPageData = (id: string) => {
-  const { data, error } = useSWR(`/projects/${id}/num_tests`, api.get)
+  const { data, error } = useSWR(`/projects/${id}/test_success`, api.get)
   return {
     data,
     error,
@@ -20,8 +20,8 @@ export default (props: ProjectChartProps) => {
   if (error) throw error
   return (
     <>
-      <p>Number of tests over time</p>
-      <BarChart height={200} data={data} xAxisLabel="Tests" />
+      <p>Test success over time</p>
+      <BarChart height={200} data={data} xAxisLabel="Success" xAxisUnit="%" />
     </>
   )
 }

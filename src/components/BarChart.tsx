@@ -16,7 +16,8 @@ import { isoStringFormat } from '../lib/date'
 type ChartProps = {
   height: number
   data: Datum[]
-  xAxiesLabel: string
+  xAxisLabel: string
+  xAxisUnit?: string
 }
 
 const accessors = {
@@ -31,24 +32,25 @@ const margin = {
   bottom: 40,
 }
 
-const renderTooltip = ({
-  tooltipData,
-  colorScale,
-}: RenderTooltipParams<Datum>) => {
-  const datum = tooltipData?.nearestDatum?.datum
-  return (
-    <>
-      <div
-        style={{
-          color: colorScale && colorScale(tooltipData?.nearestDatum?.key || ''),
-        }}
-      >
-        {tooltipData?.nearestDatum?.key}: {datum && accessors.yAccessor(datum)}
-      </div>
-      <br />
-      {datum && accessors.xAccessor(datum)}
-    </>
-  )
+const _renderTooltipWithUnit = (unit: string | undefined) => {
+  return ({ tooltipData, colorScale }: RenderTooltipParams<Datum>) => {
+    const datum = tooltipData?.nearestDatum?.datum
+    return (
+      <>
+        <div
+          style={{
+            color:
+              colorScale && colorScale(tooltipData?.nearestDatum?.key || ''),
+          }}
+        >
+          {tooltipData?.nearestDatum?.key}:{' '}
+          {datum && accessors.yAccessor(datum)} {unit && unit}
+        </div>
+        <br />
+        {datum && accessors.xAccessor(datum)}
+      </>
+    )
+  }
 }
 
 const _transformDateForTimeSeries = (data: Datum[]): Datum[] => {
@@ -60,7 +62,15 @@ const _transformDateForTimeSeries = (data: Datum[]): Datum[] => {
   })
 }
 
-export default ({ height, data = [], xAxiesLabel }: ChartProps) => {
+const _generateXAxisLabel = (
+  text: string,
+  unit: string | undefined
+): string => {
+  if (!unit) return text
+  return `${text} (${unit})`
+}
+
+export default ({ height, data = [], xAxisLabel, xAxisUnit }: ChartProps) => {
   const muiTheme = useTheme()
   const customTheme = buildChartTheme({
     backgroundColor: muiTheme.palette.background.paper,
@@ -77,6 +87,9 @@ export default ({ height, data = [], xAxiesLabel }: ChartProps) => {
     height,
   }
 
+  const xLabel = _generateXAxisLabel(xAxisLabel, xAxisUnit)
+
+  const toolTipFunc = _renderTooltipWithUnit(xAxisUnit)
   return (
     <div style={containerCssProps}>
       <XYChart
@@ -94,14 +107,14 @@ export default ({ height, data = [], xAxiesLabel }: ChartProps) => {
         />
         <AnimatedAxis
           animationTrajectory="min"
-          label={xAxiesLabel}
+          label={xLabel}
           orientation="left"
         />
         <AnimatedGrid columns={true} />
         <BarGroup>
-          <AnimatedBarSeries dataKey={xAxiesLabel} data={data} {...accessors} />
+          <AnimatedBarSeries dataKey={xAxisLabel} data={data} {...accessors} />
         </BarGroup>
-        <Tooltip<Datum> renderTooltip={renderTooltip} />
+        <Tooltip<Datum> renderTooltip={toolTipFunc} />
       </XYChart>
     </div>
   )

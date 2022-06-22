@@ -21,7 +21,12 @@ export default (props: ProjectChartProps) => {
   return (
     <>
       <p>Test duration over time</p>
-      <BarChart height={200} data={data} xAxiesLabel="Duration" />
+      <BarChart
+        height={200}
+        data={data}
+        xAxisLabel="Duration"
+        xAxisUnit="Secs"
+      />
     </>
   )
 }
