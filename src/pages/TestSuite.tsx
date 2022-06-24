@@ -22,6 +22,7 @@ interface TestCase {
   time: number
   id: number
   test_failures: Array<number>
+  skipped_tests: Array<number>
 }
 
 const _formatLink = (value: string): string => {
@@ -34,14 +35,19 @@ const _renderLinkCell = (params: GridRenderCellParams<string>) => {
   return <Link to={formattedLink}>View error</Link>
 }
 
+const _statusForTestCase = (test: TestCase): string => {
+  if(test.test_failures.length) return 'Failure'
+  if(test.skipped_tests.length) return 'Skipped'
+  return 'Success'
+}
+
 const _transformRow = (item: TestCase) => {
-  const status = item.test_failures.length ? 'Failure' : 'Success'
   const failure_id = item.test_failures[0]
   return {
     id: item.id,
     name: item.name,
     duration: item.time,
-    status,
+    status: _statusForTestCase(item),
     failure_id,
   }
 }
