@@ -7,7 +7,7 @@ import Layout from '../components/Layout'
 import ErrorBoundary from '../components/ErrorBoundary'
 
 const styles = {
-  'pre.failure': {
+  'pre.terminal': {
     color: 'white',
     backgroundColor: 'black',
     padding: '10px',
