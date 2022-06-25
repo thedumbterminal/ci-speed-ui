@@ -1,9 +1,4 @@
-import {
-  DataGrid,
-  GridColDef,
-  GridValueFormatterParams,
-  GridRenderCellParams,
-} from '@mui/x-data-grid'
+import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
 import { api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
@@ -15,6 +10,7 @@ interface TestCaseRow {
   duration: number
   status: string
   failure_id: number | undefined
+  skipped_id: number | undefined
 }
 
 interface TestCase {
@@ -22,27 +18,45 @@ interface TestCase {
   time: number
   id: number
   test_failures: Array<number>
+  skipped_tests: Array<number>
 }
 
-const _formatLink = (value: string): string => {
+const _formatFailureLink = (value: string): string => {
   return `/test_failure/?id=${value}`
 }
 
+const _formatSkippedLink = (value: string): string => {
+  return `/skipped_test/?id=${value}`
+}
+
 const _renderLinkCell = (params: GridRenderCellParams<string>) => {
-  if (!params.formattedValue) return
-  const formattedLink = _formatLink(params.formattedValue)
-  return <Link to={formattedLink}>View error</Link>
+  const failureId = params.row.failure_id
+  const skippedId = params.row.skipped_id
+  if (failureId) {
+    const formattedLink = _formatFailureLink(failureId)
+    return <Link to={formattedLink}>View</Link>
+  } else if (skippedId) {
+    const formattedLink = _formatSkippedLink(skippedId)
+    return <Link to={formattedLink}>View</Link>
+  }
+}
+
+const _statusForTestCase = (test: TestCase): string => {
+  if (test.test_failures.length) return 'Failure'
+  if (test.skipped_tests.length) return 'Skipped'
+  return 'Success'
 }
 
 const _transformRow = (item: TestCase) => {
-  const status = item.test_failures.length ? 'Failure' : 'Success'
   const failure_id = item.test_failures[0]
+  const skipped_id = item.skipped_tests[0]
   return {
     id: item.id,
     name: item.name,
     duration: item.time,
-    status,
+    status: _statusForTestCase(item),
     failure_id,
+    skipped_id,
   }
 }
 
@@ -54,22 +68,22 @@ const columns: GridColDef[] = [
   {
     field: 'name',
     headerName: 'Name',
-    width: 160,
+    width: 300,
   },
   {
     field: 'duration',
     headerName: 'Duration',
-    width: 180,
+    width: 120,
   },
   {
     field: 'status',
     headerName: 'Status',
-    width: 180,
+    width: 120,
   },
   {
-    field: 'failure_id',
+    field: 'view',
     headerName: 'View',
-    width: 160,
+    width: 120,
     renderCell: _renderLinkCell,
   },
 ]

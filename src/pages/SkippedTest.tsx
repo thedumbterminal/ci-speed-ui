@@ -4,22 +4,22 @@ import Typography from '@mui/material/Typography'
 import { useSearchParams } from 'react-router-dom'
 
 const _getPageData = (id: string) => {
-  const { data: testFailures, error: failureError } = useSWR(
-    '/test_failures/' + id,
+  const { data: skippedTests, error: skippedError } = useSWR(
+    '/skipped_tests/' + id,
     api.get
   )
   const { data: testCase, error: caseError } = useSWR(
-    () => '/test_cases/' + testFailures.test_case_id,
+    () => '/test_cases/' + skippedTests.test_case_id,
     api.get
   )
   return {
-    data: { testCase, testFailures },
-    error: caseError || failureError,
-    isLoading: !failureError && !testFailures,
+    data: { testCase, skippedTests },
+    error: caseError || skippedError,
+    isLoading: !skippedError && !skippedTests,
   }
 }
 
-const TestFailure = () => {
+const SkippedTest = () => {
   let [searchParams] = useSearchParams()
   let testCaseId = searchParams.get('id')
   if (!testCaseId) throw new Error('No test case ID given')
@@ -29,17 +29,17 @@ const TestFailure = () => {
   return (
     <>
       <Typography variant="h2" component="h2">
-        Test Failure
+        Skipped Test
       </Typography>
       <p>
-        Test failure reason for test case <b>{data?.testCase?.name}</b>.
+        Skipped test reason for test case <b>{data?.testCase?.name}</b>.
       </p>
       <br />
       <pre className="terminal">
-        <code>{data?.testFailures?.reason}</code>
+        <code>{data?.skippedTests?.reason}</code>
       </pre>
     </>
   )
 }
 
-export default TestFailure
+export default SkippedTest

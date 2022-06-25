@@ -11,6 +11,7 @@ import Build from './pages/Build'
 import TestRun from './pages/TestRun'
 import TestSuite from './pages/TestSuite'
 import TestFailure from './pages/TestFailure'
+import SkippedTest from './pages/SkippedTest'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 
 import '@fontsource/roboto/300.css'
@@ -34,6 +35,7 @@ root.render(
           <Route path="/test_run" element={<TestRun />} />
           <Route path="/test_suite" element={<TestSuite />} />
           <Route path="/test_failure" element={<TestFailure />} />
+          <Route path="/skipped_test" element={<SkippedTest />} />
           <Route index element={<Home />} />
         </Route>
       </Routes>
