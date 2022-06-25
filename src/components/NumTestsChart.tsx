@@ -20,7 +20,7 @@ export default (props: ProjectChartProps) => {
   if (error) throw error
   return (
     <>
-      <p>Number of tests over time</p>
+      <p>Number of tests per build</p>
       <BarChart height={200} data={data} xAxisLabel="Tests" />
     </>
   )
