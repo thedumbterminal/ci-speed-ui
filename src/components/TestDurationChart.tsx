@@ -20,7 +20,7 @@ export default (props: ProjectChartProps) => {
   if (error) throw error
   return (
     <>
-      <p>Test duration over time</p>
+      <p>Duration of tests per build</p>
       <BarChart
         height={200}
         data={data}
