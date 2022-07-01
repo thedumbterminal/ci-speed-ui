@@ -6,7 +6,7 @@ on:
       - completed
     workflows:
       # List all required workflow names here.
-      - 'Continuous Integration'
+      - 'Node.js CI'
 
 jobs:
   merge-me:
