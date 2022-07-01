@@ -70,7 +70,7 @@
     "singleQuote": true
   },
   "devDependencies": {
-    "jest-junit": "^13.2.0",
+    "jest-junit": "^14.0.0",
     "prettier": "^2.7.1"
   }
 }
