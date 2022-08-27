@@ -13,10 +13,15 @@ const absoluteURL = (path: string) => URL_BASE + path
 const api = {
   get: async (path: string, params: URLParams = {}) => {
     try {
-      const { data } = await axios.get(absoluteURL(path), {
+      const { data, headers } = await axios.get(absoluteURL(path), {
         params,
         withCredentials: true,
       })
+      if (headers['content-type'] !== 'application/json') {
+        throw new Error(
+          `Invalid response content type: '${headers['content-type']}'`
+        )
+      }
       return data
     } catch (error) {
       console.error('API error:', error)
