@@ -9,7 +9,7 @@ import Build from '../shared/Build'
 import { api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
-import { isoStringFormat } from '../lib/date'
+import { humanDateTimeFormat } from '../lib/date'
 
 interface BuildRow {
   id: number
@@ -18,7 +18,7 @@ interface BuildRow {
 }
 
 const _formatDate = (params: GridValueFormatterParams<string>): string =>
-  isoStringFormat(params.value)
+  humanDateTimeFormat(params.value)
 
 const _formatLink = (params: GridValueFormatterParams<string>): string => {
   return `/build/?id=${params.value}`

@@ -4,7 +4,7 @@ import {
   GridValueFormatterParams,
   GridRenderCellParams,
 } from '@mui/x-data-grid'
-import { format } from 'date-fns'
+import { humanDateTimeFormat } from '../lib/date'
 import { Link, useSearchParams } from 'react-router-dom'
 import TestRun from '../shared/TestRun'
 import { api } from '../lib/api'
@@ -17,8 +17,7 @@ interface TestRunRow {
 }
 
 const formatDate = (params: GridValueFormatterParams<string>): string => {
-  const date = new Date(params.value)
-  return format(date, 'MM/dd/yyyy kk:mm:ss')
+  return humanDateTimeFormat(params.value)
 }
 
 const formatLink = (params: GridValueFormatterParams<string>): string => {
