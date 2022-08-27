@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material'
 import ProjectSelect from '../components/ProjectSelect'
+import NumBuildsChart from '../components/NumBuildsChart'
 import NumTestsChart from '../components/NumTestsChart'
 import TestDurationChart from '../components/TestDurationChart'
 import TestSuccessChart from '../components/TestSuccessChart'
@@ -31,6 +32,7 @@ const Analyse = () => {
         Analyse
       </Typography>
       <ProjectSelect projectId={projectId} onChange={handleChange} />
+      {projectId && <NumBuildsChart projectId={projectId} />}
       {projectId && <NumTestsChart projectId={projectId} />}
       {projectId && <TestDurationChart projectId={projectId} />}
       {projectId && <TestSuccessChart projectId={projectId} />}
