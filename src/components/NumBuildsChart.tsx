@@ -1,6 +1,7 @@
 import BarChart from '../components/BarChart'
 import { api } from '../lib/api'
 import useSWR from 'swr'
+import XAxisDataType from '../shared/XAxisDataType'
 
 interface ProjectChartProps {
   projectId: string
@@ -21,7 +22,12 @@ export default (props: ProjectChartProps) => {
   return (
     <>
       <p>Number of builds per day</p>
-      <BarChart height={200} data={data} xAxisLabel="Tests" />
+      <BarChart
+        height={200}
+        data={data}
+        xAxisLabel="Tests"
+        xAxisType={XAxisDataType.Date}
+      />
     </>
   )
 }

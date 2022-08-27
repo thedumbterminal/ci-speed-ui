@@ -11,13 +11,15 @@ import {
 import { RenderTooltipParams } from '@visx/xychart/lib/components/Tooltip'
 import { useTheme } from '@mui/material/styles'
 import Datum from '../shared/Datum'
-import { isoStringFormat } from '../lib/date'
+import XAxisDataType from '../shared/XAxisDataType'
+import { humanDateTimeFormat, humanDateFormat } from '../lib/date'
 
 type ChartProps = {
   height: number
   data: Datum[]
   xAxisLabel: string
   xAxisUnit?: string
+  xAxisType?: XAxisDataType
 }
 
 const accessors = {
@@ -53,10 +55,23 @@ const _renderTooltipWithUnit = (unit: string | undefined) => {
   }
 }
 
-const _transformDateForTimeSeries = (data: Datum[]): Datum[] => {
+const _formatDate = (value: string, type: XAxisDataType): string => {
+  if (type === 'DateTime') {
+    return humanDateTimeFormat(value)
+  } else if (type === 'Date') {
+    return humanDateFormat(value)
+  } else {
+    throw new Error('Unsupported date type')
+  }
+}
+
+const _transformDateForTimeSeries = (
+  data: Datum[],
+  xAxisType: XAxisDataType = XAxisDataType.DateTime
+): Datum[] => {
   return data.map((item: Datum) => {
     return {
-      x: isoStringFormat(item.x),
+      x: _formatDate(item.x, xAxisType),
       y: item.y,
     }
   })
@@ -70,7 +85,13 @@ const _generateXAxisLabel = (
   return `${text} (${unit})`
 }
 
-export default ({ height, data = [], xAxisLabel, xAxisUnit }: ChartProps) => {
+export default ({
+  height,
+  data = [],
+  xAxisLabel,
+  xAxisUnit,
+  xAxisType,
+}: ChartProps) => {
   const muiTheme = useTheme()
   const customTheme = buildChartTheme({
     backgroundColor: muiTheme.palette.background.paper,
@@ -79,7 +100,7 @@ export default ({ height, data = [], xAxisLabel, xAxisUnit }: ChartProps) => {
     gridColor: muiTheme.palette.grey[200],
     gridColorDark: muiTheme.palette.grey[600],
   })
-  data = _transformDateForTimeSeries(data)
+  data = _transformDateForTimeSeries(data, xAxisType)
 
   // Need to set the height on an outer container as xychart will set it to 100% if we dont give
   // a width.
