@@ -25,7 +25,7 @@ export default (props: ProjectChartProps) => {
       <BarChart
         height={200}
         data={data}
-        xAxisLabel="Tests"
+        xAxisLabel="Builds"
         xAxisType={XAxisDataType.Date}
       />
     </>
