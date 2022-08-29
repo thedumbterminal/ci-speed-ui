@@ -69,7 +69,7 @@
     "singleQuote": true
   },
   "devDependencies": {
-    "jest-junit": "^14.0.0",
+    "jest-junit": "^14.0.1",
     "prettier": "^2.7.1",
     "react-scripts": "5.0.1"
   }
