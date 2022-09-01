@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material'
 import ProjectSelect from '../components/ProjectSelect'
-import NumBuildsChart from '../components/NumBuildsChart'
+import TotalTestDurationSummary from '../components/TotalTestDurationSummary'
 import { useSearchParams } from 'react-router-dom'
 import * as React from 'react'
 import { SelectChangeEvent } from '@mui/material/Select'
@@ -28,7 +28,7 @@ const Summary = () => {
         Summary
       </Typography>
       <ProjectSelect projectId={projectId} onChange={handleChange} />
-      {projectId && <NumBuildsChart projectId={projectId} />}
+      {projectId && <TotalTestDurationSummary projectId={projectId} />}
     </>
   )
 }
