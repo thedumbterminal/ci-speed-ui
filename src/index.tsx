@@ -4,6 +4,7 @@ import App from './pages/App'
 import Home from './pages/Home'
 import Account from './pages/Account'
 import ApiKey from './pages/ApiKey'
+import Summary from './pages/Summary'
 import Analyse from './pages/Analyse'
 import Projects from './pages/Projects'
 import Project from './pages/Project'
@@ -28,6 +29,7 @@ root.render(
         <Route path="/" element={<App />}>
           <Route path="/account" element={<Account />} />
           <Route path="/api_key" element={<ApiKey />} />
+          <Route path="/summary" element={<Summary />} />
           <Route path="/analyse" element={<Analyse />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/project" element={<Project />} />
