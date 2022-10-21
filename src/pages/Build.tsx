@@ -1,5 +1,4 @@
 import {
-  DataGrid,
   GridColDef,
   GridValueFormatterParams,
   GridRenderCellParams,
@@ -10,9 +9,9 @@ import TestRun from '../shared/TestRun'
 import { api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
+import { Grid, GridRow } from '../components/Grid'
 
-interface TestRunRow {
-  id: number
+interface TestRunRow extends GridRow {
   created: string
 }
 
@@ -86,22 +85,7 @@ const Build = () => {
       <p>
         Test runs for <b>{data.build && data.build.ref}</b>.
       </p>
-      <DataGrid
-        rows={testRuns}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10, 50, 100]}
-        autoHeight={true}
-        disableColumnMenu={true}
-        disableSelectionOnClick={true}
-        loading={isLoading}
-        sx={{
-          boxShadow: 2,
-          border: 2,
-          borderColor: 'primary.light',
-          '& .MuiDataGrid-cell--editable': {},
-        }}
-      />
+      <Grid rows={testRuns} columns={columns} isLoading={isLoading} />
     </>
   )
 }
