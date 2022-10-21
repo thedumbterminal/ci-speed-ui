@@ -1,5 +1,4 @@
 import {
-  DataGrid,
   GridColDef,
   GridValueFormatterParams,
   GridRenderCellParams,
@@ -10,9 +9,9 @@ import { api } from '../lib/api'
 import useSWR from 'swr'
 import { Typography } from '@mui/material'
 import NewProject from '../components/NewProject'
+import { Grid, GridRow } from '../components/Grid'
 
-interface ProjectRow {
-  id: number
+interface ProjectRow extends GridRow {
   name: string
 }
 
@@ -71,22 +70,7 @@ const Projects = () => {
       <Typography variant="h2" component="h2" gutterBottom>
         Projects
       </Typography>
-      <DataGrid
-        rows={projects}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10, 50, 100]}
-        autoHeight={true}
-        disableColumnMenu={true}
-        disableSelectionOnClick={true}
-        loading={isLoading}
-        sx={{
-          boxShadow: 2,
-          border: 2,
-          borderColor: 'primary.light',
-          '& .MuiDataGrid-cell--editable': {},
-        }}
-      />
+      <Grid rows={projects} columns={columns} isLoading={isLoading} />
       <NewProject />
     </>
   )

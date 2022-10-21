@@ -1,10 +1,11 @@
-import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
+import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
 import { api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
 import { Link, useSearchParams } from 'react-router-dom'
+import { Grid, GridRow } from '../components/Grid'
 
-interface TestCaseRow {
+interface TestCaseRow extends GridRow {
   id: number
   name: string
   duration: number
@@ -124,22 +125,7 @@ const TestSuite = () => {
         Test cases for test suite <b>{data.testSuite && data.testSuite.name}</b>
         .
       </p>
-      <DataGrid
-        rows={testCases}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10, 50, 100]}
-        autoHeight={true}
-        disableColumnMenu={true}
-        disableSelectionOnClick={true}
-        loading={isLoading}
-        sx={{
-          boxShadow: 2,
-          border: 2,
-          borderColor: 'primary.light',
-          '& .MuiDataGrid-cell--editable': {},
-        }}
-      />
+      <Grid rows={testCases} columns={columns} isLoading={isLoading} />
     </>
   )
 }

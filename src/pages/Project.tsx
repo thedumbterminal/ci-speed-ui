@@ -1,8 +1,8 @@
 import {
-  DataGrid,
   GridColDef,
   GridValueFormatterParams,
   GridRenderCellParams,
+  GridSortModel,
 } from '@mui/x-data-grid'
 import { Link, useSearchParams } from 'react-router-dom'
 import Build from '../shared/Build'
@@ -10,9 +10,9 @@ import { api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
 import { humanDateTimeFormat } from '../lib/date'
+import { Grid, GridRow } from '../components/Grid'
 
-interface BuildRow {
-  id: number
+interface BuildRow extends GridRow {
   ref: string
   created: string
 }
@@ -87,6 +87,8 @@ const Project = () => {
     builds = _transformRows(data.builds)
   }
 
+  const sortModel: GridSortModel = [{ field: 'created', sort: 'desc' }]
+
   return (
     <>
       <Typography variant="h2" component="h2">
@@ -95,26 +97,11 @@ const Project = () => {
       <p>
         Builds for project <b>{data.project && data.project.name}</b>.
       </p>
-      <DataGrid
-        initialState={{
-          sorting: {
-            sortModel: [{ field: 'created', sort: 'desc' }],
-          },
-        }}
+      <Grid
         rows={builds}
         columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10, 50, 100]}
-        autoHeight={true}
-        disableColumnMenu={true}
-        disableSelectionOnClick={true}
-        loading={isLoading}
-        sx={{
-          boxShadow: 2,
-          border: 2,
-          borderColor: 'primary.light',
-          '& .MuiDataGrid-cell--editable': {},
-        }}
+        isLoading={isLoading}
+        sortModel={sortModel}
       />
     </>
   )

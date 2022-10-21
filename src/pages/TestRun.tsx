@@ -1,7 +1,6 @@
 import { api } from '../lib/api'
 import TestSuite from '../shared/TestSuite'
 import {
-  DataGrid,
   GridColDef,
   GridValueFormatterParams,
   GridRenderCellParams,
@@ -9,9 +8,9 @@ import {
 import { Link, useSearchParams } from 'react-router-dom'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
+import { Grid, GridRow } from '../components/Grid'
 
-interface TestSuiteRow {
-  id: number
+interface TestSuiteRow extends GridRow {
   name: string
   duration: number
 }
@@ -87,22 +86,7 @@ const TestRun = () => {
       <p>
         Test suites for test run <b>{data.testRun && data.testRun.id}</b>.
       </p>
-      <DataGrid
-        rows={testSuites}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10, 50, 100]}
-        autoHeight={true}
-        disableColumnMenu={true}
-        disableSelectionOnClick={true}
-        loading={isLoading}
-        sx={{
-          boxShadow: 2,
-          border: 2,
-          borderColor: 'primary.light',
-          '& .MuiDataGrid-cell--editable': {},
-        }}
-      />
+      <Grid rows={testSuites} columns={columns} isLoading={isLoading} />
     </>
   )
 }
