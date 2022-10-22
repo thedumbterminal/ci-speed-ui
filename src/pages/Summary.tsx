@@ -2,16 +2,19 @@ import { Typography } from '@mui/material'
 import ProjectSelect from '../components/ProjectSelect'
 import TotalTestDurationSummary from '../components/TotalTestDurationSummary'
 import { useSearchParams } from 'react-router-dom'
-import * as React from 'react'
 import { SelectChangeEvent } from '@mui/material/Select'
+import useLocalStorageState from 'use-local-storage-state'
 
 const Summary = () => {
   let [searchParams, setSearchParams] = useSearchParams()
   let projectFromSearch = searchParams.get('projectId')
 
-  const [projectId, setProjectId] = React.useState<string>(
-    projectFromSearch || ''
+  const [projectId, setProjectId] = useLocalStorageState<string>(
+    'projectId', {
+      defaultValue: projectFromSearch || ''
+    }
   )
+
 
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value

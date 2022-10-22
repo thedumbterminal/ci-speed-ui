@@ -6,15 +6,17 @@ import TestDurationChart from '../components/TestDurationChart'
 import TestSuccessChart from '../components/TestSuccessChart'
 import TestsSkippedChart from '../components/TestsSkippedChart'
 import { useSearchParams } from 'react-router-dom'
-import * as React from 'react'
 import { SelectChangeEvent } from '@mui/material/Select'
+import useLocalStorageState from 'use-local-storage-state'
 
 const Analyse = () => {
   let [searchParams, setSearchParams] = useSearchParams()
   let projectFromSearch = searchParams.get('projectId')
 
-  const [projectId, setProjectId] = React.useState<string>(
-    projectFromSearch || ''
+  const [projectId, setProjectId] = useLocalStorageState<string>(
+    'projectId', {
+      defaultValue: projectFromSearch || ''
+    }
   )
 
   const handleChange = (event: SelectChangeEvent) => {
