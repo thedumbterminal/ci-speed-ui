@@ -8,6 +8,7 @@ import Summary from './pages/Summary'
 import Analyse from './pages/Analyse'
 import Projects from './pages/Projects'
 import Project from './pages/Project'
+import AddProject from './pages/AddProject'
 import Build from './pages/Build'
 import TestRun from './pages/TestRun'
 import TestSuite from './pages/TestSuite'
@@ -32,6 +33,7 @@ root.render(
           <Route path="/summary" element={<Summary />} />
           <Route path="/analyse" element={<Analyse />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/add_project" element={<AddProject />} />
           <Route path="/project" element={<Project />} />
           <Route path="/build" element={<Build />} />
           <Route path="/test_run" element={<TestRun />} />

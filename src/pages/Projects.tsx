@@ -8,7 +8,6 @@ import Project from '../shared/Project'
 import { api } from '../lib/api'
 import useSWR from 'swr'
 import { Typography } from '@mui/material'
-import NewProject from '../components/NewProject'
 import { Grid, GridRow } from '../components/Grid'
 
 interface ProjectRow extends GridRow {
@@ -71,7 +70,6 @@ const Projects = () => {
         Projects
       </Typography>
       <Grid rows={projects} columns={columns} isLoading={isLoading} />
-      <NewProject />
     </>
   )
 }

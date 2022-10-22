@@ -141,6 +141,14 @@ const PersistentDrawerLeft = ({ open, setOpen }: DrawerProps) => {
         </List>
         <Divider />
         <List>
+          <NavLink to="/add_project">
+            <ListItem button key="AddProject">
+              <ListItemIcon>
+                <MenuIcon />
+              </ListItemIcon>
+              <ListItemText primary="Add Project" />
+            </ListItem>
+          </NavLink>
           <NavLink to="/account">
             <ListItem button key="Account">
               <ListItemIcon>
