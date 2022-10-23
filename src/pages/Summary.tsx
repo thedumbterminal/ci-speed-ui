@@ -1,11 +1,9 @@
 import { Typography } from '@mui/material'
 import TotalTestDurationSummary from '../components/TotalTestDurationSummary'
-import useLocalStorageState from 'use-local-storage-state'
+import { getProjectId } from '../lib/project'
 
 const Summary = () => {
-  const [projectId, _] = useLocalStorageState<number>('projectId', {
-    defaultValue: 0,
-  })
+  const projectId = getProjectId()
 
   return (
     <>

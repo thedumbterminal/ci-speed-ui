@@ -4,12 +4,10 @@ import NumTestsChart from '../components/NumTestsChart'
 import TestDurationChart from '../components/TestDurationChart'
 import TestSuccessChart from '../components/TestSuccessChart'
 import TestsSkippedChart from '../components/TestsSkippedChart'
-import useLocalStorageState from 'use-local-storage-state'
+import { getProjectId } from '../lib/project'
 
 const Analyse = () => {
-  const [projectId, _] = useLocalStorageState<number>('projectId', {
-    defaultValue: 0,
-  })
+  const projectId = getProjectId()
 
   return (
     <>
