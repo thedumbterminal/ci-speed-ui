@@ -28,16 +28,18 @@ export default () => {
   let projects: Project[] = []
   const { data, error, isLoading } = _getProjects()
   if (error) throw error
+  let defaultValue: number = 0
   if (data) {
     projects = data
+    defaultValue = projects[0].id
   }
 
-  const [projectId, setProjectId] = useLocalStorageState<string>('projectId', {
-    defaultValue: '',
+  const [projectId, setProjectId] = useLocalStorageState<number>('projectId', {
+    defaultValue,
   })
 
   const _handleChange = (event: SelectChangeEvent): void => {
-    const value = event.target.value
+    const value = parseInt(event.target.value, 10)
     setProjectId(value)
   }
 
@@ -45,7 +47,7 @@ export default () => {
     <Select
       labelId="project-select-label"
       id="project-select"
-      value={projectId}
+      value={projectId.toString()}
       label="Project"
       onChange={_handleChange}
     >

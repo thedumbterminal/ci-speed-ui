@@ -4,8 +4,8 @@ import TotalTestDurationSummary from '../components/TotalTestDurationSummary'
 import useLocalStorageState from 'use-local-storage-state'
 
 const Summary = () => {
-  const [projectId, _] = useLocalStorageState<string>('projectId', {
-    defaultValue: '',
+  const [projectId, _] = useLocalStorageState<number>('projectId', {
+    defaultValue: 0,
   })
 
   return (

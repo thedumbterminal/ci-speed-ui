@@ -8,8 +8,8 @@ import TestsSkippedChart from '../components/TestsSkippedChart'
 import useLocalStorageState from 'use-local-storage-state'
 
 const Analyse = () => {
-  const [projectId, _] = useLocalStorageState<string>('projectId', {
-    defaultValue: '',
+  const [projectId, _] = useLocalStorageState<number>('projectId', {
+    defaultValue: 0,
   })
 
   return (

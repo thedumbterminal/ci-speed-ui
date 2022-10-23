@@ -4,11 +4,11 @@ import useSWR from 'swr'
 import XAxisDataType from '../shared/XAxisDataType'
 
 interface ProjectChartProps {
-  projectId: string
+  projectId: number
 }
 
-const _getPageData = (id: string) => {
-  const { data, error } = useSWR(`/projects/${id}/num_builds`, api.get)
+const _getPageData = (id: number) => {
+  const { data, error } = useSWR(`/projects/${id.toString()}/num_builds`, api.get)
   return {
     data,
     error,
