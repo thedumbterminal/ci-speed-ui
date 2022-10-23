@@ -16,10 +16,10 @@ export default () => {
           <Link to="/account">Login via OAUTH with GitHub.</Link>
         </li>
         <li>
-          <Link to="/projects">Create a project.</Link>
+          <Link to="/add_project">Add a project.</Link>
         </li>
         <li>
-          <Link to="/api_key">Generate an API Key</Link>
+          <Link to="/api_key">Generate an API Key.</Link>
         </li>
         <li>Upload test results.</li>
       </ol>
