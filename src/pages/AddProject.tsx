@@ -4,7 +4,7 @@ import NewProject from '../components/NewProject'
 const AddProject = () => {
   return (
     <>
-      <Typography variant="h2" component="h2">
+      <Typography variant="h2" component="h3">
         Add Project
       </Typography>
       <NewProject />

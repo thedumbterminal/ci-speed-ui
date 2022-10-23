@@ -92,7 +92,7 @@ const Project = () => {
 
   return (
     <>
-      <Typography variant="h2" component="h2">
+      <Typography variant="h2" component="h3">
         Project
       </Typography>
       <p>

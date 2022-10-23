@@ -7,7 +7,7 @@ const Summary = () => {
 
   return (
     <>
-      <Typography variant="h2" component="h2" gutterBottom>
+      <Typography variant="h2" component="h3" gutterBottom>
         Summary
       </Typography>
       {projectId && <TotalTestDurationSummary projectId={projectId} />}

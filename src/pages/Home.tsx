@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 export default () => {
   return (
     <>
-      <Typography variant="h2" component="h2">
+      <Typography variant="h2" component="h3">
         Home
       </Typography>
       <p>Welcome to CI-Speed.</p>
-      <Typography variant="h3" component="h3">
+      <Typography variant="h3" component="h4">
         Quick start
       </Typography>
       <ol>

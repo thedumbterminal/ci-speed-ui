@@ -28,7 +28,7 @@ const SkippedTest = () => {
 
   return (
     <>
-      <Typography variant="h2" component="h2">
+      <Typography variant="h2" component="h3">
         Skipped Test
       </Typography>
       <p>

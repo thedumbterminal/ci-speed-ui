@@ -28,7 +28,7 @@ const TestFailure = () => {
 
   return (
     <>
-      <Typography variant="h2" component="h2">
+      <Typography variant="h2" component="h3">
         Test Failure
       </Typography>
       <p>
