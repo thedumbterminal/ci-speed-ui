@@ -5,6 +5,7 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { api } from '../lib/api'
+import useLocalStorageState from 'use-local-storage-state'
 
 const _getProjects = () => {
   const { data, error } = useSWR('/projects/', api.get)
@@ -23,26 +24,32 @@ const _renderMenuItem = (project: Project) => {
   )
 }
 
-interface ProjectSelectProps {
-  projectId: string
-  onChange: (event: SelectChangeEvent) => void
-}
-
-export default (props: ProjectSelectProps) => {
+export default () => {
   let projects: Project[] = []
   const { data, error, isLoading } = _getProjects()
   if (error) throw error
+  let defaultValue: number = 0
   if (data) {
     projects = data
+    defaultValue = projects[0].id
+  }
+
+  const [projectId, setProjectId] = useLocalStorageState<number>('projectId', {
+    defaultValue,
+  })
+
+  const _handleChange = (event: SelectChangeEvent): void => {
+    const value = parseInt(event.target.value, 10)
+    setProjectId(value)
   }
 
   const SelectComponent = (
     <Select
       labelId="project-select-label"
       id="project-select"
-      value={props.projectId}
+      value={projectId.toString()}
       label="Project"
-      onChange={props.onChange}
+      onChange={_handleChange}
     >
       {projects.map(_renderMenuItem)}
     </Select>

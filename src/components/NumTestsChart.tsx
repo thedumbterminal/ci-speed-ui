@@ -3,11 +3,14 @@ import { api } from '../lib/api'
 import useSWR from 'swr'
 
 interface ProjectChartProps {
-  projectId: string
+  projectId: number
 }
 
-const _getPageData = (id: string) => {
-  const { data, error } = useSWR(`/projects/${id}/num_tests`, api.get)
+const _getPageData = (id: number) => {
+  const { data, error } = useSWR(
+    `/projects/${id.toString()}/num_tests`,
+    api.get
+  )
   return {
     data,
     error,

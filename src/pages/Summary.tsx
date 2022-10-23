@@ -1,33 +1,15 @@
 import { Typography } from '@mui/material'
-import ProjectSelect from '../components/ProjectSelect'
 import TotalTestDurationSummary from '../components/TotalTestDurationSummary'
-import { useSearchParams } from 'react-router-dom'
-import * as React from 'react'
-import { SelectChangeEvent } from '@mui/material/Select'
+import { getProjectId } from '../lib/project'
 
 const Summary = () => {
-  let [searchParams, setSearchParams] = useSearchParams()
-  let projectFromSearch = searchParams.get('projectId')
-
-  const [projectId, setProjectId] = React.useState<string>(
-    projectFromSearch || ''
-  )
-
-  const handleChange = (event: SelectChangeEvent) => {
-    const value = event.target.value
-    setProjectId(value)
-    const search = {
-      projectId: value,
-    }
-    setSearchParams(search, { replace: true })
-  }
+  const projectId = getProjectId()
 
   return (
     <>
-      <Typography variant="h2" component="h2" gutterBottom>
+      <Typography variant="h2" component="h3" gutterBottom>
         Summary
       </Typography>
-      <ProjectSelect projectId={projectId} onChange={handleChange} />
       {projectId && <TotalTestDurationSummary projectId={projectId} />}
     </>
   )

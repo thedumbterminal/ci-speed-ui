@@ -37,7 +37,7 @@ export default () => {
   }
   return (
     <>
-      <p>Create a new project</p>
+      <p>Enable a new project, so results can be uploaded to CI-Speed.</p>
       <form onSubmit={handleSubmit(_onSubmit)}>
         <Stack direction="row" spacing={2} alignItems="center">
           <TextField

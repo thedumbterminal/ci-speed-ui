@@ -15,6 +15,10 @@ import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { NavLink } from 'react-router-dom'
+import useSWR from 'swr'
+import { getProjectId } from '../lib/project'
+import { api } from '../lib/api'
+
 const drawerWidth = 240
 
 interface DrawerProps {
@@ -43,6 +47,17 @@ const AppBar = styled(MuiAppBar, {
   }),
 }))
 
+const _getProject = () => {
+  const projectId = getProjectId()
+
+  const { data, error } = useSWR(`/projects/${projectId.toString()}`, api.get)
+  return {
+    data,
+    error,
+    isLoading: !error && !data,
+  }
+}
+
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
@@ -63,6 +78,14 @@ const PersistentDrawerLeft = ({ open, setOpen }: DrawerProps) => {
     setOpen(false)
   }
 
+  let projectName: string = ''
+
+  const { data, error, isLoading } = _getProject()
+  if (error) throw error
+  if (data) {
+    projectName = data.name
+  }
+
   return (
     <>
       <CssBaseline />
@@ -77,9 +100,14 @@ const PersistentDrawerLeft = ({ open, setOpen }: DrawerProps) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="h1">
+          <Typography variant="h5" noWrap component="h1" sx={{ flexGrow: 1 }}>
             CI-Speed
           </Typography>
+          {!isLoading && (
+            <Typography align="right" variant="h6" noWrap component="h2">
+              [{projectName}]
+            </Typography>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -130,7 +158,7 @@ const PersistentDrawerLeft = ({ open, setOpen }: DrawerProps) => {
               <ListItemText primary="Analyse" />
             </ListItem>
           </NavLink>
-          <NavLink to="/projects">
+          <NavLink to="/project">
             <ListItem button key="Detail">
               <ListItemIcon>
                 <MenuIcon />
@@ -141,6 +169,22 @@ const PersistentDrawerLeft = ({ open, setOpen }: DrawerProps) => {
         </List>
         <Divider />
         <List>
+          <NavLink to="/choose_project">
+            <ListItem button key="ChooseProject">
+              <ListItemIcon>
+                <MenuIcon />
+              </ListItemIcon>
+              <ListItemText primary="Choose Project" />
+            </ListItem>
+          </NavLink>
+          <NavLink to="/add_project">
+            <ListItem button key="AddProject">
+              <ListItemIcon>
+                <MenuIcon />
+              </ListItemIcon>
+              <ListItemText primary="Add Project" />
+            </ListItem>
+          </NavLink>
           <NavLink to="/account">
             <ListItem button key="Account">
               <ListItemIcon>

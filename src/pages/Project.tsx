@@ -4,13 +4,14 @@ import {
   GridRenderCellParams,
   GridSortModel,
 } from '@mui/x-data-grid'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Build from '../shared/Build'
 import { api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
 import { humanDateTimeFormat } from '../lib/date'
 import { Grid, GridRow } from '../components/Grid'
+import { getProjectId } from '../lib/project'
 
 interface BuildRow extends GridRow {
   ref: string
@@ -60,7 +61,7 @@ const columns: GridColDef[] = [
   },
 ]
 
-const _getPageData = (id: string) => {
+const _getPageData = (id: number) => {
   const { data: project, error: projectError } = useSWR(
     '/projects/' + id,
     api.get
@@ -78,8 +79,8 @@ const _getPageData = (id: string) => {
 
 const Project = () => {
   let builds: BuildRow[] = []
-  let [searchParams] = useSearchParams()
-  let projectId = searchParams.get('id')
+  const projectId = getProjectId()
+
   if (!projectId) throw new Error('No project ID given')
   const { data, error, isLoading } = _getPageData(projectId)
   if (error) throw error
@@ -91,7 +92,7 @@ const Project = () => {
 
   return (
     <>
-      <Typography variant="h2" component="h2">
+      <Typography variant="h2" component="h3">
         Project
       </Typography>
       <p>

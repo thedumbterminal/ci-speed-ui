@@ -28,6 +28,7 @@
     "react-router-dom": "^6.4.2",
     "swr": "^1.3.0",
     "typescript": "^4.8.4",
+    "use-local-storage-state": "^18.1.1",
     "web-vitals": "^3.0.3",
     "yup": "^0.32.11"
   },
@@ -51,7 +52,9 @@
       "react-app/jest"
     ]
   },
-  "eslintIgnore": ["coverage/*"],
+  "eslintIgnore": [
+    "coverage/*"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",

@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 export default () => {
   return (
     <>
-      <Typography variant="h2" component="h2">
+      <Typography variant="h2" component="h3">
         Home
       </Typography>
       <p>Welcome to CI-Speed.</p>
-      <Typography variant="h3" component="h3">
+      <Typography variant="h3" component="h4">
         Quick start
       </Typography>
       <ol>
@@ -16,10 +16,10 @@ export default () => {
           <Link to="/account">Login via OAUTH with GitHub.</Link>
         </li>
         <li>
-          <Link to="/projects">Create a project.</Link>
+          <Link to="/add_project">Add a project.</Link>
         </li>
         <li>
-          <Link to="/api_key">Generate an API Key</Link>
+          <Link to="/api_key">Generate an API Key.</Link>
         </li>
         <li>Upload test results.</li>
       </ol>
