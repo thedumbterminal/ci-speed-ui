@@ -7,7 +7,10 @@ interface ProjectChartProps {
 }
 
 const _getPageData = (id: number) => {
-  const { data, error } = useSWR(`/projects/${id.toString()}/test_success`, api.get)
+  const { data, error } = useSWR(
+    `/projects/${id.toString()}/test_success`,
+    api.get
+  )
   return {
     data,
     error,

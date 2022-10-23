@@ -6,7 +6,7 @@ import Account from './pages/Account'
 import ApiKey from './pages/ApiKey'
 import Summary from './pages/Summary'
 import Analyse from './pages/Analyse'
-import Projects from './pages/Projects'
+import ChooseProject from './pages/ChooseProject'
 import Project from './pages/Project'
 import AddProject from './pages/AddProject'
 import Build from './pages/Build'
@@ -32,7 +32,7 @@ root.render(
           <Route path="/api_key" element={<ApiKey />} />
           <Route path="/summary" element={<Summary />} />
           <Route path="/analyse" element={<Analyse />} />
-          <Route path="/projects" element={<Projects />} />
+          <Route path="/choose_project" element={<ChooseProject />} />
           <Route path="/add_project" element={<AddProject />} />
           <Route path="/project" element={<Project />} />
           <Route path="/build" element={<Build />} />
