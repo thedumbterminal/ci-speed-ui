@@ -1,10 +1,15 @@
 import * as React from 'react'
-import { Stack, TextField } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { api } from '../lib/api'
+import MenuItem from '@mui/material/MenuItem'
+import FormHelperText from '@mui/material/FormHelperText'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
+import useSWR from 'swr'
+import InputLabel from '@mui/material/InputLabel'
 
 interface IFormInput {
   name: string
@@ -17,6 +22,23 @@ const schema = yup.object().shape({
     .matches(/^[a-zA-Z0-9_\-\/]+$/),
 })
 
+const _getAvailableProjects = () => {
+  const { data, error } = useSWR('/available_projects/', api.get)
+  return {
+    data,
+    error,
+    isLoading: !error && !data,
+  }
+}
+
+const _renderMenuItem = (projectName: string) => {
+  return (
+    <MenuItem key={projectName} value={projectName}>
+      {projectName}
+    </MenuItem>
+  )
+}
+
 export default () => {
   const {
     register,
@@ -26,38 +48,58 @@ export default () => {
     resolver: yupResolver(schema),
   })
 
+  let availableProjects: string[] = []
+  const { data, error, isLoading } = _getAvailableProjects()
+  if (error) throw error
+  if (data) {
+    availableProjects = data
+  }
+
   const [loading, setLoading] = React.useState(false)
 
-  let _onSubmit = async (formData: IFormInput) => {
+  const _onSubmit = async (formData: IFormInput) => {
     setLoading(true)
     await api.post('/projects/', {
       name: formData.name,
     })
     setLoading(false)
   }
+
+  const SelectComponent = (
+    <Select
+      {...register('name')}
+      labelId="available-project-select-label"
+      id="available-project-select"
+      defaultValue=""
+      label="Available Project Name"
+      error={!!errors.name?.message}
+    >
+      {availableProjects.map(_renderMenuItem)}
+    </Select>
+  )
+
   return (
     <>
       <p>Enable a new project, so results can be uploaded to CI-Speed.</p>
       <form onSubmit={handleSubmit(_onSubmit)}>
-        <Stack direction="row" spacing={2} alignItems="center">
-          <TextField
-            {...register('name')}
-            label="New Project Name"
-            helperText={errors.name?.message}
-            error={!!errors.name?.message}
-            variant="filled"
-          />
-          <div>
-            <LoadingButton
-              type="submit"
-              loading={loading}
-              variant="contained"
-              loadingIndicator="Creating..."
-            >
-              Create Project
-            </LoadingButton>
-          </div>
-        </Stack>
+        <FormControl fullWidth error={!!errors.name?.message}>
+          <InputLabel id="available-project-select-label">
+            Available Projects
+          </InputLabel>
+          {!isLoading && SelectComponent}
+          <FormHelperText>{errors.name?.message}</FormHelperText>
+        </FormControl>
+        <div>
+          <br />
+          <LoadingButton
+            type="submit"
+            loading={loading}
+            variant="contained"
+            loadingIndicator="Activating..."
+          >
+            Activate Project
+          </LoadingButton>
+        </div>
       </form>
     </>
   )

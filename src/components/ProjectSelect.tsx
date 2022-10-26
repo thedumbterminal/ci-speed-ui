@@ -57,7 +57,7 @@ export default () => {
 
   return (
     <FormControl fullWidth>
-      <InputLabel id="project-select-label">Project</InputLabel>
+      <InputLabel id="project-select-label">Projects</InputLabel>
       {!isLoading && SelectComponent}
     </FormControl>
   )
