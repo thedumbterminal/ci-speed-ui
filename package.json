@@ -73,7 +73,7 @@
   },
   "devDependencies": {
     "jest-junit": "^14.0.1",
-    "prettier": "^2.7.1",
+    "prettier": "^2.8.0",
     "react-scripts": "5.0.1"
   }
 }
