@@ -16,7 +16,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.2.3",
     "@types/node": "^18.11.4",
-    "@types/react": "^18.0.21",
+    "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.6",
     "@visx/visx": "^2.16.0",
     "axios": "^1.2.0",
