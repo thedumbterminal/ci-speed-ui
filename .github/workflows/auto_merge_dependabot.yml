@@ -1,0 +1,21 @@
+name: Auto Merge Dependabot
+on:
+  workflow_run:
+    types:
+      - completed
+    workflows:
+      # List all required workflow names here.
+      - 'Node.js CI'
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+      contents: write
+
+    steps:
+      -
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        uses: fastify/github-action-merge-dependabot@v3
