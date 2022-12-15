@@ -29,7 +29,7 @@ export default () => {
   const { data, error, isLoading } = _getProjects()
   if (error) throw error
   let defaultValue: number = 0
-  if (data) {
+  if (data && data.length) {
     projects = data
     defaultValue = projects[0].id
   }
