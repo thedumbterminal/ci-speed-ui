@@ -15,6 +15,7 @@ import { getProjectId } from '../lib/project'
 
 interface BuildRow extends GridRow {
   ref: string
+  commitSha: string
   created: string
 }
 
@@ -30,6 +31,7 @@ const _transformRows = (testRuns: Build[]): BuildRow[] => {
     return {
       id: item.id,
       ref: item.ref,
+      commitSha: item.commit_sha,
       created: item.created_at,
     }
   })
@@ -50,6 +52,11 @@ const columns: GridColDef[] = [
   {
     field: 'ref',
     headerName: 'Reference',
+    width: 160,
+  },
+  {
+    field: 'commitSha',
+    headerName: 'Commit SHA',
     width: 160,
   },
   {
