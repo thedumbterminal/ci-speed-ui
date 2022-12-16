@@ -1,4 +1,4 @@
-import { api } from '../lib/api'
+import { Api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
 import { useSearchParams } from 'react-router-dom'
@@ -6,11 +6,11 @@ import { useSearchParams } from 'react-router-dom'
 const _getPageData = (id: string) => {
   const { data: skippedTests, error: skippedError } = useSWR(
     '/skipped_tests/' + id,
-    api.get
+    Api.simpleGet
   )
   const { data: testCase, error: caseError } = useSWR(
     () => '/test_cases/' + skippedTests.test_case_id,
-    api.get
+    Api.simpleGet
   )
   return {
     data: { testCase, skippedTests },

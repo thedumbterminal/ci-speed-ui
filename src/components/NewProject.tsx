@@ -3,7 +3,7 @@ import LoadingButton from '@mui/lab/LoadingButton'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { api } from '../lib/api'
+import { Api } from '../lib/api'
 import MenuItem from '@mui/material/MenuItem'
 import FormHelperText from '@mui/material/FormHelperText'
 import FormControl from '@mui/material/FormControl'
@@ -23,7 +23,7 @@ const schema = yup.object().shape({
 })
 
 const _getAvailableProjects = () => {
-  const { data, error } = useSWR('/available_projects/', api.get)
+  const { data, error } = useSWR('/available_projects/', Api.simpleGet)
   return {
     data,
     error,
@@ -59,8 +59,11 @@ export default () => {
 
   const _onSubmit = async (formData: IFormInput) => {
     setLoading(true)
-    await api.post('/projects/', {
-      name: formData.name,
+    await Api.post({
+      url: '/projects/',
+      params: {
+        name: formData.name,
+      },
     })
     setLoading(false)
   }

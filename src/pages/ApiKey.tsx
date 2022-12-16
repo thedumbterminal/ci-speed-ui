@@ -1,4 +1,4 @@
-import { api } from '../lib/api'
+import { Api } from '../lib/api'
 import useSWR from 'swr'
 import LoadingButton from '@mui/lab/LoadingButton'
 import * as React from 'react'
@@ -10,7 +10,7 @@ interface GenerateButtonProps {
 }
 
 const _generateApiKey = () => {
-  const { data, error } = useSWR('/token/', api.post)
+  const { data, error } = useSWR('/token/', Api.simplePost)
   return {
     data,
     error,

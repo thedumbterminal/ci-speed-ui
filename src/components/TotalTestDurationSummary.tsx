@@ -1,4 +1,4 @@
-import { api } from '../lib/api'
+import { Api } from '../lib/api'
 import useSWR from 'swr'
 import { formatDistanceStrict } from 'date-fns'
 import { Typography } from '@mui/material'
@@ -10,7 +10,7 @@ interface ProjectChartProps {
 const _getPageData = (id: number) => {
   const { data, error } = useSWR(
     `/projects/${id.toString()}/total_test_duration`,
-    api.get
+    Api.simpleGet
   )
   return {
     data,

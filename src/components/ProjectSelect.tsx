@@ -4,11 +4,11 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import { api } from '../lib/api'
+import { Api } from '../lib/api'
 import useLocalStorageState from 'use-local-storage-state'
 
 const _getProjects = () => {
-  const { data, error } = useSWR('/projects/', api.get)
+  const { data, error } = useSWR('/projects/', Api.simpleGet)
   return {
     data,
     error,

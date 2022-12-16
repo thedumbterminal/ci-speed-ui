@@ -6,7 +6,7 @@ import {
 import { humanDateTimeFormat } from '../lib/date'
 import { Link, useSearchParams } from 'react-router-dom'
 import TestRun from '../shared/TestRun'
-import { api } from '../lib/api'
+import { Api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
 import { Grid, GridRow } from '../components/Grid'
@@ -54,10 +54,13 @@ const columns: GridColDef[] = [
 ]
 
 const _getPageData = (id: string) => {
-  const { data: build, error: projectError } = useSWR('/builds/' + id, api.get)
+  const { data: build, error: projectError } = useSWR(
+    '/builds/' + id,
+    Api.simpleGet
+  )
   const { data: testRuns, error: runError } = useSWR(
-    () => ['/test_runs/', { build_id: build.id }],
-    api.get
+    () => ({ url: '/test_runs/', params: { build_id: build.id + '' } }),
+    Api.get
   )
   return {
     data: { build, testRuns },
