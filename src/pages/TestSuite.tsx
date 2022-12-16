@@ -1,5 +1,5 @@
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
-import { api } from '../lib/api'
+import { Api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
 import { Link, useSearchParams } from 'react-router-dom'
@@ -92,11 +92,11 @@ const columns: GridColDef[] = [
 const _getPageData = (id: string) => {
   const { data: testSuite, error: suiteError } = useSWR(
     '/test_suites/' + id,
-    api.get
+    Api.simpleGet
   )
   const { data: testCases, error: caseError } = useSWR(
-    () => ['/test_cases/', { test_suite_id: id }],
-    api.get
+    () => ({ url: '/test_cases/', params: { test_suite_id: id } }),
+    Api.get
   )
   return {
     data: { testSuite, testCases },

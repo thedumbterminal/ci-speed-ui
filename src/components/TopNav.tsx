@@ -17,7 +17,7 @@ import ListItemText from '@mui/material/ListItemText'
 import { NavLink } from 'react-router-dom'
 import useSWR from 'swr'
 import { getProjectId } from '../lib/project'
-import { api } from '../lib/api'
+import { Api } from '../lib/api'
 
 const drawerWidth = 240
 
@@ -50,7 +50,10 @@ const AppBar = styled(MuiAppBar, {
 const _getProject = () => {
   const projectId = getProjectId()
 
-  const { data, error } = useSWR(`/projects/${projectId.toString()}`, api.get)
+  const { data, error } = useSWR(
+    `/projects/${projectId.toString()}`,
+    Api.simpleGet
+  )
   return {
     data,
     error,

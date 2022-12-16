@@ -6,7 +6,7 @@ import {
 } from '@mui/x-data-grid'
 import { Link } from 'react-router-dom'
 import Build from '../shared/Build'
-import { api } from '../lib/api'
+import { Api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
 import { humanDateTimeFormat } from '../lib/date'
@@ -64,11 +64,11 @@ const columns: GridColDef[] = [
 const _getPageData = (id: number) => {
   const { data: project, error: projectError } = useSWR(
     '/projects/' + id,
-    api.get
+    Api.simpleGet
   )
   const { data: builds, error: runError } = useSWR(
-    () => ['/builds/', { project_id: project.id }],
-    api.get
+    () => ({ url: '/builds/', params: { project_id: project.id + '' } }),
+    Api.get
   )
   return {
     data: { project, builds },

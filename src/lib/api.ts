@@ -8,13 +8,19 @@ interface URLParams {
   [key: string]: string | number
 }
 
+interface ApiRequest {
+  url: string
+  params: URLParams
+}
+
 const absoluteURL = (path: string) => URL_BASE + path
 
-const api = {
-  get: async (path: string, params: URLParams = {}) => {
+class Api {
+  static async get(request: ApiRequest) {
+    console.log('get()', request)
     try {
-      const { data, headers } = await axios.get(absoluteURL(path), {
-        params,
+      const { data, headers } = await axios.get(absoluteURL(request.url), {
+        params: request.params,
         withCredentials: true,
       })
       if (headers['content-type'] !== 'application/json') {
@@ -26,12 +32,16 @@ const api = {
     } catch (error) {
       console.error('API error:', error)
     }
-  },
+  }
 
-  post: async (path: string, params: URLParams = {}) => {
-    const formData = qs.stringify(params)
+  static simpleGet(path: string) {
+    return Api.get({ url: path, params: {} })
+  }
+
+  static async post(request: ApiRequest) {
+    const formData = qs.stringify(request.params)
     try {
-      const { data } = await axios.post(absoluteURL(path), formData, {
+      const { data } = await axios.post(absoluteURL(request.url), formData, {
         withCredentials: true,
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
@@ -41,7 +51,11 @@ const api = {
     } catch (error) {
       console.error('API error:', error)
     }
-  },
+  }
+
+  static simplePost(path: string) {
+    return Api.post({ url: path, params: {} })
+  }
 }
 
-export { api, absoluteURL }
+export { Api, absoluteURL }

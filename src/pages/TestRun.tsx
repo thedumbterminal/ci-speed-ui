@@ -1,4 +1,4 @@
-import { api } from '../lib/api'
+import { Api } from '../lib/api'
 import TestSuite from '../shared/TestSuite'
 import {
   GridColDef,
@@ -55,10 +55,13 @@ const columns: GridColDef[] = [
 ]
 
 const _getPageData = (id: string) => {
-  const { data: testRun, error: runError } = useSWR('/test_runs/' + id, api.get)
+  const { data: testRun, error: runError } = useSWR(
+    '/test_runs/' + id,
+    Api.simpleGet
+  )
   const { data: testSuites, error: suiteError } = useSWR(
-    () => ['/test_suites/', { test_run_id: testRun.id }],
-    api.get
+    () => ({ url: '/test_suites/', params: { test_run_id: testRun.id } }),
+    Api.get
   )
   return {
     data: { testRun, testSuites },

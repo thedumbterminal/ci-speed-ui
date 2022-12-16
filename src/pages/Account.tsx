@@ -1,4 +1,4 @@
-import { api } from '../lib/api'
+import { Api } from '../lib/api'
 import useSWR from 'swr'
 import Login from '../components/Login'
 import Typography from '@mui/material/Typography'
@@ -12,7 +12,7 @@ interface UserInfo {
 }
 
 const _getUserInfo = () => {
-  const { data, error } = useSWR('/user/', api.get)
+  const { data, error } = useSWR('/user/', Api.simpleGet)
   return {
     data,
     error,

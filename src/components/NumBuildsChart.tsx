@@ -1,5 +1,5 @@
 import BarChart from '../components/BarChart'
-import { api } from '../lib/api'
+import { Api } from '../lib/api'
 import useSWR from 'swr'
 import XAxisDataType from '../shared/XAxisDataType'
 
@@ -10,7 +10,7 @@ interface ProjectChartProps {
 const _getPageData = (id: number) => {
   const { data, error } = useSWR(
     `/projects/${id.toString()}/num_builds`,
-    api.get
+    Api.simpleGet
   )
   return {
     data,
