@@ -4,6 +4,7 @@ import {
   GridRenderCellParams,
   GridSortModel,
 } from '@mui/x-data-grid'
+import { Link as MLink } from '@mui/material'
 import { Link } from 'react-router-dom'
 import Build from '../shared/Build'
 import { Api } from '../lib/api'
@@ -32,6 +33,7 @@ const _transformRows = (testRuns: Build[]): BuildRow[] => {
       id: item.id,
       ref: item.ref,
       commitSha: item.commit_sha,
+      commitUrl: item.commit_url,
       created: item.created_at,
     }
   })
@@ -40,6 +42,12 @@ const _transformRows = (testRuns: Build[]): BuildRow[] => {
 const _renderLinkCell = (params: GridRenderCellParams<string>) => {
   const formatted = params.formattedValue as string
   return <Link to={formatted}>View build</Link>
+}
+
+const _renderShaCell = (params: GridRenderCellParams<string>) => {
+  const formatted = params.formattedValue as string
+  const url = params.row.commitUrl
+  return <MLink href={url} rel="noopener" target="_blank" title="View commit on GitHub">{formatted}</MLink>
 }
 
 const columns: GridColDef[] = [
@@ -56,8 +64,9 @@ const columns: GridColDef[] = [
   },
   {
     field: 'commitSha',
-    headerName: 'Commit SHA',
+    headerName: 'Commit',
     width: 160,
+    renderCell: _renderShaCell
   },
   {
     field: 'id',
