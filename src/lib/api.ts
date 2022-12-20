@@ -17,7 +17,6 @@ const absoluteURL = (path: string) => URL_BASE + path
 
 class Api {
   static async get(request: ApiRequest) {
-    console.log('get()', request)
     try {
       const { data, headers } = await axios.get(absoluteURL(request.url), {
         params: request.params,
