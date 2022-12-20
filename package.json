@@ -42,7 +42,7 @@
     "coverage:report": "npm run coverage -- --reporters=default --reporters=jest-junit",
     "test:watch": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "git checkout main && git pull origin main && update-browserslist-db@latest && REACT_APP_API_BASE=https://ci-speed.herokuapp.com/api PUBLIC_URL=/ci-speed-ui npm run build && git add docs && git commit docs -m 'Deploy' && git push origin main",
+    "deploy": "git checkout main && git pull origin main && npx update-browserslist-db@latest && REACT_APP_API_BASE=https://ci-speed.herokuapp.com/api PUBLIC_URL=/ci-speed-ui npm run build && git add docs && git commit docs -m 'Deploy' && git push origin main",
     "serve": "npm run build && cd docs && python3 -m http.server",
     "ci": "npm run lint && npm run coverage:report"
   },
