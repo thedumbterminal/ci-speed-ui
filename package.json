@@ -7,7 +7,7 @@
     "@emotion/styled": "^11.10.6",
     "@fontsource/roboto": "^4.5.8",
     "@hookform/resolvers": "^3.0.1",
-    "@mui/icons-material": "^5.11.11",
+    "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.125",
     "@mui/material": "^5.11.16",
     "@mui/x-data-grid": "^6.1.0",
