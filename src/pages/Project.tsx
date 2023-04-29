@@ -47,7 +47,16 @@ const _renderLinkCell = (params: GridRenderCellParams<string>) => {
 const _renderShaCell = (params: GridRenderCellParams<string>) => {
   const formatted = params.formattedValue as string
   const url = params.row.commitUrl
-  return <MLink href={url} rel="noopener" target="_blank" title="View commit on GitHub">{formatted}</MLink>
+  return (
+    <MLink
+      href={url}
+      rel="noopener"
+      target="_blank"
+      title="View commit on GitHub"
+    >
+      {formatted}
+    </MLink>
+  )
 }
 
 const columns: GridColDef[] = [
@@ -66,7 +75,7 @@ const columns: GridColDef[] = [
     field: 'commitSha',
     headerName: 'Commit',
     width: 160,
-    renderCell: _renderShaCell
+    renderCell: _renderShaCell,
   },
   {
     field: 'id',

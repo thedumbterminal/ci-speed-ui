@@ -6,7 +6,7 @@ Frontend for CI Speed
 
 ## Requirements
 
-* NVM
+- NVM
 
 ## Install
 
@@ -24,7 +24,7 @@ npm start
 
 ## Environment Variables
 
-* REACT_APP_API_BASE - The URL of the API to use.
+- REACT_APP_API_BASE - The URL of the API to use.
 
 ## Deploy
 
@@ -38,17 +38,17 @@ It will be deployed automatically to github pages.
 
 ## Tech
 
-* Create react app
-* Material UI https://mui.com/material-ui/getting-started/installation/
-* Visx https://airbnb.io/visx
+- Create react app
+- Material UI https://mui.com/material-ui/getting-started/installation/
+- Visx https://airbnb.io/visx
 
 ## Todo
 
-* Signup
-* Most failing tests
-* Longest tests
-* Flaky tests
-* Skipped tests that have been skipped for more than a month
+- Signup
+- Most failing tests
+- Longest tests
+- Flaky tests
+- Skipped tests that have been skipped for more than a month
 
 # Getting Started with Create React App
 
