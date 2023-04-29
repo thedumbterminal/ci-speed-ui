@@ -32,7 +32,7 @@ const transformRows = (testRuns: TestRun[]): TestRunRow[] => {
   })
 }
 
-const renderLinkCell = (params: GridRenderCellParams<string>) => {
+const renderLinkCell = (params: GridRenderCellParams) => {
   const formatted = params.formattedValue as string
   return <Link to={formatted}>View test run</Link>
 }

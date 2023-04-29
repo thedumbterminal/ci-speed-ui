@@ -30,7 +30,7 @@ const _formatSkippedLink = (value: string): string => {
   return `/skipped_test/?id=${value}`
 }
 
-const _renderLinkCell = (params: GridRenderCellParams<string>) => {
+const _renderLinkCell = (params: GridRenderCellParams) => {
   const failureId = params.row.failure_id
   const skippedId = params.row.skipped_id
   if (failureId) {

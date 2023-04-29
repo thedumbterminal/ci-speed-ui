@@ -22,7 +22,7 @@ const Grid = ({ rows, columns, isLoading, sortModel = [] }: GridProps) => {
           sortModel,
         },
       }}
-      onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+      onPageSizeChange={(newPageSize: number) => setPageSize(newPageSize)}
       rows={rows}
       columns={columns}
       pageSize={pageSize}

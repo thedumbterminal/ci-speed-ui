@@ -39,12 +39,12 @@ const _transformRows = (testRuns: Build[]): BuildRow[] => {
   })
 }
 
-const _renderLinkCell = (params: GridRenderCellParams<string>) => {
+const _renderLinkCell = (params: GridRenderCellParams) => {
   const formatted = params.formattedValue as string
   return <Link to={formatted}>View build</Link>
 }
 
-const _renderShaCell = (params: GridRenderCellParams<string>) => {
+const _renderShaCell = (params: GridRenderCellParams) => {
   const formatted = params.formattedValue as string
   const url = params.row.commitUrl
   return (
