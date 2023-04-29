@@ -18,11 +18,6 @@ jobs:
         node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    # For auto merging
-    permissions:
-      pull-requests: write
-      contents: write
-
     steps:
       - name: Set Timezone
         uses: szenius/set-timezone@v1.1
@@ -42,4 +37,16 @@ jobs:
           CI_SPEED_AUTH_TOKEN: ${{ secrets.CI_SPEED_AUTH_TOKEN }}
         run: |
           scripts/upload_to_ci_speed.sh ${{ github.repository }} ${{ github.run_id }} ${{ github.sha }}
+
+  automerge:
+    needs: build
+    runs-on: ubuntu-latest
+
+    # For auto merging
+    permissions:
+      pull-requests: write
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
       - uses: fastify/github-action-merge-dependabot@v3
