@@ -25,6 +25,12 @@ type ChartProps = {
 const accessors = {
   xAccessor: (d: Datum) => d.x,
   yAccessor: (d: Datum) => d.y,
+  onPointerUp: () => console.log('test'),
+  onPointerMove: () => console.log('test'),
+  onPointerOut: () => console.log('test'),
+  onBlur: () => console.log('test'),
+  onFocus: () => console.log('test'),
+  onPointerDown: () => console.log('test'),
 }
 
 const margin = {

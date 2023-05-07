@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material'
 import TotalTestDurationSummary from '../components/TotalTestDurationSummary'
+import TestPassPercentageSummary from '../components/TestPassPercentageSummary'
 import { getProjectId } from '../lib/project'
 
 const Summary = () => {
@@ -11,6 +12,7 @@ const Summary = () => {
         Summary
       </Typography>
       {projectId && <TotalTestDurationSummary projectId={projectId} />}
+      {projectId && <TestPassPercentageSummary projectId={projectId} />}
     </>
   )
 }
