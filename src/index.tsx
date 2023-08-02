@@ -44,5 +44,5 @@ root.render(
         </Route>
       </Routes>
     </HashRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
 )

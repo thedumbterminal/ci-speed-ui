@@ -9,7 +9,7 @@ interface ProjectChartProps {
 const _getPageData = (id: number) => {
   const { data, error } = useSWR(
     `/projects/${id.toString()}/test_duration`,
-    Api.simpleGet
+    Api.simpleGet,
   )
   return {
     data,
