@@ -73,7 +73,7 @@ const _formatDate = (value: string, type: XAxisDataType): string => {
 
 const _transformDateForTimeSeries = (
   data: Datum[],
-  xAxisType: XAxisDataType = XAxisDataType.DateTime
+  xAxisType: XAxisDataType = XAxisDataType.DateTime,
 ): Datum[] => {
   return data.map((item: Datum) => {
     return {
@@ -85,7 +85,7 @@ const _transformDateForTimeSeries = (
 
 const _generateXAxisLabel = (
   text: string,
-  unit: string | undefined
+  unit: string | undefined,
 ): string => {
   if (!unit) return text
   return `${text} (${unit})`

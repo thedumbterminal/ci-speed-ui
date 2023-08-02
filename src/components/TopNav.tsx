@@ -52,7 +52,7 @@ const _getProject = () => {
 
   const { data, error } = useSWR(
     `/projects/${projectId.toString()}`,
-    Api.simpleGet
+    Api.simpleGet,
   )
   return {
     data,

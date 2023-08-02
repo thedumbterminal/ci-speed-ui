@@ -6,11 +6,11 @@ import { useSearchParams } from 'react-router-dom'
 const _getPageData = (id: string) => {
   const { data: testFailures, error: failureError } = useSWR(
     '/test_failures/' + id,
-    Api.simpleGet
+    Api.simpleGet,
   )
   const { data: testCase, error: caseError } = useSWR(
     () => '/test_cases/' + testFailures.test_case_id,
-    Api.simpleGet
+    Api.simpleGet,
   )
   return {
     data: { testCase, testFailures },
