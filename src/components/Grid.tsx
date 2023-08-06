@@ -13,7 +13,10 @@ interface GridProps {
 }
 
 const Grid = ({ rows, columns, isLoading, sortModel = [] }: GridProps) => {
-  const [pageSize, setPageSize] = React.useState(10)
+  const [paginationModel, setPaginationModel] = React.useState({
+    pageSize: 10,
+    page: 0,
+  })
 
   return (
     <DataGrid
@@ -21,15 +24,20 @@ const Grid = ({ rows, columns, isLoading, sortModel = [] }: GridProps) => {
         sorting: {
           sortModel,
         },
+        pagination: {
+          paginationModel: {
+            pageSize: 10,
+          },
+        },
       }}
-      onPageSizeChange={(newPageSize: number) => setPageSize(newPageSize)}
+      paginationModel={paginationModel}
+      onPaginationModelChange={setPaginationModel}
       rows={rows}
       columns={columns}
-      pageSize={pageSize}
-      rowsPerPageOptions={[10, 50, 100]}
+      pageSizeOptions={[10, 50, 100]}
       autoHeight={true}
       disableColumnMenu={true}
-      disableSelectionOnClick={true}
+      isRowSelectable={() => false}
       loading={isLoading}
       sx={{
         boxShadow: 2,
