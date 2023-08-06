@@ -9,14 +9,14 @@
     "@hookform/resolvers": "^3.1.1",
     "@mui/icons-material": "^5.14.1",
     "@mui/lab": "^5.0.0-alpha.137",
-    "@mui/material": "^5.14.1",
+    "@mui/material": "^5.14.3",
     "@mui/x-data-grid": "^5.17.25",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.5.3",
-    "@types/node": "^20.4.4",
-    "@types/react": "^18.2.15",
+    "@types/node": "^20.4.5",
+    "@types/react": "^18.2.17",
     "@types/react-dom": "^18.2.7",
     "@visx/visx": "^3.3.0",
     "axios": "^1.4.0",
@@ -75,7 +75,7 @@
   },
   "devDependencies": {
     "jest-junit": "^16.0.0",
-    "prettier": "^2.8.8",
+    "prettier": "^3.0.0",
     "react-scripts": "5.0.1",
     "update-browserslist-db": "^1.0.11"
   }

@@ -24,7 +24,7 @@ class Api {
       })
       if (headers['content-type'] !== 'application/json') {
         throw new Error(
-          `Invalid response content type: '${headers['content-type']}'`
+          `Invalid response content type: '${headers['content-type']}'`,
         )
       }
       return data
