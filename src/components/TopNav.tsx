@@ -104,7 +104,19 @@ const PersistentDrawerLeft = ({ open, setOpen }: DrawerProps) => {
           </Typography>
           {!isLoading && data && (
             <Typography align="right" variant="h6" noWrap component="h2">
-              [<Link title="View repository on GitHub" underline="hover" variant="inherit" color="inherit" href={data.vcs_url} rel="noopener" target="_blank">{data.name}</Link>]
+              [
+              <Link
+                title="View repository on GitHub"
+                underline="hover"
+                variant="inherit"
+                color="inherit"
+                href={data.vcs_url}
+                rel="noopener"
+                target="_blank"
+              >
+                {data.name}
+              </Link>
+              ]
             </Typography>
           )}
         </Toolbar>
