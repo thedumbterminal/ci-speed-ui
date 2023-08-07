@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import List from '@mui/material/List'
+import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
@@ -81,13 +82,8 @@ const PersistentDrawerLeft = ({ open, setOpen }: DrawerProps) => {
     setOpen(false)
   }
 
-  let projectName: string = ''
-
   const { data, error, isLoading } = _getProject()
   if (error) throw error
-  if (data) {
-    projectName = data.name
-  }
 
   return (
     <>
@@ -106,9 +102,21 @@ const PersistentDrawerLeft = ({ open, setOpen }: DrawerProps) => {
           <Typography variant="h5" noWrap component="h1" sx={{ flexGrow: 1 }}>
             CI-Speed
           </Typography>
-          {!isLoading && (
+          {!isLoading && data && (
             <Typography align="right" variant="h6" noWrap component="h2">
-              [{projectName}]
+              [
+              <Link
+                title="View repository on GitHub"
+                underline="hover"
+                variant="inherit"
+                color="inherit"
+                href={data.vcs_url}
+                rel="noopener"
+                target="_blank"
+              >
+                {data.name}
+              </Link>
+              ]
             </Typography>
           )}
         </Toolbar>
