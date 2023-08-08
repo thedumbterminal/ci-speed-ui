@@ -34,10 +34,8 @@
   },
   "scripts": {
     "lint": "npm run lint:prettier && npm run lint:eslint",
-    "lint:ci": "npm run lint:prettier && npm run lint:eslint:ci",
     "lint:prettier": "prettier -c .",
-    "lint:eslint": "eslint .",
-    "lint:eslint:ci": "eslint . --format junit > eslint_junit.xml",
+    "lint:eslint": "eslint . --format eslint-formatter-multiple",
     "format": "prettier --write .",
     "start": "react-scripts start",
     "build": "BUILD_PATH=./docs react-scripts build",
@@ -48,7 +46,20 @@
     "eject": "react-scripts eject",
     "deploy": "git checkout main && git pull origin main && npx update-browserslist-db && REACT_APP_API_BASE=https://ci-speed.herokuapp.com/api PUBLIC_URL=/ci-speed-ui npm run build && git add docs && git commit docs -m 'Deploy' && git push origin main",
     "serve": "npm run build && cd docs && python3 -m http.server",
-    "ci": "npm run lint:ci && npm run build && npm run coverage:report"
+    "ci": "npm run lint && npm run build && npm run coverage:report"
+  },
+  "eslint-formatter-multiple": {
+    "formatters": [
+      {
+        "name": "stylish",
+        "output": "console"
+      },
+      {
+        "name": "junit",
+        "output": "file",
+        "path": "eslint_junit.xml"
+      }
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -77,6 +88,7 @@
     "singleQuote": true
   },
   "devDependencies": {
+    "eslint-formatter-multiple": "^2.0.0",
     "jest-junit": "^16.0.0",
     "prettier": "^3.0.1",
     "react-scripts": "5.0.1",
