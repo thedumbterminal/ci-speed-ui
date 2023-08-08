@@ -126,15 +126,8 @@ export default ({
         xScale={{ type: 'band' }}
         yScale={{ type: 'linear' }}
       >
-        <Axis
-          numTicks={4}
-          label="Date"
-          orientation="bottom"
-        />
-        <Axis
-          label={xLabel}
-          orientation="left"
-        />
+        <Axis numTicks={4} label="Date" orientation="bottom" />
+        <Axis label={xLabel} orientation="left" />
         <Grid columns={true} />
         <BarGroup>
           <BarSeries dataKey={xAxisLabel} data={data} {...accessors} />
