@@ -34,8 +34,10 @@
   },
   "scripts": {
     "lint": "npm run lint:prettier && npm run lint:eslint",
+    "lint:ci": "npm run lint:prettier && npm run lint:eslint:ci",
     "lint:prettier": "prettier -c .",
     "lint:eslint": "eslint .",
+    "lint:eslint:ci": "eslint . --format junit > eslint_junit.xml",
     "format": "prettier --write .",
     "start": "react-scripts start",
     "build": "BUILD_PATH=./docs react-scripts build",
@@ -55,7 +57,8 @@
     ]
   },
   "eslintIgnore": [
-    "coverage/*"
+    "coverage/*",
+    "docs/*"
   ],
   "browserslist": {
     "production": [
