@@ -1,8 +1,8 @@
 import React from 'react'
 import {
-  AnimatedAxis,
-  AnimatedGrid,
-  AnimatedBarSeries,
+  Axis,
+  Grid,
+  BarSeries,
   XYChart,
   Tooltip,
   BarGroup,
@@ -126,20 +126,18 @@ export default ({
         xScale={{ type: 'band' }}
         yScale={{ type: 'linear' }}
       >
-        <AnimatedAxis
+        <Axis
           numTicks={4}
-          animationTrajectory="min"
           label="Date"
           orientation="bottom"
         />
-        <AnimatedAxis
-          animationTrajectory="min"
+        <Axis
           label={xLabel}
           orientation="left"
         />
-        <AnimatedGrid columns={true} />
+        <Grid columns={true} />
         <BarGroup>
-          <AnimatedBarSeries dataKey={xAxisLabel} data={data} {...accessors} />
+          <BarSeries dataKey={xAxisLabel} data={data} {...accessors} />
         </BarGroup>
         <Tooltip<Datum> renderTooltip={toolTipFunc} />
       </XYChart>
