@@ -31,7 +31,7 @@ const Info = ({ data }: UserInfoProps) => {
 }
 
 const Account = () => {
-  const { data, error, isLoading } = _getUserInfo()
+  const { data } = _getUserInfo()
   let stateComponent
   if (!data) {
     stateComponent = <Login />

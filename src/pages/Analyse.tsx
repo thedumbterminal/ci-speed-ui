@@ -4,10 +4,10 @@ import NumTestsChart from '../components/NumTestsChart'
 import TestDurationChart from '../components/TestDurationChart'
 import TestSuccessChart from '../components/TestSuccessChart'
 import TestsSkippedChart from '../components/TestsSkippedChart'
-import { getProjectId } from '../lib/project'
+import { useProjectId } from '../lib/project'
 
 const Analyse = () => {
-  const projectId = getProjectId()
+  const projectId = useProjectId()
 
   return (
     <>

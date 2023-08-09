@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import qs from 'qs'
 
 const DEFAULT_BASE = 'http://localhost:5000/api'

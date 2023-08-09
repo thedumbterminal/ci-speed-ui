@@ -12,7 +12,7 @@ import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
 import { humanDateTimeFormat } from '../lib/date'
 import { Grid, GridRow } from '../components/Grid'
-import { getProjectId } from '../lib/project'
+import { useProjectId } from '../lib/project'
 
 interface BuildRow extends GridRow {
   ref: string
@@ -104,7 +104,7 @@ const _getPageData = (id: number) => {
 
 const Project = () => {
   let builds: BuildRow[] = []
-  const projectId = getProjectId()
+  const projectId = useProjectId()
 
   if (!projectId) throw new Error('No project ID given')
   const { data, error, isLoading } = _getPageData(projectId)

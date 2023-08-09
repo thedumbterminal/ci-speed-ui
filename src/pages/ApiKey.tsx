@@ -19,7 +19,7 @@ const _generateApiKey = () => {
 }
 
 const TokenDisplay = () => {
-  const { data, error, isLoading } = _generateApiKey()
+  const { data } = _generateApiKey()
   return (
     <>
       <p>Your API key is:</p>
