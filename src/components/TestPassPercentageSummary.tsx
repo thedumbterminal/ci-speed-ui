@@ -23,7 +23,7 @@ const _humanPercent = (amount: number = 0): string => {
   return amount.toFixed(2) + ' %'
 }
 
-export default (props: ProjectChartProps) => {
+const testPassPercentageSummary = (props: ProjectChartProps) => {
   const { data, error } = _getPageData(props.projectId)
   if (error) throw error
   const humanPercent = _humanPercent(data)
@@ -36,3 +36,5 @@ export default (props: ProjectChartProps) => {
     </>
   )
 }
+
+export default testPassPercentageSummary

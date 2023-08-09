@@ -35,7 +35,7 @@
   "scripts": {
     "lint": "npm run lint:prettier && npm run lint:eslint",
     "lint:prettier": "prettier -c .",
-    "lint:eslint": "eslint . --format eslint-formatter-multiple",
+    "lint:eslint": "eslint . --max-warnings=0 --format eslint-formatter-multiple",
     "format": "prettier --write .",
     "start": "react-scripts start",
     "build": "BUILD_PATH=./docs react-scripts build",

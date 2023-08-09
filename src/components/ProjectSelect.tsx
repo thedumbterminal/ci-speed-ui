@@ -24,7 +24,7 @@ const _renderMenuItem = (project: Project) => {
   )
 }
 
-export default () => {
+const ProjectSelect = () => {
   let projects: Project[] = []
   const { data, error, isLoading } = _getProjects()
   if (error) throw error
@@ -62,3 +62,5 @@ export default () => {
     </FormControl>
   )
 }
+
+export default ProjectSelect

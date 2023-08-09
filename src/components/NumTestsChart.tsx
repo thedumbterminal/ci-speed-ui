@@ -18,7 +18,7 @@ const _getPageData = (id: number) => {
   }
 }
 
-export default (props: ProjectChartProps) => {
+const NumTestsChart = (props: ProjectChartProps) => {
   const { data, error } = _getPageData(props.projectId)
   if (error) throw error
   return (
@@ -28,3 +28,5 @@ export default (props: ProjectChartProps) => {
     </>
   )
 }
+
+export default NumTestsChart

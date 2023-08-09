@@ -91,7 +91,7 @@ const _generateXAxisLabel = (
   return `${text} (${unit})`
 }
 
-export default ({
+const BarChart =({
   height,
   data = [],
   xAxisLabel,
@@ -137,3 +137,5 @@ export default ({
     </div>
   )
 }
+
+export default BarChart

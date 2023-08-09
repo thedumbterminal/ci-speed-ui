@@ -26,7 +26,7 @@ const _humanDuration = (seconds: number = 0): string => {
   return formatDistanceStrict(end, start)
 }
 
-export default (props: ProjectChartProps) => {
+const TotalTestDurationSummary = (props: ProjectChartProps) => {
   const { data, error } = _getPageData(props.projectId)
   if (error) throw error
   const humanDuration = _humanDuration(data)
@@ -39,3 +39,5 @@ export default (props: ProjectChartProps) => {
     </>
   )
 }
+
+export default TotalTestDurationSummary

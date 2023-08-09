@@ -19,7 +19,7 @@ const schema = yup.object().shape({
   name: yup
     .string()
     .required()
-    .matches(/^[a-zA-Z0-9_\-\/]+$/),
+    .matches(/^[a-zA-Z0-9_\-/]+$/),
 })
 
 const _getAvailableProjects = () => {
@@ -39,7 +39,7 @@ const _renderMenuItem = (projectName: string) => {
   )
 }
 
-export default () => {
+const NewProject = () => {
   const {
     register,
     handleSubmit,
@@ -107,3 +107,5 @@ export default () => {
     </>
   )
 }
+
+export default NewProject
