@@ -91,7 +91,7 @@ const _generateXAxisLabel = (
   return `${text} (${unit})`
 }
 
-const BarChart =({
+const BarChart = ({
   height,
   data = [],
   xAxisLabel,
