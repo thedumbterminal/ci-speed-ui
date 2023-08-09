@@ -35,7 +35,7 @@
   "scripts": {
     "lint": "npm run lint:prettier && npm run lint:eslint",
     "lint:prettier": "prettier -c .",
-    "lint:eslint": "eslint .",
+    "lint:eslint": "eslint . --format eslint-formatter-multiple",
     "format": "prettier --write .",
     "start": "react-scripts start",
     "build": "BUILD_PATH=./docs react-scripts build",
@@ -48,6 +48,19 @@
     "serve": "npm run build && cd docs && python3 -m http.server",
     "ci": "npm run lint && npm run build && npm run coverage:report"
   },
+  "eslint-formatter-multiple": {
+    "formatters": [
+      {
+        "name": "stylish",
+        "output": "console"
+      },
+      {
+        "name": "junit",
+        "output": "file",
+        "path": "eslint_junit.xml"
+      }
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -55,7 +68,8 @@
     ]
   },
   "eslintIgnore": [
-    "coverage/*"
+    "coverage/*",
+    "docs/*"
   ],
   "browserslist": {
     "production": [
@@ -74,6 +88,7 @@
     "singleQuote": true
   },
   "devDependencies": {
+    "eslint-formatter-multiple": "^2.0.0",
     "jest-junit": "^16.0.0",
     "prettier": "^3.0.1",
     "react-scripts": "5.0.1",
