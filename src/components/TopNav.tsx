@@ -215,14 +215,26 @@ const PersistentDrawerLeft = ({ open, setOpen }: DrawerProps) => {
         </List>
         <Divider />
         <List>
-          <a href="/doc" target="_blank">
+          <Link href="/doc" rel="noopener" target="_blank">
             <ListItem button key="API">
               <ListItemIcon>
                 <MenuIcon />
               </ListItemIcon>
               <ListItemText primary="API" />
             </ListItem>
-          </a>
+          </Link>
+          <Link
+            href="https://github.com/thedumbterminal/ci-speed/wiki"
+            rel="noopener"
+            target="_blank"
+          >
+            <ListItem button key="Wiki">
+              <ListItemIcon>
+                <MenuIcon />
+              </ListItemIcon>
+              <ListItemText primary="Wiki" />
+            </ListItem>
+          </Link>
         </List>
       </Drawer>
     </>

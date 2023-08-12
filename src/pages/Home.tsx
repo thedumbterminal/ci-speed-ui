@@ -1,5 +1,6 @@
 import Typography from '@mui/material/Typography'
-import { Link } from 'react-router-dom'
+import Link from '@mui/material/Link'
+import { Link as RLink } from 'react-router-dom'
 
 const home = () => {
   return (
@@ -13,15 +14,23 @@ const home = () => {
       </Typography>
       <ol>
         <li>
-          <Link to="/account">Login via OAUTH with GitHub.</Link>
+          <RLink to="/account">Login via OAUTH with GitHub.</RLink>
         </li>
         <li>
-          <Link to="/add_project">Add a project.</Link>
+          <RLink to="/add_project">Add a project.</RLink>
         </li>
         <li>
-          <Link to="/api_key">Generate an API Key.</Link>
+          <RLink to="/api_key">Generate an API Key.</RLink>
         </li>
-        <li>Upload test results.</li>
+        <li>
+          <Link
+            href="https://github.com/thedumbterminal/ci-speed/wiki/Documentation"
+            rel="noopener"
+            target="_blank"
+          >
+            Upload test results.
+          </Link>
+        </li>
       </ol>
     </>
   )
