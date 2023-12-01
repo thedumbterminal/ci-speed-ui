@@ -1,12 +1,15 @@
 import BarChart from '../components/BarChart'
 import { Api } from '../lib/api'
 import useSWR from 'swr'
+import { useAnalyseDays } from '../lib/preferences'
+
 
 interface ProjectChartProps {
   projectId: number
 }
 
 const _getPageData = (id: number) => {
+  const analyseDays = useAnalyseDays()
   const { data, error } = useSWR(
     `/projects/${id.toString()}/test_duration`,
     Api.simpleGet,

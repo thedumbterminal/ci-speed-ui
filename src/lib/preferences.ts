@@ -7,4 +7,11 @@ const useProjectId = (): number => {
   return id
 }
 
-export { useProjectId }
+const useAnalyseDays = (): number => {
+  const [days] = useLocalStorageState<number>('analyseDays', {
+    defaultValue: 30,
+  })
+  return days
+}
+
+export { useProjectId, useAnalyseDays }
