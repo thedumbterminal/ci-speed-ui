@@ -3,17 +3,17 @@ import { Api } from '../lib/api'
 import useSWR from 'swr'
 import { useAnalyseDays } from '../lib/preferences'
 
-
 interface ProjectChartProps {
   projectId: number
 }
 
 const _getPageData = (id: number) => {
-  const analyseDays = useAnalyseDays()
+  const days = useAnalyseDays()
   const { data, error } = useSWR(
-    `/projects/${id.toString()}/test_duration`,
-    Api.simpleGet,
+    () => ({ url: `/projects/${id.toString()}/test_duration`, params: { days } }),
+    Api.get,
   )
+
   return {
     data,
     error,
