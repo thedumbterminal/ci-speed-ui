@@ -12,7 +12,7 @@ import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
 import { humanDateTimeFormat } from '../lib/date'
 import { Grid, GridRow } from '../components/Grid'
-import { useProjectId } from '../lib/project'
+import { useProjectId } from '../lib/preferences'
 
 interface BuildRow extends GridRow {
   ref: string

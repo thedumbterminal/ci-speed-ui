@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import TotalTestDurationSummary from '../components/TotalTestDurationSummary'
 import TestPassPercentageSummary from '../components/TestPassPercentageSummary'
-import { useProjectId } from '../lib/project'
+import { useProjectId } from '../lib/preferences'
 
 const Summary = () => {
   const projectId = useProjectId()

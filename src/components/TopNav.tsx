@@ -17,7 +17,7 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { NavLink } from 'react-router-dom'
 import useSWR from 'swr'
-import { useProjectId } from '../lib/project'
+import { useProjectId } from '../lib/preferences'
 import { Api } from '../lib/api'
 
 const drawerWidth = 240
