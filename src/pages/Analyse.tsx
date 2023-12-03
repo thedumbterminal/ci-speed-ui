@@ -22,9 +22,12 @@ const _renderMenuItem = (days: Number) => {
 const Analyse = () => {
   const projectId = useProjectId()
   let defaultValue: number = 30
-  const [analyseDays, setAnalyseDays] = useLocalStorageState<number>('analyseDays', {
-    defaultValue,
-  })
+  const [analyseDays, setAnalyseDays] = useLocalStorageState<number>(
+    'analyseDays',
+    {
+      defaultValue,
+    },
+  )
 
   const _handleChange = (event: SelectChangeEvent): void => {
     const value = parseInt(event.target.value, 10)

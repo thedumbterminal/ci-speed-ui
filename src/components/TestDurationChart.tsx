@@ -10,7 +10,10 @@ interface ProjectChartProps {
 const _getPageData = (id: number) => {
   const days = useAnalyseDays()
   const { data, error } = useSWR(
-    () => ({ url: `/projects/${id.toString()}/test_duration`, params: { days } }),
+    () => ({
+      url: `/projects/${id.toString()}/test_duration`,
+      params: { days },
+    }),
     Api.get,
   )
 
