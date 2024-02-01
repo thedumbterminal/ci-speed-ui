@@ -24,7 +24,7 @@ npm start
 
 ## Environment Variables
 
-- REACT_APP_API_BASE - The URL of the API to use.
+- PUBLIC_API_BASE - The URL of the API to use.
 
 ## Deploy
 
@@ -38,7 +38,7 @@ It will be deployed automatically to github pages.
 
 ## Tech
 
-- Create react app
+- Rsbuild https://rsbuild.dev
 - Material UI https://mui.com/material-ui/getting-started/installation/
 - Visx https://airbnb.io/visx
 
@@ -49,10 +49,6 @@ It will be deployed automatically to github pages.
 - Longest tests
 - Flaky tests
 - Skipped tests that have been skipped for more than a month
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
