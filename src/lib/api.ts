@@ -1,8 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 
-const DEFAULT_BASE = 'http://localhost:5000/api'
-const URL_BASE = process.env.PUBLIC_API_BASE || DEFAULT_BASE
+const URL_BASE = process.env.PUBLIC_API_BASE
 
 interface URLParams {
   [key: string]: string | number
