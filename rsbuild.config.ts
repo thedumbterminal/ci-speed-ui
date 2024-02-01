@@ -11,4 +11,7 @@ export default defineConfig({
       root: 'docs',
     },
   },
+  server: {
+    port: 3000,
+  }
 });
