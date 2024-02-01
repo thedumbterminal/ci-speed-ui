@@ -1,0 +1,191 @@
+/*! ./adapters/adapters.js */
+
+/*! ../utils.js */
+
+/*! ./AxiosError.js */
+
+/*! ../utils.js */
+
+/*! ./cancel/isCancel.js */
+
+/*! ./mergeConfig.js */
+
+/*! ./classes/URLSearchParams.js */
+
+/*! ./utils.js */
+
+/*! ../core/AxiosHeaders.js */
+
+/*! ../platform/index.js */
+
+/*! ../core/AxiosHeaders.js */
+
+/*! ./core/AxiosHeaders.js */
+
+/*! ./classes/Blob.js */
+
+/*! ../../../helpers/AxiosURLSearchParams.js */
+
+/*! ../env/data.js */
+
+/*! ../core/AxiosError.js */
+
+/*! ./http.js */
+
+/*! ./lib/axios.js */
+
+/*! ./toFormData.js */
+
+/*! ../platform/index.js */
+
+/*! ../helpers/isAbsoluteURL.js */
+
+/*! ./helpers/isAxiosError.js */
+
+/*! ../core/AxiosHeaders.js */
+
+/*! ./../helpers/isURLSameOrigin.js */
+
+/*! ../helpers/combineURLs.js */
+
+/*! ./buildFullPath.js */
+
+/*! ../platform/node/classes/FormData.js */
+
+/*! ./../core/settle.js */
+
+/*! ./toFormData.js */
+
+/*! ../utils.js */
+
+/*! ../core/AxiosError.js */
+
+/*! ./node/index.js */
+
+/*! ../platform/index.js */
+
+/*! ./AxiosHeaders.js */
+
+/*! ./env/data.js */
+
+/*! ../cancel/isCancel.js */
+
+/*! ./../utils.js */
+
+/*! ./transitional.js */
+
+/*! ./helpers/formDataToJSON.js */
+
+/*! ../utils.js */
+
+/*! ./../helpers/buildURL.js */
+
+/*! ../defaults/transitional.js */
+
+/*! ./helpers/bind.js */
+
+/*! ../utils.js */
+
+/*! ../defaults/index.js */
+
+/*! ../utils.js */
+
+/*! ./defaults/index.js */
+
+/*! ./core/AxiosError.js */
+
+/*! ./AxiosHeaders.js */
+
+/*! ../cancel/CanceledError.js */
+
+/*! ./InterceptorManager.js */
+
+/*! ./CanceledError.js */
+
+/*! ./../helpers/cookies.js */
+
+/*! ../helpers/speedometer.js */
+
+/*! ./cancel/CancelToken.js */
+
+/*! ../core/buildFullPath.js */
+
+/*! ./xhr.js */
+
+/*! ./../utils.js */
+
+/*! ./helpers/spread.js */
+
+/*! ../helpers/buildURL.js */
+
+/*! ./../utils.js */
+
+/*! ./transformData.js */
+
+/*! ./core/mergeConfig.js */
+
+/*! ../utils.js */
+
+/*! ./core/Axios.js */
+
+/*! ../helpers/AxiosURLSearchParams.js */
+
+/*! ../helpers/parseProtocol.js */
+
+/*! ../helpers/formDataToJSON.js */
+
+/*! ../utils.js */
+
+/*! ./common/utils.js */
+
+/*! ../core/AxiosError.js */
+
+/*! ./cancel/CanceledError.js */
+
+/*! ./classes/FormData.js */
+
+/*! ./helpers/HttpStatusCode.js */
+
+/*! ../cancel/CanceledError.js */
+
+/*! ../core/AxiosError.js */
+
+/*! ../utils.js */
+
+/*! ./../utils.js */
+
+/*! ../helpers/toURLEncodedForm.js */
+
+/*! ../platform/index.js */
+
+/*! ../defaults/index.js */
+
+/*! ./helpers/toFormData.js */
+
+/*! ../helpers/parseHeaders.js */
+
+/*! ./../utils.js */
+
+/*! ../helpers/toFormData.js */
+
+/*! ../core/AxiosError.js */
+
+/*! ../core/AxiosError.js */
+
+/*! ../helpers/validator.js */
+
+/*! ./../utils.js */
+
+/*! ../platform/index.js */
+
+/*! ./helpers/bind.js */
+
+/*! ./dispatchRequest.js */
+
+/*! ./../utils.js */
+
+/*! ./../utils.js */
+
+/*! ../adapters/adapters.js */
+
+/*! ../utils.js */
