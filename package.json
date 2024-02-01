@@ -14,7 +14,6 @@
     "@testing-library/jest-dom": "^6.3.0",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.2",
-    "@types/jest": "^29.5.11",
     "@types/node": "^20.11.10",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
@@ -37,16 +36,16 @@
     "lint:prettier": "prettier -c .",
     "lint:eslint": "eslint . --max-warnings=0 --format eslint-formatter-multiple",
     "format": "prettier --write .",
-    "start": "react-scripts start",
-    "build": "BUILD_PATH=./docs react-scripts build",
-    "test": "react-scripts test --watchAll=false",
+    "start": "PUBLIC_API_BASE=http://localhost:5000/api rsbuild dev",
+    "build": "rsbuild build",
+    "test": "jest",
     "coverage": "npm run test -- --coverage",
     "coverage:report": "npm run coverage -- --reporters=default --reporters=jest-junit",
     "test:watch": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "git checkout main && git pull origin main && npx update-browserslist-db && REACT_APP_API_BASE=https://ci-speed.herokuapp.com/api PUBLIC_URL=/ci-speed-ui npm run build && git add docs && git commit docs -m 'Deploy' && git push origin main",
+    "deploy": "git checkout main && git pull origin main && npx update-browserslist-db && PUBLIC_API_BASE=https://ci-speed.herokuapp.com/api PUBLIC_URL=/ci-speed-ui npm run build && git add docs && git commit docs -m 'Deploy' && git push origin main",
     "serve": "npm run build && cd docs && python3 -m http.server",
-    "ci": "npm run lint && npm run build && npm run coverage:report"
+    "ci": "npm run lint && npm run build && npm run coverage:report",
+    "preview": "rsbuild preview"
   },
   "eslint-formatter-multiple": {
     "formatters": [
@@ -88,10 +87,18 @@
     "singleQuote": true
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@rsbuild/core": "^0.3.11",
+    "@rsbuild/plugin-react": "^0.3.11",
+    "@types/jest": "^29.5.12",
+    "eslint": "^8.56.0",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-formatter-multiple": "^2.0.0",
+    "jest": "^29.7.0",
     "jest-junit": "^16.0.0",
     "prettier": "^3.2.4",
-    "react-scripts": "5.0.1",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
     "update-browserslist-db": "^1.0.13"
   }
 }
