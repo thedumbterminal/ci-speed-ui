@@ -16,7 +16,7 @@
     "@testing-library/user-event": "^14.5.2",
     "@types/node": "^20.11.17",
     "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.18",
+    "@types/react-dom": "^18.2.19",
     "@visx/visx": "^3.8.0",
     "axios": "^1.6.7",
     "date-fns": "^3.3.1",
