@@ -91,7 +91,7 @@
     "@rsbuild/core": "^0.4.1",
     "@rsbuild/plugin-react": "^0.4.3",
     "@types/jest": "^29.5.12",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-formatter-multiple": "^2.0.0",
     "jest": "^29.7.0",
