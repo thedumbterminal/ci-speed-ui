@@ -1,6 +1,7 @@
 import BarChart from '../components/BarChart'
 import { Api } from '../lib/api'
 import useSWR from 'swr'
+import XAxisDataType from '../shared/XAxisDataType'
 import { useAnalyseDays } from '../lib/preferences'
 
 interface ProjectChartProps {
@@ -29,8 +30,14 @@ const TestSuccessChart = (props: ProjectChartProps) => {
   if (error) throw error
   return (
     <>
-      <p>Percentage of successful tests per build</p>
-      <BarChart height={200} data={data} xAxisLabel="Success" xAxisUnit="%" />
+      <p>Percentage of successful tests per day</p>
+      <BarChart
+        height={200}
+        data={data}
+        xAxisLabel="Success"
+        xAxisUnit="%"
+        xAxisType={XAxisDataType.Date}
+      />
     </>
   )
 }
