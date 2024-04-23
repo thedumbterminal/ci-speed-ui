@@ -1,6 +1,7 @@
 import BarChart from '../components/BarChart'
 import { Api } from '../lib/api'
 import useSWR from 'swr'
+import XAxisDataType from '../shared/XAxisDataType'
 import { useAnalyseDays } from '../lib/preferences'
 
 interface ProjectChartProps {
@@ -26,8 +27,13 @@ const NumTestsChart = (props: ProjectChartProps) => {
   if (error) throw error
   return (
     <>
-      <p>Number of tests per build</p>
-      <BarChart height={200} data={data} xAxisLabel="Tests" />
+      <p>Number of tests per day</p>
+      <BarChart
+        height={200}
+        data={data}
+        xAxisLabel="Tests"
+        xAxisType={XAxisDataType.Date}
+      />
     </>
   )
 }
