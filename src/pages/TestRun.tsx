@@ -1,10 +1,6 @@
 import { Api } from '../lib/api'
 import TestSuite from '../shared/TestSuite'
-import {
-  GridColDef,
-  GridValueFormatterParams,
-  GridRenderCellParams,
-} from '@mui/x-data-grid'
+import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
 import { Link, useSearchParams } from 'react-router-dom'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
@@ -15,8 +11,8 @@ interface TestSuiteRow extends GridRow {
   duration: number
 }
 
-const formatLink = (params: GridValueFormatterParams<string>): string => {
-  return `/test_suite/?id=${params.value}`
+const formatLink = (value: string): string => {
+  return `/test_suite/?id=${value}`
 }
 
 const transformRows = (testSuites: TestSuite[]): TestSuiteRow[] => {

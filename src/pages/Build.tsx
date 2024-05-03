@@ -1,8 +1,4 @@
-import {
-  GridColDef,
-  GridValueFormatterParams,
-  GridRenderCellParams,
-} from '@mui/x-data-grid'
+import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
 import { humanDateTimeFormat } from '../lib/date'
 import { Link, useSearchParams } from 'react-router-dom'
 import TestRun from '../shared/TestRun'
@@ -15,12 +11,12 @@ interface TestRunRow extends GridRow {
   created: string
 }
 
-const formatDate = (params: GridValueFormatterParams<string>): string => {
-  return humanDateTimeFormat(params.value)
+const formatDate = (value: string): string => {
+  return humanDateTimeFormat(value)
 }
 
-const formatLink = (params: GridValueFormatterParams<string>): string => {
-  return `/test_run/?id=${params.value}`
+const formatLink = (value: string): string => {
+  return `/test_run/?id=${value}`
 }
 
 const transformRows = (testRuns: TestRun[]): TestRunRow[] => {

@@ -1,6 +1,5 @@
 import {
   GridColDef,
-  GridValueFormatterParams,
   GridRenderCellParams,
   GridSortModel,
 } from '@mui/x-data-grid'
@@ -20,11 +19,10 @@ interface BuildRow extends GridRow {
   created: string
 }
 
-const _formatDate = (params: GridValueFormatterParams<string>): string =>
-  humanDateTimeFormat(params)
+const _formatDate = (value: string): string => humanDateTimeFormat(value)
 
-const _formatLink = (params: GridValueFormatterParams<string>): string => {
-  return `/build/?id=${params.value}`
+const _formatLink = (value: string): string => {
+  return `/build/?id=${value}`
 }
 
 const _transformRows = (builds: Build[]): BuildRow[] => {
