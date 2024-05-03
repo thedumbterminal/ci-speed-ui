@@ -9,6 +9,7 @@ import { Grid, GridRow } from '../components/Grid'
 
 interface TestRunRow extends GridRow {
   created: string
+  fileName: string
 }
 
 const formatDate = (value: string): string => {
@@ -24,6 +25,7 @@ const transformRows = (testRuns: TestRun[]): TestRunRow[] => {
     return {
       id: item.id,
       created: item.created_at,
+      fileName: item.file_name,
     }
   })
 }
@@ -39,6 +41,11 @@ const columns: GridColDef[] = [
     headerName: 'Created',
     width: 160,
     valueFormatter: formatDate,
+  },
+  {
+    field: 'fileName',
+    headerName: 'File Name',
+    width: 160,
   },
   {
     field: 'id',
