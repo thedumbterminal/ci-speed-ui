@@ -21,14 +21,14 @@ interface BuildRow extends GridRow {
 }
 
 const _formatDate = (params: GridValueFormatterParams<string>): string =>
-  humanDateTimeFormat(params.value)
+  humanDateTimeFormat(params)
 
 const _formatLink = (params: GridValueFormatterParams<string>): string => {
   return `/build/?id=${params.value}`
 }
 
-const _transformRows = (testRuns: Build[]): BuildRow[] => {
-  return testRuns.map((item: Build) => {
+const _transformRows = (builds: Build[]): BuildRow[] => {
+  return builds.map((item: Build) => {
     return {
       id: item.id,
       ref: item.ref,
