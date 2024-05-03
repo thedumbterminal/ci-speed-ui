@@ -1,8 +1,14 @@
 /*! react */
 
+/*! react */
+
 /*! ./cjs/react.production.min.js */
 
+/*! scheduler */
+
 /*! ./cjs/react-dom.production.min.js */
+
+/*! ./cjs/scheduler.production.min.js */
 
 /**
  * @license React
@@ -14,7 +20,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/*! scheduler */
+/*! ./cjs/react-jsx-runtime.production.min.js */
 
 /**
  * @license React
@@ -26,12 +32,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/*! ./cjs/scheduler.production.min.js */
-
-/*! react-dom */
-
-/*! ./cjs/react-jsx-runtime.production.min.js */
-
 /**
  * @license React
  * scheduler.production.min.js
@@ -42,7 +42,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/*! react */
+/*! react-dom */
 
 /**
  * @license React
