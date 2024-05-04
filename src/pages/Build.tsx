@@ -35,7 +35,7 @@ const renderLinkCell = (params: GridRenderCellParams) => {
   return <Link to={formatted}>View test run</Link>
 }
 
-const columns: GridColDef[] = [
+const testRunColumns: GridColDef[] = [
   {
     field: 'created',
     headerName: 'Created',
@@ -55,6 +55,8 @@ const columns: GridColDef[] = [
     renderCell: renderLinkCell,
   },
 ]
+
+const slowCasesColumns: GridColDef[] = []
 
 const _getPageData = (id: string) => {
   const { data: build, error: projectError } = useSWR(
@@ -77,21 +79,28 @@ const Build = () => {
   let buildId = searchParams.get('id')
   let testRuns: TestRunRow[] = []
   if (!buildId) throw new Error('No build ID given')
-  const { data, error, isLoading } = _getPageData(buildId)
+  const { data, error, isLoading: testRunsIsLoading } = _getPageData(buildId)
   if (error) throw error
   if (data?.testRuns) {
     testRuns = transformRows(data.testRuns)
   }
 
+  const slowCases = []
+  const slowCasesIsLoading = true
+
   return (
     <>
       <Typography variant="h2" component="h3">
-        Build
+        Build {data.build && data.build.ref}
       </Typography>
       <p>
-        Test runs for <b>{data.build && data.build.ref}</b>.
+        Slowest test cases for this build:
       </p>
-      <Grid rows={testRuns} columns={columns} isLoading={isLoading} />
+      <Grid rows={slowCases} columns={slowCasesColumns} isLoading={slowCasesIsLoading} />
+      <p>
+        Test runs for this build:
+      </p>
+      <Grid rows={testRuns} columns={testRunColumns} isLoading={testRunsIsLoading} />
     </>
   )
 }
