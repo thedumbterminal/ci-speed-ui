@@ -1,11 +1,13 @@
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
 import { humanDateTimeFormat } from '../lib/date'
 import { Link, useSearchParams } from 'react-router-dom'
-import TestRun from '../shared/TestRun'
+import TestRun from '../types/TestRun'
+import TestCaseRow from '../types/TestCaseRow'
 import { Api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
 import { Grid, GridRow } from '../components/Grid'
+import TestCase from '../models/TestCase'
 
 interface TestRunRow extends GridRow {
   created: string
@@ -20,7 +22,17 @@ const formatLink = (value: string): string => {
   return `/test_run/?id=${value}`
 }
 
-const transformRows = (testRuns: TestRun[]): TestRunRow[] => {
+const transformTestRunRows = (testRuns: TestRun[]): TestRunRow[] => {
+  return testRuns.map((item: TestRun) => {
+    return {
+      id: item.id,
+      created: item.created_at,
+      fileName: item.file_name,
+    }
+  })
+}
+
+const transformSlowCasesRows = (testRuns: TestRun[]): TestRunRow[] => {
   return testRuns.map((item: TestRun) => {
     return {
       id: item.id,
@@ -63,14 +75,21 @@ const _getPageData = (id: string) => {
     '/builds/' + id,
     Api.simpleGet,
   )
+  const { data: slowCases, error: slowError } = useSWR(
+    () => ({ url: '/slow_test_cases/', params: { build_id: build.id + '' } }),
+    Api.get,
+  )
   const { data: testRuns, error: runError } = useSWR(
     () => ({ url: '/test_runs/', params: { build_id: build.id + '' } }),
     Api.get,
   )
   return {
-    data: { build, testRuns },
-    error: projectError || runError,
-    isLoading: !runError && !testRuns,
+    data: { build, slowCases, testRuns },
+    error: projectError || slowError || runError,
+    isLoading: {
+      testRuns: !runError && !testRuns,
+      slowCases: !slowError && !slowCases
+    }
   }
 }
 
@@ -78,15 +97,16 @@ const Build = () => {
   let [searchParams] = useSearchParams()
   let buildId = searchParams.get('id')
   let testRuns: TestRunRow[] = []
+  let slowCases: TestCaseRow[] = []
   if (!buildId) throw new Error('No build ID given')
-  const { data, error, isLoading: testRunsIsLoading } = _getPageData(buildId)
+  const { data, error, isLoading } = _getPageData(buildId)
   if (error) throw error
   if (data?.testRuns) {
-    testRuns = transformRows(data.testRuns)
+    testRuns = transformTestRunRows(data.testRuns)
   }
-
-  const slowCases = []
-  const slowCasesIsLoading = true
+  if (data?.slowCases) {
+    slowCases = TestCase.transformRows(data.slowCases)
+  }
 
   return (
     <>
@@ -96,11 +116,11 @@ const Build = () => {
       <p>
         Slowest test cases for this build:
       </p>
-      <Grid rows={slowCases} columns={slowCasesColumns} isLoading={slowCasesIsLoading} />
+      <Grid rows={slowCases} columns={slowCasesColumns} isLoading={isLoading.slowCases} />
       <p>
         Test runs for this build:
       </p>
-      <Grid rows={testRuns} columns={testRunColumns} isLoading={testRunsIsLoading} />
+      <Grid rows={testRuns} columns={testRunColumns} isLoading={isLoading.testRuns} />
     </>
   )
 }

@@ -3,24 +3,9 @@ import { Api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'
 import { Link, useSearchParams } from 'react-router-dom'
-import { Grid, GridRow } from '../components/Grid'
-
-interface TestCaseRow extends GridRow {
-  id: number
-  name: string
-  duration: number
-  status: string
-  failure_id: number | undefined
-  skipped_id: number | undefined
-}
-
-interface TestCase {
-  name: string
-  time: number
-  id: number
-  test_failures: Array<number>
-  skipped_tests: Array<number>
-}
+import { Grid } from '../components/Grid'
+import TestCaseRow from '../types/TestCaseRow'
+import TestCase from '../models/TestCase'
 
 const _formatFailureLink = (value: string): string => {
   return `/test_failure/?id=${value}`
@@ -40,29 +25,6 @@ const _renderLinkCell = (params: GridRenderCellParams) => {
     const formattedLink = _formatSkippedLink(skippedId)
     return <Link to={formattedLink}>View</Link>
   }
-}
-
-const _statusForTestCase = (test: TestCase): string => {
-  if (test.test_failures.length) return 'Failure'
-  if (test.skipped_tests.length) return 'Skipped'
-  return 'Success'
-}
-
-const _transformRow = (item: TestCase) => {
-  const failure_id = item.test_failures[0]
-  const skipped_id = item.skipped_tests[0]
-  return {
-    id: item.id,
-    name: item.name,
-    duration: item.time,
-    status: _statusForTestCase(item),
-    failure_id,
-    skipped_id,
-  }
-}
-
-const _transformRows = (testCases: TestCase[]): TestCaseRow[] => {
-  return testCases.map(_transformRow)
 }
 
 const columns: GridColDef[] = [
@@ -113,7 +75,7 @@ const TestSuite = () => {
   const { data, error, isLoading } = _getPageData(testSuiteId)
   if (error) throw error
   if (data?.testCases) {
-    testCases = _transformRows(data.testCases)
+    testCases = TestCase.transformRows(data.testCases)
   }
 
   return (

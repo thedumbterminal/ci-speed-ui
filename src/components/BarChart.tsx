@@ -10,8 +10,8 @@ import {
 } from '@visx/xychart'
 import { RenderTooltipParams } from '@visx/xychart/lib/components/Tooltip'
 import { useTheme } from '@mui/material/styles'
-import Datum from '../shared/Datum'
-import XAxisDataType from '../shared/XAxisDataType'
+import Datum from '../types/Datum'
+import XAxisDataType from '../types/XAxisDataType'
 import { humanDateTimeFormat, humanDateFormat } from '../lib/date'
 
 type ChartProps = {
