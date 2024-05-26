@@ -5,7 +5,7 @@ import {
 } from '@mui/x-data-grid'
 import { Link as MLink } from '@mui/material'
 import { Link } from 'react-router-dom'
-import Build from '../shared/Build'
+import Build from '../types/Build'
 import { Api } from '../lib/api'
 import useSWR from 'swr'
 import Typography from '@mui/material/Typography'

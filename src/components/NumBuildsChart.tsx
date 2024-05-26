@@ -1,7 +1,7 @@
 import BarChart from '../components/BarChart'
 import { Api } from '../lib/api'
 import useSWR from 'swr'
-import XAxisDataType from '../shared/XAxisDataType'
+import XAxisDataType from '../types/XAxisDataType'
 import { useAnalyseDays } from '../lib/preferences'
 
 interface ProjectChartProps {

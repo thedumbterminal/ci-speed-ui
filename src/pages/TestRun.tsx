@@ -1,5 +1,5 @@
 import { Api } from '../lib/api'
-import TestSuite from '../shared/TestSuite'
+import TestSuite from '../types/TestSuite'
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
 import { Link, useSearchParams } from 'react-router-dom'
 import useSWR from 'swr'

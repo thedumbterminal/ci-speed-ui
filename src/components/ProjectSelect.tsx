@@ -1,4 +1,4 @@
-import Project from '../shared/Project'
+import Project from '../types/Project'
 import useSWR from 'swr'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
