@@ -4,4 +4,5 @@ export default interface TestCase {
   id: number
   test_failures: Array<number>
   skipped_tests: Array<number>
+  test_suite_id: number
 }

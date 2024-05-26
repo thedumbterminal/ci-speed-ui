@@ -22,17 +22,11 @@ const formatLink = (value: string): string => {
   return `/test_run/?id=${value}`
 }
 
-const transformTestRunRows = (testRuns: TestRun[]): TestRunRow[] => {
-  return testRuns.map((item: TestRun) => {
-    return {
-      id: item.id,
-      created: item.created_at,
-      fileName: item.file_name,
-    }
-  })
+const _formatTestSuiteLink = (value: string): string => {
+  return `/test_suite/?id=${value}`
 }
 
-const transformSlowCasesRows = (testRuns: TestRun[]): TestRunRow[] => {
+const transformTestRunRows = (testRuns: TestRun[]): TestRunRow[] => {
   return testRuns.map((item: TestRun) => {
     return {
       id: item.id,
@@ -68,7 +62,30 @@ const testRunColumns: GridColDef[] = [
   },
 ]
 
-const slowCasesColumns: GridColDef[] = []
+const _renderTestSuiteLinkCell = (params: GridRenderCellParams) => {
+  const formatted = params.formattedValue as string
+  return <Link to={formatted}>View test suite</Link>
+}
+
+const slowCasesColumns: GridColDef[] = [
+  {
+    field: 'name',
+    headerName: 'Name',
+    width: 300,
+  },
+  {
+    field: 'duration',
+    headerName: 'Duration',
+    width: 120,
+  },
+  {
+    field: 'test_suite_id',
+    headerName: 'View',
+    width: 120,
+    valueFormatter: _formatTestSuiteLink,
+    renderCell: _renderTestSuiteLinkCell,
+  },
+]
 
 const _getPageData = (id: string) => {
   const { data: build, error: projectError } = useSWR(
@@ -88,8 +105,8 @@ const _getPageData = (id: string) => {
     error: projectError || slowError || runError,
     isLoading: {
       testRuns: !runError && !testRuns,
-      slowCases: !slowError && !slowCases
-    }
+      slowCases: !slowError && !slowCases,
+    },
   }
 }
 
@@ -113,14 +130,18 @@ const Build = () => {
       <Typography variant="h2" component="h3">
         Build {data.build && data.build.ref}
       </Typography>
-      <p>
-        Slowest test cases for this build:
-      </p>
-      <Grid rows={slowCases} columns={slowCasesColumns} isLoading={isLoading.slowCases} />
-      <p>
-        Test runs for this build:
-      </p>
-      <Grid rows={testRuns} columns={testRunColumns} isLoading={isLoading.testRuns} />
+      <p>Slowest 3 test cases for this build:</p>
+      <Grid
+        rows={slowCases}
+        columns={slowCasesColumns}
+        isLoading={isLoading.slowCases}
+      />
+      <p>Test runs for this build:</p>
+      <Grid
+        rows={testRuns}
+        columns={testRunColumns}
+        isLoading={isLoading.testRuns}
+      />
     </>
   )
 }

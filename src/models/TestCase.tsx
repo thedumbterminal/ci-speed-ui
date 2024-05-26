@@ -8,23 +8,23 @@ class TestCase {
     return 'Success'
   }
 
-  static _transformRow(item: ITestCase) {
+  static _transformRow(item: ITestCase): ITestCaseRow {
     const failure_id = item.test_failures[0]
     const skipped_id = item.skipped_tests[0]
     return {
       id: item.id,
       name: item.name,
       duration: item.time,
-      status: this._statusForTestCase(item),
+      status: TestCase._statusForTestCase(item),
       failure_id,
       skipped_id,
+      test_suite_id: item.test_suite_id,
     }
   }
 
   static transformRows(testCases: ITestCase[]): ITestCaseRow[] {
-    return testCases.map(this._transformRow)
+    return testCases.map(TestCase._transformRow)
   }
-
 }
 
 export default TestCase

@@ -7,4 +7,5 @@ export default interface TestCaseRow extends GridRow {
   status: string
   failure_id: number | undefined
   skipped_id: number | undefined
+  test_suite_id: number
 }
