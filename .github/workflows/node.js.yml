@@ -28,16 +28,10 @@ jobs:
       - run: npm run ci
       - name: ci-speed
         if: success() || failure()
-        uses: thedumbterminal/ci-speed-github-action@v1.0.0
+        uses: thedumbterminal/ci-speed-github-action@main
         with:
           token: ${{ secrets.CI_SPEED_AUTH_TOKEN }}
-          results: eslint_junit.xml
-      - name: ci-speed-2
-        if: success() || failure()
-        uses: thedumbterminal/ci-speed-github-action@v1.0.0
-        with:
-          token: ${{ secrets.CI_SPEED_AUTH_TOKEN }}
-          results: junit.xml
+          results: eslint_junit.xml junit.xml
 
   automerge:
     needs: build
