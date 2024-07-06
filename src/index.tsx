@@ -3,6 +3,7 @@ import * as React from 'react'
 import App from './pages/App'
 import Home from './pages/Home'
 import Account from './pages/Account'
+import Login from './pages/Login'
 import ApiKey from './pages/ApiKey'
 import Summary from './pages/Summary'
 import Analyse from './pages/Analyse'
@@ -28,6 +29,7 @@ root.render(
     <HashRouter>
       <Routes>
         <Route path="/" element={<App />}>
+          <Route path="/login" element={<Login />} />
           <Route path="/account" element={<Account />} />
           <Route path="/api_key" element={<ApiKey />} />
           <Route path="/summary" element={<Summary />} />
