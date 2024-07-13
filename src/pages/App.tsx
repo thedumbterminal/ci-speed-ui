@@ -5,6 +5,7 @@ import GlobalStyles from '@mui/material/GlobalStyles'
 import theme from '../theme'
 import Layout from '../components/Layout'
 import ErrorBoundary from '../components/ErrorBoundary'
+import AuthProvider from '../hooks/AuthProvider'
 
 const styles = {
   'pre.terminal': {
@@ -24,7 +25,9 @@ export default function App() {
       {inputGlobalStyles}
       <ErrorBoundary>
         <Layout>
-          <Outlet />
+          <AuthProvider>
+            <Outlet />
+          </AuthProvider>
         </Layout>
       </ErrorBoundary>
     </ThemeProvider>
