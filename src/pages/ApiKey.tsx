@@ -3,6 +3,8 @@ import useSWR from 'swr'
 import LoadingButton from '@mui/lab/LoadingButton'
 import * as React from 'react'
 import { TextareaAutosize, Typography } from '@mui/material'
+import { Navigate } from 'react-router-dom'
+import { useAuth } from '../hooks/AuthProvider'
 
 interface GenerateButtonProps {
   loading: boolean
@@ -50,6 +52,12 @@ const GenerateButton = ({ loading, onClick }: GenerateButtonProps) => {
 
 const ApiKey = () => {
   const [loading, setLoading] = React.useState(false)
+
+  const user = useAuth()
+  if (!user) {
+    console.log('Redirecting to login...')
+    return <Navigate to="/login" />
+  }
 
   const _generateClick = () => {
     console.log('_generateClick()')

@@ -1,8 +1,16 @@
 import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
 import { Link as RLink } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
+import { useAuth } from '../hooks/AuthProvider'
 
-const home = () => {
+const Home = () => {
+  const user = useAuth()
+  if (!user) {
+    console.log('Redirecting to login...')
+    return <Navigate to="/login" />
+  }
+
   return (
     <>
       <Typography variant="h2" component="h3">
@@ -36,4 +44,4 @@ const home = () => {
   )
 }
 
-export default home
+export default Home

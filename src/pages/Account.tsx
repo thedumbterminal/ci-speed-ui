@@ -1,12 +1,12 @@
 import Typography from '@mui/material/Typography'
 import { Navigate } from 'react-router-dom'
-import { useAuth } from "../hooks/AuthProvider";
+import { useAuth } from '../hooks/AuthProvider'
 
 const Account = () => {
-  const user = useAuth();
+  const user = useAuth()
   if (!user) {
     console.log('Redirecting to login...')
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" />
   }
 
   return (

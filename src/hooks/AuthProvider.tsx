@@ -8,7 +8,7 @@ interface User {
   active: boolean
 }
 
-const AuthContext = createContext<User|null>(null)
+const AuthContext = createContext<User | null>(null)
 
 const _getUserInfo = () => {
   const { data, error } = useSWR('/user/', Api.simpleGet)
