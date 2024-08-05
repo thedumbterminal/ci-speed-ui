@@ -28,8 +28,8 @@ root.render(
   <React.StrictMode>
     <HashRouter>
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<App />}>
-          <Route path="/login" element={<Login />} />
           <Route path="/account" element={<Account />} />
           <Route path="/api_key" element={<ApiKey />} />
           <Route path="/summary" element={<Summary />} />

@@ -10,8 +10,6 @@ import MenuItem from '@mui/material/MenuItem'
 import useLocalStorageState from 'use-local-storage-state'
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
-import { Navigate } from 'react-router-dom'
-import { useAuth } from '../hooks/AuthProvider'
 
 const _renderMenuItem = (days: Number) => {
   return (
@@ -22,8 +20,6 @@ const _renderMenuItem = (days: Number) => {
 }
 
 const Analyse = () => {
-  const user = useAuth()
-
   const projectId = useProjectId()
   let defaultValue: number = 30
   const [analyseDays, setAnalyseDays] = useLocalStorageState<number>(
@@ -32,11 +28,6 @@ const Analyse = () => {
       defaultValue,
     },
   )
-
-  if (!user) {
-    console.log('Redirecting to login...')
-    return <Navigate to="/login" />
-  }
 
   const _handleChange = (event: SelectChangeEvent): void => {
     const value = parseInt(event.target.value, 10)

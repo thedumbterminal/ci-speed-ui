@@ -12,8 +12,6 @@ import Typography from '@mui/material/Typography'
 import { humanDateTimeFormat } from '../lib/date'
 import { Grid, GridRow } from '../components/Grid'
 import { useProjectId } from '../lib/preferences'
-import { Navigate } from 'react-router-dom'
-import { useAuth } from '../hooks/AuthProvider'
 
 interface BuildRow extends GridRow {
   ref: string
@@ -105,12 +103,6 @@ const _getPageData = (id: number) => {
 const Project = () => {
   let builds: BuildRow[] = []
   const projectId = useProjectId()
-
-  const user = useAuth()
-  if (!user) {
-    console.log('Redirecting to login...')
-    return <Navigate to="/login" />
-  }
 
   if (!projectId) throw new Error('No project ID given')
   const { data, error, isLoading } = _getPageData(projectId)

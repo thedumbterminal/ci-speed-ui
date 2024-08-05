@@ -24,11 +24,11 @@ export default function App() {
       <CssBaseline />
       {inputGlobalStyles}
       <ErrorBoundary>
-        <Layout>
-          <AuthProvider>
+        <AuthProvider>
+          <Layout>
             <Outlet />
-          </AuthProvider>
-        </Layout>
+          </Layout>
+        </AuthProvider>
       </ErrorBoundary>
     </ThemeProvider>
   )
