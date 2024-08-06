@@ -100,7 +100,15 @@ const PersistentDrawerLeft = ({ open, setOpen }: DrawerProps) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h5" noWrap component="h1" sx={{ flexGrow: 1 }}>
-            CI-Speed
+            <Link
+              href=""
+              variant="inherit"
+              color="inherit"
+              underline="hover"
+              title="CI-Speed"
+            >
+              CI-Speed
+            </Link>
           </Typography>
           {!isLoading && data && (
             <Typography align="right" variant="h6" noWrap component="h2">
@@ -241,4 +249,4 @@ const PersistentDrawerLeft = ({ open, setOpen }: DrawerProps) => {
   )
 }
 
-export { DrawerHeader, PersistentDrawerLeft, drawerWidth }
+export { DrawerHeader, PersistentDrawerLeft, drawerWidth, AppBar }

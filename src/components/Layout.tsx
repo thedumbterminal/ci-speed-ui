@@ -1,9 +1,12 @@
-import { PersistentDrawerLeft, DrawerHeader, drawerWidth } from './TopNav'
+import { DrawerHeader, drawerWidth, AppBar } from './TopNav'
 import * as React from 'react'
 import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { useTheme } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import Drawer from '@mui/material/Drawer'
+import Link from '@mui/material/Link'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -29,20 +32,38 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
 }))
 
 const Layout = (props: LayoutProps) => {
-  const theme = useTheme()
-  const [open, setOpen] = React.useState(false)
-  const wideScreen = useMediaQuery(theme.breakpoints.up('md'))
-  const [defaultedMenu, setDefaultedMenu] = React.useState(false)
-  if (wideScreen && !defaultedMenu) {
-    console.debug('Defaulting menu to open for wide screens')
-    setOpen(true)
-    setDefaultedMenu(true)
-  }
-
   return (
     <Box sx={{ display: 'flex' }}>
-      <PersistentDrawerLeft open={open} setOpen={setOpen} />
-      <Main open={open}>
+      <CssBaseline />
+      <AppBar position="fixed" open={false}>
+        <Toolbar>
+          <Typography variant="h5" noWrap component="h1" sx={{ flexGrow: 1 }}>
+            <Link
+              href=""
+              variant="inherit"
+              color="inherit"
+              underline="hover"
+              title="CI-Speed"
+            >
+              CI-Speed
+            </Link>
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+          },
+        }}
+        variant="persistent"
+        anchor="left"
+        open={false}
+      ></Drawer>
+      <Main>
         <DrawerHeader />
         {props.children}
       </Main>

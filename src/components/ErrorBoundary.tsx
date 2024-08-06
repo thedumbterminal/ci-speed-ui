@@ -1,22 +1,24 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react'
 import Typography from '@mui/material/Typography'
+import Layout from './Layout'
+import Link from '@mui/material/Link'
 
 interface Props {
   children: ReactNode
 }
 
 interface State {
-  hasError: boolean
+  hasError: null | Error
 }
 
 class ErrorBoundary extends Component<Props, State> {
   public state: State = {
-    hasError: false,
+    hasError: null,
   }
 
-  public static getDerivedStateFromError(_: Error): State {
+  public static getDerivedStateFromError(e: Error): State {
     // Update state so the next render will show the fallback UI.
-    return { hasError: true }
+    return { hasError: e }
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
@@ -24,13 +26,27 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   public render() {
-    if (this.state.hasError) {
+    if (this.state.hasError !== null) {
       return (
         <>
-          <Typography variant="h2" component="h2">
-            Sorry...
-          </Typography>
-          <p>there was an error.</p>
+          <Layout>
+            <Typography variant="h2" component="h3">
+              Sorry...
+            </Typography>
+            <p>There was an error:</p>
+            <code>{this.state.hasError.message}</code>
+            <p>
+              Please raise an issue on our{' '}
+              <Link
+                href="https://github.com/thedumbterminal/ci-speed-ui/issues"
+                target="_blank"
+                title="Log issue"
+              >
+                GitHub Project
+              </Link>
+              .
+            </p>
+          </Layout>
         </>
       )
     }

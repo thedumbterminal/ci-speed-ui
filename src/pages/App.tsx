@@ -3,7 +3,6 @@ import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import GlobalStyles from '@mui/material/GlobalStyles'
 import theme from '../theme'
-import Layout from '../components/Layout'
 import ErrorBoundary from '../components/ErrorBoundary'
 
 const styles = {
@@ -23,9 +22,7 @@ export default function App() {
       <CssBaseline />
       {inputGlobalStyles}
       <ErrorBoundary>
-        <Layout>
-          <Outlet />
-        </Layout>
+        <Outlet />
       </ErrorBoundary>
     </ThemeProvider>
   )

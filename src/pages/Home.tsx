@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'
 import { Link as RLink } from 'react-router-dom'
 
-const home = () => {
+const Home = () => {
   return (
     <>
       <Typography variant="h2" component="h3">
@@ -36,4 +36,4 @@ const home = () => {
   )
 }
 
-export default home
+export default Home
