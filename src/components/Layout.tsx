@@ -6,6 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Drawer from '@mui/material/Drawer'
+import Link from '@mui/material/Link'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -37,7 +38,15 @@ const Layout = (props: LayoutProps) => {
       <AppBar position="fixed" open={false}>
         <Toolbar>
           <Typography variant="h5" noWrap component="h1" sx={{ flexGrow: 1 }}>
-            CI-Speed
+            <Link
+              href=""
+              variant="inherit"
+              color="inherit"
+              underline="hover"
+              title="CI-Speed"
+            >
+              CI-Speed
+            </Link>
           </Typography>
         </Toolbar>
       </AppBar>
