@@ -241,4 +241,4 @@ const PersistentDrawerLeft = ({ open, setOpen }: DrawerProps) => {
   )
 }
 
-export { DrawerHeader, PersistentDrawerLeft, drawerWidth }
+export { DrawerHeader, PersistentDrawerLeft, drawerWidth, AppBar }

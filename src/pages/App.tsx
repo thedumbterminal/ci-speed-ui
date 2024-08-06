@@ -3,9 +3,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import GlobalStyles from '@mui/material/GlobalStyles'
 import theme from '../theme'
-import Layout from '../components/Layout'
 import ErrorBoundary from '../components/ErrorBoundary'
-import AuthProvider from '../hooks/AuthProvider'
 
 const styles = {
   'pre.terminal': {
@@ -24,11 +22,7 @@ export default function App() {
       <CssBaseline />
       {inputGlobalStyles}
       <ErrorBoundary>
-        <AuthProvider>
-          <Layout>
-            <Outlet />
-          </Layout>
-        </AuthProvider>
+        <Outlet />
       </ErrorBoundary>
     </ThemeProvider>
   )

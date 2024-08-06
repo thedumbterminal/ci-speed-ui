@@ -1,11 +1,9 @@
-import { DrawerHeader, drawerWidth, AppBar } from './TopNav'
+import { PersistentDrawerLeft, DrawerHeader, drawerWidth } from './TopNav'
 import * as React from 'react'
 import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
-import CssBaseline from '@mui/material/CssBaseline'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import Drawer from '@mui/material/Drawer'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTheme } from '@mui/material/styles'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -30,31 +28,21 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   }),
 }))
 
-const Layout = (props: LayoutProps) => {
+const AuthedLayout = (props: LayoutProps) => {
+  const theme = useTheme()
+  const [open, setOpen] = React.useState(false)
+  const wideScreen = useMediaQuery(theme.breakpoints.up('md'))
+  const [defaultedMenu, setDefaultedMenu] = React.useState(false)
+  if (wideScreen && !defaultedMenu) {
+    console.debug('Defaulting menu to open for wide screens')
+    setOpen(true)
+    setDefaultedMenu(true)
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={false}>
-        <Toolbar>
-          <Typography variant="h5" noWrap component="h1" sx={{ flexGrow: 1 }}>
-            CI-Speed
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={false}
-      ></Drawer>
-      <Main>
+      <PersistentDrawerLeft open={open} setOpen={setOpen} />
+      <Main open={open}>
         <DrawerHeader />
         {props.children}
       </Main>
@@ -62,4 +50,4 @@ const Layout = (props: LayoutProps) => {
   )
 }
 
-export default Layout
+export default AuthedLayout
