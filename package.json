@@ -18,7 +18,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@visx/visx": "^3.11.0",
-    "axios": "^1.7.4",
+    "axios": "^1.7.5",
     "date-fns": "^3.6.0",
     "qs": "^6.13.0",
     "react": "^18.2.0",
