@@ -96,7 +96,7 @@
     "eslint-formatter-multiple": "^2.0.0",
     "jest": "^30.0.3",
     "jest-junit": "^16.0.0",
-    "prettier": "^3.6.0",
+    "prettier": "^3.6.2",
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
     "update-browserslist-db": "^1.1.3"
