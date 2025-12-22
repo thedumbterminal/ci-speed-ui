@@ -99,6 +99,6 @@
     "prettier": "^3.7.4",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
-    "update-browserslist-db": "^1.2.2"
+    "update-browserslist-db": "^1.2.3"
   }
 }
