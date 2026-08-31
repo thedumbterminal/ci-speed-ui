@@ -94,7 +94,7 @@
     "eslint": "^8.57.1",
     "eslint-config-react-app": "^7.0.1",
     "eslint-formatter-multiple": "^2.0.0",
-    "jest": "^30.4.2",
+    "jest": "^30.5.0",
     "jest-junit": "^17.0.0",
     "prettier": "^3.9.6",
     "ts-jest": "^29.4.12",
